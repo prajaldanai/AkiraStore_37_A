@@ -13,7 +13,7 @@ const CategoryPanelPage = ({ onClose }) => {
     { name: "Glasses", slug: "glasses" },
     { name: "Shoes", slug: "shoes" },
     { name: "Grocery", slug: "grocery" },
-    { name: "Electronics", slug: "electronics" }, 
+    { name: "Electronics", slug: "electronics" }, // ✅ FIX ADDED
   ];
 
   const handleCategoryClick = (slug) => {
