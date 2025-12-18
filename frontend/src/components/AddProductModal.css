@@ -1,0 +1,414 @@
+/* ===== OVERLAY ===== */
+.add-product-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* ===== MODAL MAIN ===== */
+.add-product-modal {
+  width: 95%;
+  max-width: 1200px;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 30px;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== TITLE ===== */
+.add-prod-title {
+  text-align: center;
+  color: #6b33e9;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.add-prod-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.add-prod-close-btn:hover {
+  background: #ff3157;
+  transform: translateY(-1px);
+}
+
+/* ===== GRID LAYOUT ===== */
+.add-prod-form {
+  width: 100%;
+}
+
+.add-prod-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+}
+
+/* ===== LABELS ===== */
+.add-prod-left label,
+.add-prod-right label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #5a2ad1;
+}
+
+/* ===== INPUTS ===== */
+.add-prod-left input,
+.add-prod-right input,
+.add-prod-right select,
+.add-prod-right textarea,
+.add-prod-left textarea {
+  width: 100%;
+  padding: 13px;
+  border: 2px solid #b27bff;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+  background: #faf7ff;
+}
+
+.add-prod-left input:focus,
+.add-prod-right input:focus,
+.add-prod-right select:focus,
+.add-prod-right textarea:focus {
+  border-color: #7a3fff;
+  background: #ffffff;
+}
+
+/* ===== IMAGE UPLOAD BOX ===== */
+.add-prod-upload-block .field-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.image-upload-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* ===== IMAGE THUMBNAIL ===== */
+.image-thumb {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  border: 2px solid #c9a7ff;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f7f0ff;
+}
+
+.image-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #ff4d6d;
+  border: none;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== ADD IMAGE BUTTON ===== */
+.add-more-images-box {
+  width: 120px;
+  height: 120px;
+  border: 2px dashed #a56bff;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4e8ff;
+  cursor: pointer;
+  font-weight: 600;
+  color: #7a33ff;
+  transition: 0.2s ease;
+}
+
+.add-more-images-box:hover {
+  background: #ead8ff;
+  transform: translateY(-1px);
+}
+
+/* ===== FEATURES ===== */
+.link-button {
+  background: none;
+  border: none;
+  color: #7a33ff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: -5px;
+  padding: 0;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
+.add-prod-features-block input {
+  margin-bottom: 10px !important;
+}
+
+/* ===== SHIPPING ===== */
+.ship-field {
+  margin-bottom: 16px;
+}
+
+.ship-field select {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 2px solid #b27bff;
+  font-size: 14px;
+  background: #faf7ff;
+  outline: none;
+  transition: 0.2s;
+}
+
+.ship-field select:focus {
+  border-color: #7a3fff;
+  background: #ffffff;
+}
+
+/* selected note: Rs. 1450 (for time on delivery) */
+.shipping-selected-note {
+  font-size: 13px;
+  color: #5a2ad1;
+  margin-top: 4px;
+}
+
+/* ===== CUSTOM SHIPPING RULE TAGS (STYLE C) ===== */
+.shipping-rules-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 5px 0;
+}
+
+.shipping-rule-tag {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #f4e8ff;
+  border: 1px solid #c9a7ff;
+  font-size: 12px;
+  color: #5a2ad1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+/* ===== FOOTER ===== */
+.add-prod-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.save-product-btn {
+  background: #7a33ff;
+  padding: 12px 25px;
+  color: white;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.save-product-btn:hover:not(:disabled) {
+  background: #5f24c9;
+}
+
+.cancel-btn {
+  background: #dddddd;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background: #c6c6c6;
+}
+
+/* ===== SUCCESS & ERROR ===== */
+.error-text {
+  color: #ff4d6d;
+  margin-top: 10px;
+}
+
+.success-text {
+  color: #2ecc71;
+  margin-top: 10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 800px) {
+  .add-prod-modal {
+    padding: 20px;
+  }
+
+  .add-prod-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ===== POPUP OVERLAY ===== */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2100;
+}
+
+/* ===== POPUP BOX ===== */
+.popup-box {
+  background: #fff;
+  width: 380px;
+  max-width: 95vw;
+  padding: 22px 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  position: relative;
+  animation: popupIn 0.25s ease-out;
+}
+
+@keyframes popupIn {
+  from {
+    transform: translateY(10px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* POPUP CLOSE BUTTON */
+.popup-close {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  font-size: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-box h3 {
+  margin: 0 0 15px 0;
+  color: #5a2ad1;
+  font-size: 18px;
+}
+
+/* POPUP INPUTS */
+.popup-box label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #5a2ad1;
+  margin-top: 8px;
+}
+
+.popup-box input[type="text"],
+.popup-box input[type="number"] {
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 11px;
+  border-radius: 10px;
+  border: 2px solid #c9a7ff;
+  outline: none;
+  font-size: 14px;
+  background: #faf7ff;
+}
+
+.popup-box input:focus {
+  border-color: #7a3fff;
+  background: #ffffff;
+}
+
+/* APPLY TO RADIO SECTION */
+.apply-to-section {
+  margin-top: 15px;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.apply-to-section p {
+  margin: 0 0 4px 0;
+  font-weight: 600;
+  color: #5a2ad1;
+}
+
+/* POPUP BUTTON GROUPS */
+.popup-actions,
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.save-btn {
+  background: #7a33ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.save-btn:hover {
+  background: #5f24c9;
+}

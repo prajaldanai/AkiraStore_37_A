@@ -1,43 +1,47 @@
 require("dotenv").config();
 const path = require("path");
 
-
 const express = require("express");
 const cors = require("cors");
-
 
 // Import DB connection
 const { connectDB } = require("./database/db");
 
 // Import routes
 const authRoutes = require("./routes/authRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
+const productRoutes = require("./routes/productRoutes");    
+const productUserRoutes = require("./routes/productUserRoutes");
+const ratingRoutes = require("./routes/ratingRoutes");
+const categoryPageRoutes = require("./routes/categoryPageRoutes");
 
-const categoryRoutes = require("./routes/categoryRoutes");  // ⭐ ADD THIS
-
-const productRoutes = require("./routes/productRoutes"); 
 
 const app = express();
-
 
 // Serve uploaded images as static files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // -------------------------
-// MIDDLEWARE (MUST BE FIRST)
+// MIDDLEWARE
 // -------------------------
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // -------------------------
-// ROUTES (AFTER MIDDLEWARE)
+// ROUTES
 // -------------------------
 app.use("/api/auth", authRoutes);
-app.use("/api", productRoutes);
-app.use("/api/categories", categoryRoutes);  // ⭐ ADD THIS
+app.use("/api/categories", categoryRoutes);
+app.use("/api", productRoutes);                     // ⭐ ADMIN PRODUCT ROUTES
+app.use("/api/user/products", productUserRoutes);  // ⭐ USER PRODUCT ROUTES
+app.use("/api/rating", ratingRoutes);
+app.use("/api/category-page", categoryPageRoutes);
+
+
+
 
 console.log("🔥 productRoutes MOUNTED");
-
 
 // Test route
 app.get("/", (req, res) => {
