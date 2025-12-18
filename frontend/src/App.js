@@ -9,7 +9,10 @@ import {
 // Pages
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import DashboardPage from "./pages/DashboardPage";
+import HomePage from "./pages/HomePage";
+import WomenPage from "./pages/WomenPage"; 
+
+
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminCategoryPage from "./pages/AdminCategoryPage";
@@ -74,16 +77,24 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/forget-password" element={<ForgetPasswordPage />} />
 
-        {/* USER DASHBOARD */}
+                     {/* ⭐ USER HOME PAGE */}
         <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <DashboardPage />
+              <HomePage />   
             </ProtectedRoute>
           }
         />
+         
 
+
+          <Route 
+        path="/women" 
+        element={<WomenPage />} 
+    /> 
+
+    
         {/* ADMIN DASHBOARD */}
         <Route
           path="/admin-dashboard"

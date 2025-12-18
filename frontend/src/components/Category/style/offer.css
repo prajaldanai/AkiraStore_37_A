@@ -1,0 +1,53 @@
+.offer-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #c9f4c4; 
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  gap: 40px;
+}
+
+.offer-left img {
+  width: 260px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.offer-right {
+  flex: 1;
+}
+
+.offer-right h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.save-text {
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.countdown {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.countdown .box {
+  background: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 70px;
+}
+
+.countdown .box span {
+  font-size: 22px;
+  font-weight: bold;
+  display: block;
+}

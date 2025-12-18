@@ -1,0 +1,53 @@
+/* ======================= */
+/* FIGMA HERO SECTION FIX  */
+/* ======================= */
+
+.hero-figma-container {
+  width: 100%;
+  height: 622px;                    /* EXACT FIGMA HEIGHT */
+  background: #C2EFD4;              /* GREEN BACKGROUND */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 60px;
+  box-sizing: border-box;
+}
+
+/* LEFT SIDE TEXT */
+.hero-left-figma {
+  width: 723px;                     /* EXACT FIGMA WIDTH */
+}
+
+.hero-title {
+  font-family: "Rufina", serif;
+  font-size: 86px;                  /* EXACT FIGMA FONT SIZE */
+  font-weight: bold;
+  line-height: 110%;
+  color: #224f34;
+  margin: 0 0 25px 0;
+}
+
+.hero-sub {
+  font-family: "Rufina", serif;
+  font-size: 28px;
+  line-height: 140%;
+  width: 680px;
+  color: #224f34;
+  margin-top: 20px;
+}
+
+/* RIGHT IMAGE BLOCK */
+.hero-right-figma {
+  width: 417px;                     /* FIGMA DIMENSIONS */
+  height: 584px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-img {
+  width: 417px;
+  height: 584px;
+  object-fit: cover;
+  border-radius: 40px;              /* Matches round corner look */
+}
