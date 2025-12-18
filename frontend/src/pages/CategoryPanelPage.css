@@ -1,0 +1,123 @@
+/* MAIN POPUP PANEL */
+.category-panel {
+  position: absolute;
+  top: 100px;
+  left: 20px;   
+  width: 200px;
+  padding: 35px;
+
+  /* MATCH SIDEBAR COLOR FAMILY */
+  background: #1a0843;
+
+  border-radius: 26px;
+
+  /* Same glow style as sidebar */
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 0 22px rgba(138, 47, 255, 0.55);
+
+  z-index: 30;
+
+  /* Smooth slide + glow animation */
+  animation: panelGlowSlide 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* SLIDE & GLOW */
+@keyframes panelGlowSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(-28px) scale(0.94);
+    box-shadow: 0 0 0 rgba(138,47,255,0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateX(6px) scale(1.03);
+    box-shadow: 0 0 25px rgba(138,47,255,0.45);
+  }
+
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* CATEGORY LIST */
+.category-panel-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.category-panel-list li {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+/* LEFT NEON BAR */
+.category-panel-list li::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 60%;
+  border-radius: 0 6px 6px 0;
+  background: linear-gradient(180deg, #ffd6ff, #ff9cff);
+  box-shadow: 0 0 10px rgba(255, 156, 255, 0.8);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+/* HOVER LIKE SIDEBAR */
+.category-panel-list li:hover {
+  opacity: 1;
+  background: linear-gradient(135deg, #c77dfd, #8a2fff);
+  transform: translateX(8px);
+  box-shadow: 0 4px 18px rgba(140,40,255,0.32);
+}
+
+.category-panel-list li:hover::before {
+  width: 6px;
+  opacity: 1;
+}
+
+/* TEXT MOVEMENT */
+.category-panel-list li {
+  transition: letter-spacing 0.3s ease, transform 0.3s ease;
+}
+.category-panel-list li:hover {
+  letter-spacing: 0.6px;
+}
+
+/* CLOSE BUTTON */
+.category-close-btn {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  background: #ff4d6d;
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+ 
+}
+/* CLOSE POP */
+@keyframes closePop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
