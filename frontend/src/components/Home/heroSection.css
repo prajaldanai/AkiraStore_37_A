@@ -1,1 +1,284 @@
-/*simran code*/
+/* MAIN WRAPPER */
+.hero-wrapper {
+  display: flex;
+  gap: 25px;
+  width: 100%;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+/* LEFT BIG SECTION */
+.hero-left {
+  width: 60%;
+  height: 680px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* RIGHT GRID */
+.hero-right {
+  width: 50%;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* CARD HEIGHT FIX */
+.hero-card {
+  height: 330px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* IMAGE */
+.hero-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* OVERLAY (SLIGHTLY LIGHTER FOR PREMIUM LOOK) */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55); /* was 0.75 → now cleaner */
+  z-index: 1;
+}
+
+/* TEXT */
+.hero-text {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  z-index: 2;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.45); /* improved readability */
+  transition: opacity .25s ease;
+}
+
+/* -------------------------------------------------- */
+/*   FIXED CENTER HOVER TRIGGER – DOES NOT COVER BTN  */
+/* -------------------------------------------------- */
+.hover-trigger {
+  position: absolute;
+  width: 40%; 
+  height: 25%;   
+  top: 42%;      
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* -------------------------------------------------- */
+/* HOVER BOX                                          */
+/* -------------------------------------------------- */
+.hover-box {
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%) scale(.85);
+  opacity: 0;
+  background: rgba(0,0,0,.75);
+  border-radius: 12px;
+  z-index: 6;
+  padding: 30px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  pointer-events: auto;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+/* ONLY ACTIVATE WHEN TRIGGER ENTERS */
+.hover-box.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* TEXT FADES WHEN ENTERING TRIGGER */
+.hover-trigger:hover ~ .hero-text {
+  opacity: 0;
+}
+
+/* EXPANDED MODE */
+.hero-container[data-open="true"] .hover-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: rgba(0,0,0,.85);
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.hero-container[data-open="true"] .hero-text {
+  opacity: 0;
+}
+
+/* -------------------------------------------------- */
+/* DISCOVER BUTTON — FINAL PREMIUM VERSION            */
+/* -------------------------------------------------- */
+
+.discover-btn {
+  padding: 12px 28px;
+  border: 2px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all .25s ease;
+  font-size: 16px;
+  border-radius: 40px;
+  pointer-events: auto;
+
+  /* PREMIUM BUTTON IMPROVEMENTS */
+  max-width: 380px;        /* keeps button from becoming too wide on large card */
+  width: 100%;
+  margin: 0 auto;          /* centers the button */
+}
+
+/* TEXT INSIDE BUTTON SHOULD NOT BLOCK HOVER */
+.discover-btn * {
+  pointer-events: none;
+}
+
+/* PREMIUM HOVER EFFECT */
+.discover-btn:hover {
+  background: white;
+  color: black;
+  transform: translateY(-2px) scale(1.07); /* small lift + scale */
+  box-shadow: 0 0 12px rgba(255,255,255,0.6);
+}
+
+
+
+
+/* ============================== */
+/* HEADER section of main page below code */
+/* ============================== */
+
+/* ============================== */
+/* CLEAN HEADER NAVBAR            */
+/* ============================== */
+
+.home-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #dcdcdc;
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  
+}
+
+.header-logo {
+  width: 115px;
+}
+
+/* SEARCH BAR */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar {
+  width: 430px;
+  height: 42px;
+  background: white;
+  border-radius: 50px;
+  border: 1.4px solid #bcbcbc;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 10px;
+}
+
+.search-icon-left,
+.search-icon-right {
+  width: 20px;
+  opacity: 0.7;
+    cursor: pointer;
+
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nav-link.active {
+  color: #7b3fa1;
+  font-weight: 700;
+}
+
+.nav-link::after {
+  content: "";
+  height: 2px;
+  width: 0;
+  background: #7b3fa1;
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transition: 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* LOGOUT TEXT BUTTON */
+.logout-text-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 22px;
+  color: #000;
+  font-weight: 700;
+}
+
+.logout-text-btn:hover {
+  color: #7b3fa1;
+}
