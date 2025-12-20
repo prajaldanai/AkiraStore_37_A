@@ -1,0 +1,264 @@
+/* ============================================================
+   PAGE WRAPPER
+============================================================ */
+.category-page {
+  padding: 30px;
+  background: #f8f8f8;
+  min-height: 100vh;
+}
+
+
+/* ============================================================
+   HEADER (TITLE + BUTTONS)
+============================================================ */
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;        /* 🔥 Prevents breaking into two lines */
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.category-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #3d1a9f;
+  margin: 0;
+  white-space: nowrap;      /* 🔥 Keeps title from pushing buttons down */
+}
+
+/* RIGHT SIDE BUTTONS */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;          /* 🔥 Prevents right buttons from shrinking */
+}
+
+/* HOME BUTTON (RIGHT SIDE ICON) */
+.home-btn {
+  background: #ffffff;
+  border: 2px solid #dcdcdc;
+  padding: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+.home-btn:hover {
+  background: #f4f4f4;
+  transform: scale(1.05);
+}
+
+/* ADD PRODUCT BUTTON */
+.add-product-btn {
+  background: #7a33ff;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.add-product-btn:hover {
+  background: #5d24c8;
+}
+
+
+/* ============================================================
+   PRODUCT GRID
+============================================================ */
+.product-grid {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+
+/* ============================================================
+   PRODUCT CARD
+============================================================ */
+.product-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 4px 12px rgba(150, 102, 255, 0.18);
+  transition: 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(150, 102, 255, 0.25);
+}
+
+/* Image container */
+.product-image {
+  width: 100%;
+  height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f1e7ff;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Product info */
+.product-info {
+  margin-top: 12px;
+}
+
+.product-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.price {
+  margin-top: 5px;
+  color: #7a33ff;
+  font-weight: 600;
+}
+
+.tag {
+  margin-top: 3px;
+  font-size: 14px;
+  color: #444;
+}
+
+
+/* ============================================================
+   CARD ACTION BUTTONS
+============================================================ */
+.card-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-btn {
+  background: #b288ff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: #8d63ff;
+}
+
+.delete-btn {
+  background: #ff4d6d;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #e13659;
+}
+
+
+/* ============================================================
+   DELETE POPUP
+============================================================ */
+.delete-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+}
+
+.delete-popup {
+  background: #000;
+  color: white;
+  padding: 30px;
+  width: 450px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px #7a33ff;
+}
+
+.delete-popup h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.delete-buttons {
+  margin-top: 22px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel-delete {
+  background: #b288ff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.cancel-delete:hover {
+  background: #926aff;
+}
+
+.confirm-delete {
+  background: #ff2727;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.confirm-delete:hover {
+  background: #d61919;
+}
