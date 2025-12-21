@@ -20,7 +20,7 @@ const allowed = [
   "image/jpg",
   "image/png",
   "image/webp",
-  "image/avif",   
+  "image/avif",   // ⭐ FIX: AVIF added!
 ];
 
 // Filter → only images allowed
