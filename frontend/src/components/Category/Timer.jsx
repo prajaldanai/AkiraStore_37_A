@@ -4,7 +4,7 @@ exports.getCategoryPage = async (req, res) => {
   try {
     const { slug } = req.params;
 
-    // Match slug → category ID
+    
     let categoryId = null;
     if (slug === "women") categoryId = 2;
     if (slug === "men") categoryId = 1;
@@ -14,12 +14,11 @@ exports.getCategoryPage = async (req, res) => {
       return res.status(400).json({ message: "Invalid category" });
     }
 
-    // Fetch real products from DB
+
     const products = await getProductsByCategoryId(categoryId);
 
     console.log("🔥 PRODUCTS FETCHED FOR CATEGORY:", slug, products);
 
-    // Return EXACTLY what your frontend expects
     res.json({
       bestSelling: products.filter((p) => p.tag === "best-selling"),
 
@@ -30,10 +29,10 @@ exports.getCategoryPage = async (req, res) => {
       exclusiveOffer:
         products.find((p) => p.tag === "exclusive-offer") || null,
 
-      all: products, // full list
+      all: products,
     });
   } catch (error) {
-    console.error("❌ CATEGORY PAGE ERROR:", error);
+    console.error(" CATEGORY PAGE ERROR:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
