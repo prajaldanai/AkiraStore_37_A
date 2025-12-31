@@ -1,95 +1,118 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./style/categoryPage.css";
 
-import HomeHeader from "../Home/HomeHeader";   // ⭐ HEADER AT TOP
-
+import Layout from "../Layout/Layout";
 import HeroSection from "./HeroSection";
 import ProductsSection from "./ProductsSection";
 import OfferSection from "./OfferSection";
 import { CATEGORY_CONFIG } from "./config";
 
-export default function CategoryPage({ slug }) {
-  const [pageData, setPageData] = useState(null);
+export default function CategoryPage() {
+  const { slug } = useParams();
+
+  const [products, setProducts] = useState([]);
+  const [exclusiveOffers, setExclusiveOffers] = useState([]); // ✅ ADD
   const [loading, setLoading] = useState(true);
 
-  // ⭐ ALWAYS CALL HOOKS OUTSIDE CONDITIONS
   useEffect(() => {
-    async function loadPage() {
+    document.body.classList.add("women-page-body");
+    return () => {
+      document.body.classList.remove("women-page-body");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!slug) return;
+
+    async function loadData() {
       try {
+        setLoading(true);
+
         const res = await fetch(
           `http://localhost:5000/api/user/products/category/${slug}`
         );
-
         const data = await res.json();
-        console.log("🔥 RAW PRODUCTS:", data);
 
-        let products = data.products || [];
-
-        // ⭐ FIX IMAGE FORMAT
-        products = products.map((p) => ({
+        const normalizedProducts = (data.products || []).map(p => ({
           ...p,
           images: p.main_image ? [p.main_image] : [],
         }));
 
-        console.log("🔥 FIXED PRODUCTS:", products);
-
-        // ⭐ GROUP PRODUCTS
-        const grouped = {
-          bestSelling: products.filter((p) => p.tag === "best-selling"),
-          newArrivals: products.filter((p) => p.tag === "new-arrival"),
-          accessories: products.filter((p) => p.tag === "accessories"),
-          exclusiveOffer:
-            products.find((p) => p.tag === "exclusive-offer") || null,
-        };
-
-        console.log("🔥 GROUPED DATA:", grouped);
-
-        setPageData(grouped);
+        setProducts(normalizedProducts);
       } catch (err) {
-        console.log("❌ Category Page Load Error:", err);
+        console.error("Category Page Load Error:", err);
       } finally {
         setLoading(false);
       }
     }
 
-    loadPage();
+    loadData();
   }, [slug]);
 
-  // ⭐ SAFE RETURNS (NO HOOK ERRORS)
   if (loading) return <h2 className="loading">Loading...</h2>;
-  if (!pageData) return <h2>No Data</h2>;
 
-  const { bestSelling, newArrivals, accessories, exclusiveOffer } = pageData;
   const config = CATEGORY_CONFIG[slug];
+  if (!config) {
+    return (
+      <Layout>
+        <h2 className="loading">Category not found</h2>
+      </Layout>
+    );
+  }
+
+  const bestSelling = products.filter(p => p.tag === "best-selling");
+  const newArrivals = products.filter(p => p.tag === "new-arrival");
+  const accessories = products.filter(p => p.tag === "accessories");
 
   return (
-    <div className="category-page">
+    <Layout>
+      <div className="category-page women-page women-category-page">
+        <HeroSection config={config} />
 
-      {/* ⭐ FIX GAP — HEADER ALWAYS FIRST */}
-      <HomeHeader />
+        {bestSelling.length > 0 && (
+          <ProductsSection
+            title="Best Selling"
+            description="Get in on the trend with our curated selection of the best selling styles."
+            products={bestSelling}
+            variant="slider"
+          />
+        )}
 
-      {/* HERO SECTION */}
-      <HeroSection config={config} />
+        {newArrivals.length > 0 && (
+          <ProductsSection
+            title="New Arrivals"
+            description="Discover the latest arrivals and stay ahead with fresh new fashion picks."
+            products={newArrivals}
+            variant="slider"
+          />
+        )}
 
-      {/* BEST SELLING */}
-      {bestSelling.length > 0 && (
-        <ProductsSection title="Best Selling" products={bestSelling} />
-      )}
+        {accessories.length > 0 && (
+          <ProductsSection
+            title="Accessories"
+            description="Complete your look with must-have accessories designed to elevate your style."
+            products={accessories}
+            variant="slider"
+          />
+        )}
 
-      {/* NEW ARRIVALS */}
-      {newArrivals.length > 0 && (
-        <ProductsSection title="New Arrivals" products={newArrivals} />
-      )}
+        {/* ✅ Banner + countdown */}
+        <OfferSection
+          category={slug}
+          onOffersLoaded={setExclusiveOffers}
+        />
 
-      {/* ACCESSORIES */}
-      {accessories.length > 0 && (
-        <ProductsSection title="Accessories" products={accessories} />
-      )}
-
-      {/* EXCLUSIVE OFFER */}
-      {exclusiveOffer && (
-        <OfferSection offer={exclusiveOffer} config={config} />
-      )}
-    </div>
+        {/* ✅ Product cards (only when offers exist) */}
+        {exclusiveOffers.length > 0 && (
+          <ProductsSection
+            title="Exclusive Offers"
+            description="Limited-time deals available until the offer ends"
+            products={exclusiveOffers}
+            variant="slider"
+          />
+        )}
+      </div>
+    </Layout>
   );
 }
