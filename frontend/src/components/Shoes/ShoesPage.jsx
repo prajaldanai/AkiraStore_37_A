@@ -19,3 +19,5 @@ export default function ShoesPage() {
   );
 }
 //simran code  delete all the file and write your own code 
+// dsfksdfj kdfjska jdksa jfak 
+//sdfk jsafkjasofkdj aoskf
