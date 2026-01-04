@@ -10,8 +10,8 @@ const { connectDB } = require("./database/db");
 // Import routes
 const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
-const productRoutes = require("./routes/productRoutes");    
-const productUserRoutes = require("./routes/productUserRoutes");
+const productRoutes = require("./routes/productRoutes");     // ⭐ FIXED
+const productUserRoutes = require("./routes/productUserRoutes"); // ⭐ USER SIDE
 const ratingRoutes = require("./routes/ratingRoutes");
 const categoryPageRoutes = require("./routes/categoryPageRoutes");
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./home.css";
+
+
 
 import menHero from "../../assets/images/men-hero.png";
 import electronicsHero from "../../assets/images/electronics-hero.png";

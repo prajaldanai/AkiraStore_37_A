@@ -1,21 +1,34 @@
 import React from "react";
-import "./style/hero.css";
+import styles from "./style/hero.module.css";
 
 export default function HeroSection({ config }) {
+  if (!config || !config.showHero || !config.heroImage) return null;
+
   return (
-    <div className="hero-figma-container">
+    <section className={styles.heroContainer}>
+      <div className={styles.heroInner}>
 
-      {/* LEFT TEXT */}
-      <div className="hero-left-figma">
-        <h1 className="hero-title">{config.title}</h1>
-        <p className="hero-sub">{config.subtitle}</p>
+        {/* LEFT TEXT */}
+        <div className={styles.heroLeft}>
+          <h1 className={styles.heroTitle}>
+            {config.title}
+          </h1>
+
+          <p className={styles.heroSubtitle}>
+            {config.subtitle}
+          </p>
+        </div>
+
+        {/* RIGHT IMAGE */}
+        <div className={styles.heroRight}>
+          <img
+            src={config.heroImage}
+            alt="Hero model"
+            className={styles.heroImg}
+          />
+        </div>
+
       </div>
-
-      {/* RIGHT IMAGE */}
-      <div className="hero-right-figma">
-        <img src={config.heroImage} alt="model" className="hero-img" />
-      </div>
-
-    </div>
+    </section>
   );
 }

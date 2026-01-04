@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
-import ProductSlider from "./ProductSlider";
+import ProductSlider from "../Product/ProductSlider";
+
 import { useNavigate } from "react-router-dom";
-import "./home.css";
+import styles from "./home.css";
 
 export default function HomeSection({ title, subtitle, slug }) {
   const navigate = useNavigate();
