@@ -1,0 +1,27 @@
+{
+  "name": "akirastore_37_a",
+  "version": "1.0.0",
+  "description": "🛍️ AkiraStore — Group E-Commerce Project (PERN Stack)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "module",
+    "url": "git+https://github.com/prajaldanai/AkiraStore_37_A.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prajaldanai/AkiraStore_37_A/issues"
+  },
+  "homepage": "https://github.com/prajaldanai/AkiraStore_37_A#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11",
+    "pg": "^8.16.3"
+  }
+}

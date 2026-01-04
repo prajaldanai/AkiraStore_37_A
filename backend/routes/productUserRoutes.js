@@ -7,13 +7,16 @@ const userProductController = require("../controllers/userProductController");
    USER PRODUCT ROUTES (ORDER MATTERS! DO NOT REARRANGE)
 =============================================================== */
 
-//  Latest products for homepage (men, women, kids, electronics, etc.)
+// 1️⃣ Latest products for homepage (men, women, kids, electronics, etc.)
 router.get("/latest/:slug", userProductController.getLatestProducts);
 
-//  View All → list products under a category
+// 2️⃣ View All → list products under a category
 router.get("/category/:slug", userProductController.getProductsByCategorySlug);
 
-//  Single Product Details (use /product/:id to avoid route conflicts)
+// 3️⃣ Single Product Details (use /product/:id to avoid route conflicts)
 router.get("/product/:id", userProductController.getProductDetails);
+
+// 4️⃣ 🔥 Exclusive offers (ACTIVE ONLY)
+router.get("/exclusive-offers", userProductController.getExclusiveOffers);
 
 module.exports = router;

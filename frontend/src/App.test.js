@@ -1,8 +1,15 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+// ⭐ FIX: Ensure popup-root ALWAYS exists for portals
+let popupRoot = document.getElementById("popup-root");
+if (!popupRoot) {
+  popupRoot = document.createElement("div");
+  popupRoot.id = "popup-root";
+  document.body.appendChild(popupRoot);
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);

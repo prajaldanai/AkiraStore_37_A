@@ -10,7 +10,13 @@ import {
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
-import WomenPage from "./pages/WomenPage"; 
+import CategoryPage from "./components/Category/CategoryPage";
+
+// ⭐ USER DISCOVERY PAGES (FROM HOME)
+import ShoesPage from "./components/Shoes/ShoesPage";
+import ElectronicsPage from "./components/Electronics/ElectronicsPage";
+
+
 
 
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
@@ -86,13 +92,41 @@ function App() {
             </ProtectedRoute>
           }
         />
+                          {/* ============================================================
+    USER DISCOVERY PAGES (OPENED FROM HOME)
+    Shoes & Electronics
+============================================================ */}
+           <Route
+            path="/shoes"
+      element={
+     <ProtectedRoute>
+      <ShoesPage />
+     </ProtectedRoute>
+         }
+/>
+
+<Route
+  path="/electronics"
+  element={
+    <ProtectedRoute>
+      <ElectronicsPage />
+    </ProtectedRoute>
+  }
+/>
+
          
 
 
-          <Route 
-        path="/women" 
-        element={<WomenPage />} 
-    /> 
+              {/* ✅ USER CATEGORY PAGES (Women / Men / Kids) */}
+<Route
+  path="/category/:slug"
+  element={
+    <ProtectedRoute>
+      <CategoryPage />
+    </ProtectedRoute>
+  }
+/>
+
 
     
         {/* ADMIN DASHBOARD */}

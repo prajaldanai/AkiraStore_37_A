@@ -1,56 +1,24 @@
-.category-page {
-  margin: 0 !important;
-  padding: 0 !important;
-   background: #ffffff !important;
+/* ==========================
+   WOMEN PAGE – BACKGROUND ONLY
+   (DESIGN SAFE)
+========================== */
+
+/* Body fallback (optional but fine) */
+body.women-page-body {
+  background-color: #ffffff;
 }
 
-
-
-
-.offer-wrapper {
-  background: #c9f4c4; /* same soft green as Figma */
-  border-radius: 10px;
-  padding: 30px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 40px;
+/* 🔥 EXACT WRAPPER ONLY (NO CHILD OVERRIDE) */
+.category-page.women-page.women-category-page {
+  background-color: #ffffff !important;
+  min-height: 100vh;
 }
 
-.offer-left img {
-  width: 260px;
-  border-radius: 20px;
-}
-
-.offer-right {
-  width: 55%;
-}
-
-.offer-right h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.save-text {
-  margin-top: -8px;
-  font-weight: 600;
-}
-
-.countdown {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.countdown .box {
-  background: #fff;
-  padding: 10px 15px;
-  border-radius: 8px;
+/* ==========================
+   LOADING STATE
+========================== */
+.loading {
   text-align: center;
-  font-size: 14px;
-}
-
-.countdown .box span {
-  font-size: 22px;
-  display: block;
-  font-weight: bold;
+  padding: 40px;
+  font-size: 18px;
 }

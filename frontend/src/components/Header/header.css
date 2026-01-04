@@ -1,0 +1,154 @@
+/* ==============================
+   APP HEADER (GLOBAL & ISOLATED)
+============================== */
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: #dcdcdc;
+
+  /* 🔥 Smooth hide/show */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* ==============================
+   HIDE / SHOW STATES
+============================== */
+
+/* hide on scroll down */
+.app-header.hide {
+  transform: translateY(-100%);
+}
+
+/* visible state */
+.app-header.show {
+  transform: translateY(0);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ==============================
+   INNER WRAPPER (HEIGHT CONTROLS OFFSET)
+============================== */
+
+.app-header-inner {
+  height: 80px; /* 🔥 MUST MATCH .page-content padding-top */
+  padding: 0 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* ==============================
+   LOGO
+============================== */
+
+.app-header .header-logo {
+  width: 115px;
+  cursor: pointer;
+}
+
+/* ==============================
+   SEARCH BAR
+============================== */
+
+.app-header .header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.app-header .search-bar {
+  width: 430px;
+  height: 42px;
+  background: #ffffff;
+  border-radius: 50px;
+  border: 1.4px solid #bcbcbc;
+
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 10px;
+}
+
+.app-header .search-icon-left,
+.app-header .search-icon-right {
+  width: 20px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.app-header .search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+}
+
+/* ==============================
+   NAV LINKS
+============================== */
+
+.app-header .nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.app-header .nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+
+.app-header .nav-link.active {
+  color: #7b3fa1;
+  font-weight: 700;
+}
+
+/* underline animation */
+.app-header .nav-link::after {
+  content: "";
+  height: 2px;
+  width: 0;
+  background: #7b3fa1;
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.app-header .nav-link:hover::after,
+.app-header .nav-link.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ==============================
+   LOGOUT
+============================== */
+
+.app-header .logout-text-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 22px;
+  color: #000;
+  font-weight: 700;
+}
+
+.app-header .logout-text-btn:hover {
+  color: #7b3fa1;
+}

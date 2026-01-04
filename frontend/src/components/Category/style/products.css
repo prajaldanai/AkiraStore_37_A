@@ -1,83 +1,101 @@
-/* ============================= */
-/* PRODUCT SECTION WRAPPER */
-/* ============================= */
+/* ================================
+   FIGMA SECTION HEADER
+================================ */
 
-.products-section {
+.figma-section-header {
   width: 100%;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 10px 20px;
+  text-align: center;
+  margin-bottom: 36px;
+  box-sizing: border-box;
 }
 
-/* SECTION TITLES */
-.section-title {
-  font-size: 22px;
+.figma-section-title {
+  font-size: 34px;
   font-weight: 700;
-  margin-bottom: 10px;
+  color: #2f4f2f;
+  margin-bottom: 8px;
+  line-height: 1.2;
 }
 
-/* ============================= */
-/* 3-COLUMN GRID LIKE FIGMA */
-/* ============================= */
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-}
-
-/* ============================= */
-/* PRODUCT CARD */
-/* ============================= */
-
-.product-card {
-  border-radius: 10px;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid #e5e5e5;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-}
-
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.15);
-}
-
-/* ============================= */
-/* PRODUCT IMAGE */
-/* ============================= */
-
-.product-img-box {
-  width: 100%;
-  height: 330px; /* perfect Figma height */
-  overflow: hidden;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.product-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ============================= */
-/* PRODUCT NAME + PRICE */
-/* ============================= */
-
-.product-info {
-  padding: 12px 10px;
-}
-
-.product-name {
+.figma-section-description {
   font-size: 15px;
   color: #000;
-  margin: 0;
-  margin-bottom: 3px;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-.product-price {
-  font-weight: bold;
-  color: #222;
-  margin: 0;
+.figma-section-tag {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #2f8f46;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+/* ================================
+   CATEGORY PRODUCT PRICE
+   (MATCH HOME EXACTLY)
+================================ */
+
+.category-page .product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* New price = primary */
+.category-page .product-new-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Old price = grey + line-through (same like home) */
+.category-page .product-old-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: #9ca3af;
+}
+
+/* ================================
+   PRODUCT NAME (CATEGORY ONLY)
+================================ */
+
+.category-page .product-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .figma-section-title {
+    font-size: 28px;
+  }
+
+  .figma-section-description {
+    font-size: 14px;
+    padding: 0 16px;
+  }
+
+  .category-page .product-new-price {
+    font-size: 16px;
+  }
+
+  .category-page .product-old-price {
+    font-size: 20px;
+  }
 }

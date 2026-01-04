@@ -1,0 +1,6 @@
+/* ===============================
+   OFFSET CONTENT FOR FIXED HEADER
+================================ */
+.page-content {
+  padding-top: 80px; /* 🔥 must match header height */
+}
