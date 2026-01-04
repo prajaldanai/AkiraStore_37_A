@@ -193,3 +193,54 @@ exports.getProductDetails = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
+exports.getExclusiveOffers = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT
+        p.*,
+
+        /* ⭐ FIRST IMAGE */
+        (
+          SELECT image_url
+          FROM product_images
+          WHERE product_id = p.id
+          ORDER BY id ASC
+          LIMIT 1
+        ) AS main_image,
+
+        /* ⭐ AVG RATING */
+        (
+          SELECT COALESCE(AVG(r.rating), 0)
+          FROM product_ratings r
+          WHERE r.product_id = p.id
+        ) AS avg_rating,
+
+        /* ⭐ RATING COUNT */
+        (
+          SELECT COUNT(*)
+          FROM product_ratings r
+          WHERE r.product_id = p.id
+        ) AS rating_count
+
+      FROM products p
+      WHERE
+        p.tag = 'exclusive-offer'
+        AND p.exclusive_offer_end IS NOT NULL
+        AND p.exclusive_offer_end > NOW()
+      ORDER BY p.exclusive_offer_end ASC
+    `);
+
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error("❌ Exclusive offers error:", error);
+    res.status(500).json({
+      message: "Failed to fetch exclusive offers",
+    });
+  }
+};

@@ -1,53 +1,182 @@
+/* ===============================
+   EXCLUSIVE OFFER SECTION (RE-DESIGNED)
+================================ */
 .offer-wrapper {
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+
+  background: #c9f4c4;
+
+  /* MORE BREATHING SPACE */
+  padding: 15px 350px;
+  min-height: 340px;
+
   display: flex;
   align-items: center;
-  background: #c9f4c4; 
-  border-radius: 10px;
-  padding: 30px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  gap: 40px;
+  justify-content: space-between;
+  gap: 20px;    /* gap between image and the section  */
+
+
+  box-sizing: border-box;
+}
+
+/* ===============================
+   LEFT IMAGE (HERO STYLE)
+================================ */
+.offer-left {
+  display: flex;
+  align-items: center;
 }
 
 .offer-left img {
-  width: 260px;
+  width: 360px;
   height: auto;
-  border-radius: 20px;
-  object-fit: cover;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
+/* ===============================
+   RIGHT CONTENT (RELAXED LAYOUT)
+================================ */
 .offer-right {
-  flex: 1;
+  max-width: 760px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
 }
 
+/* TITLE */
 .offer-right h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.2;
 }
 
-.save-text {
-  margin-top: 5px;
-  font-size: 16px;
+/* DESCRIPTION */
+.offer-right p {
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  color: #1f3d1f;
 }
 
+/* ===============================
+   COUNTDOWN SECTION
+================================ */
 .countdown {
   display: flex;
+  align-items: center;
   gap: 20px;
-  margin-top: 20px;
+  margin-bottom: 22px;
 }
 
+/* LABEL */
+.ends-label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* TIME BOX */
 .countdown .box {
+  width: 82px;
+  height: 82px;
+
   background: #ffffff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-align: center;
-  min-width: 70px;
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
+/* NUMBER */
 .countdown .box span {
-  font-size: 22px;
-  font-weight: bold;
-  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+/* UNIT */
+.countdown .box {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* ===============================
+   LIVE DEAL TEXT
+================================ */
+.offer-count {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* ===============================
+   NO OFFER / LOADING STATE
+================================ */
+.offer-wrapper.no-offer {
+  justify-content: center;
+  text-align: center;
+}
+
+.no-offer-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  max-width: 900px;
+}
+
+/* ===============================
+   RESPONSIVE (TABLET)
+================================ */
+@media (max-width: 1100px) {
+  .offer-wrapper {
+    padding: 48px 48px;
+    gap: 56px;
+    min-height: 300px;
+  }
+
+  .offer-left img {
+    width: 300px;
+  }
+
+  .offer-right h2 {
+    font-size: 32px;
+  }
+}
+
+/* ===============================
+   RESPONSIVE (MOBILE)
+================================ */
+@media (max-width: 768px) {
+  .offer-wrapper {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 24px;
+    gap: 36px;
+    min-height: auto;
+  }
+
+  .offer-left img {
+    width: 240px;
+  }
+
+  .countdown {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .offer-right p {
+    margin-bottom: 20px;
+  }
 }

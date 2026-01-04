@@ -1,7 +1,8 @@
 // src/components/Home/CategoryGrid.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./home.css";
+import styles from "./home.css";
+
 
 import menHero from "../../assets/images/men-hero.jpg";
 import electronicsHero from "../../assets/images/electronics-hero.jpg";

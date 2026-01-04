@@ -1,0 +1,44 @@
+/* ==========================
+   HOME PAGE – BASE
+========================== */
+
+.home-page {
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* ==========================
+   KEEP HERO GREEN
+   (DO NOTHING HERE)
+========================== */
+
+
+/* ==========================
+   FORCE ALL PRODUCT SECTIONS WHITE
+   (THIS IS THE KEY FIX)
+========================== */
+
+/* HomeSection wrapper */
+.home-page .home-section,
+.home-page .products-section,
+.home-page .slider-section {
+  background-color: #ffffff !important;
+}
+
+/* Slider internals (Swiper / custom) */
+.home-page .product-slider,
+.home-page .swiper,
+.home-page .swiper-wrapper {
+  background-color: #ffffff !important;
+}
+
+/* Individual slides should stay transparent */
+.home-page .swiper-slide {
+  background-color: transparent;
+}
+
+/* ==========================
+   KEEP OFFER / PROMO GREEN
+========================== */
+
+/* DO NOT override offer section */

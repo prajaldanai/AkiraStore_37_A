@@ -4,12 +4,26 @@ import "./style/products.css";
 export default function ProductCard({ item }) {
   if (!item) return null;
 
-  // Fix image full path
-  const backendURL = "http://localhost:5000"; 
-  const img =
-    item.images?.[0]
-      ? `${backendURL}${item.images[0]}`
-      : `${backendURL}/uploads/placeholder.png`;
+  const backendURL = "http://localhost:5000";
+
+  /* ===============================
+     IMAGE
+  =============================== */
+  const img = item.main_image
+    ? `${backendURL}${item.main_image}`
+    : `${backendURL}/uploads/placeholder.png`;
+
+  /* ===============================
+     PRICE LOGIC (FINAL)
+     - show old price for exclusive-offer
+  =============================== */
+  const price = Number(item.price);
+  const oldPrice = Number(item.old_price);
+
+  const isExclusiveOffer =
+    item.tag === "exclusive-offer" &&
+    !isNaN(oldPrice) &&
+    oldPrice > 0;
 
   return (
     <div className="product-card">
@@ -19,7 +33,20 @@ export default function ProductCard({ item }) {
 
       <div className="product-info">
         <p className="product-name">{item.name}</p>
-        <p className="product-price">Rs. {item.price}</p>
+
+        <div className="product-price-row">
+          {/* NEW PRICE */}
+          <span className="product-new-price">
+            Rs. {price.toFixed(2)}
+          </span>
+
+          {/* OLD PRICE (CUT) */}
+          {isExclusiveOffer && (
+            <span className="product-old-price">
+              Rs. {oldPrice.toFixed(2)}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

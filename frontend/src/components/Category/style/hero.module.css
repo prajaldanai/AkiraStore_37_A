@@ -1,0 +1,128 @@
+/* ===============================
+   FULL-BLEED HERO BACKGROUND
+   (ESCAPES PARENT PADDING)
+================================ */
+.heroContainer {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  /* 🔥 FIX HEADER GAP */
+  margin-top: -25px;   /* must match header height */
+
+  height: 650px;
+  background: #cff5e1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+/* ===============================
+   HERO INNER (BOXED CONTENT)
+================================ */
+.heroInner {
+  width: 100%;
+  max-width: 1320px;                   /* Figma-like container */
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.2fr 417px;  /* TEXT | IMAGE */
+  align-items: center;
+
+  padding: 0 60px;                     /* inner spacing only */
+  box-sizing: border-box;
+  gap: 120px;                          /* large empty space */
+}
+
+/* ===============================
+   LEFT TEXT (FIGMA STYLE)
+================================ */
+.heroLeft {
+  max-width: 640px;
+  text-align: left;
+}
+
+.heroTitle {
+  font-family: "Rufina", serif;
+  font-size: 86px;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #224f34;                      /* Figma green */
+  margin: 0;
+}
+
+.heroSubtitle {
+  margin-top: 24px;
+  font-size: 20px;
+  line-height: 1.7;
+  color: #224f34;
+  max-width: 420px;
+}
+
+/* ===============================
+   RIGHT IMAGE (FIGMA SIZE)
+================================ */
+.heroRight {
+  width: 417px;
+  height: 584px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: auto;                   /* push image right */
+}
+
+.heroImg {
+  width: 417px;
+  height: 584px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ===============================
+   REMOVE BOTTOM GAP
+================================ */
+.heroContainer {
+  margin-bottom: 0;
+}
+
+/* ===============================
+   RESPONSIVE SAFETY
+================================ */
+@media (max-width: 1200px) {
+  .heroInner {
+    gap: 60px;
+    padding: 0 40px;
+  }
+
+  .heroTitle {
+    font-size: 64px;
+  }
+}
+
+@media (max-width: 900px) {
+  .heroContainer {
+    height: auto;
+    padding: 40px 0;
+  }
+
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .heroRight {
+    margin-left: 0;
+  }
+
+  .heroImg {
+    width: 320px;
+    height: 460px;
+  }
+
+  .heroTitle {
+    font-size: 54px;
+  }
+}
