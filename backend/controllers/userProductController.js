@@ -1,66 +1,72 @@
-const { pool } = require("../database/db");
+const {
+  Product,
+  Category,
+  ProductImage,
+  ProductRating,
+} = require("../models");
+const { Op, fn, col, literal } = require("sequelize");
 
 /* ============================================================
-   GET LATEST PRODUCTS FOR HOMEPAGE (Men Latest, Women Latest…)
+   HELPER
+============================================================ */
+function normalizeImage(img) {
+  if (!img) return null;
+  const fixed = String(img).replace(/\\/g, "/");
+  return fixed.startsWith("/uploads") ? fixed : `/uploads/${fixed}`;
+}
+
+/* ============================================================
+   GET LATEST PRODUCTS FOR HOMEPAGE
 ============================================================ */
 exports.getLatestProducts = async (req, res) => {
   try {
     const { slug } = req.params;
     const limit = Number(req.query.limit) || 6;
 
-    // 1️⃣ Check category from slug
-    const category = await pool.query(
-      "SELECT id FROM categories WHERE slug = $1",
-      [slug]
-    );
-
-    if (category.rowCount === 0) {
+    const category = await Category.findOne({ where: { slug } });
+    if (!category) {
       return res.status(404).json({
         success: false,
         message: "Category not found",
       });
     }
 
-    const categoryId = category.rows[0].id;
-
-    // 2️⃣ Fetch latest products + FIRST image + rating avg + rating count
-    const result = await pool.query(
-      `
-      SELECT 
-        p.*,
-
-        /* ⭐ FIRST MAIN IMAGE */
-        (
-          SELECT image_url 
-          FROM product_images 
-          WHERE product_id = p.id 
-          ORDER BY id ASC 
-          LIMIT 1
-        ) AS main_image,
-
-        /* ⭐ AVERAGE RATING */
-        COALESCE(AVG(r.rating), 0) AS avg_rating,
-
-        /* ⭐ TOTAL RATING COUNT */
-        COUNT(r.rating) AS rating_count
-
-      FROM products p
-      LEFT JOIN product_ratings r 
-        ON p.id = r.product_id
-
-      WHERE p.category_id = $1
-      GROUP BY p.id
-      ORDER BY p.created_at DESC
-      LIMIT $2
-      `,
-      [categoryId, limit]
-    );
-
-    return res.json({
-      success: true,
-      products: result.rows,
+    const products = await Product.findAll({
+      where: { category_id: category.id },
+      attributes: {
+        include: [
+          [fn("COALESCE", fn("AVG", col("ProductRatings.rating")), 0), "avg_rating"],
+          [fn("COUNT", col("ProductRatings.rating")), "rating_count"],
+        ],
+      },
+      include: [
+        {
+          model: ProductImage,
+          attributes: ["image_url"],
+          required: false, // ✅ IMPORTANT
+        },
+        {
+          model: ProductRating,
+          attributes: [],
+          required: false, // ✅ IMPORTANT
+        },
+      ],
+      group: ["Product.id", "ProductImages.id"],
+      order: [["id", "DESC"]], // ✅ avoid created_at issues
+      limit,
+      subQuery: false,
     });
 
+    const formatted = products.map((p) => {
+      const mainImage = p.ProductImages?.[0]?.image_url || null;
+
+      return {
+        ...p.toJSON(),
+        main_image: normalizeImage(mainImage),
+      };
+    });
+
+    return res.json({ success: true, products: formatted });
   } catch (err) {
     console.error("❌ getLatestProducts ERROR:", err);
     return res.status(500).json({
@@ -77,58 +83,45 @@ exports.getProductsByCategorySlug = async (req, res) => {
   try {
     const { slug } = req.params;
 
-    // 1️⃣ Validate category slug
-    const category = await pool.query(
-      "SELECT id FROM categories WHERE slug = $1",
-      [slug]
-    );
-
-    if (category.rowCount === 0) {
+    const category = await Category.findOne({ where: { slug } });
+    if (!category) {
       return res.status(404).json({
         success: false,
         message: "Category not found",
       });
     }
 
-    const categoryId = category.rows[0].id;
-
-    // 2️⃣ Fetch all products + rating joins
-    const result = await pool.query(
-      `
-      SELECT 
-        p.*,
-
-        /* ⭐ FIRST IMAGE */
-        (
-          SELECT image_url
-          FROM product_images
-          WHERE product_id = p.id
-          ORDER BY id ASC
-          LIMIT 1
-        ) AS main_image,
-
-        /* ⭐ AVERAGE RATING */
-        COALESCE(AVG(r.rating), 0) AS avg_rating,
-
-        /* ⭐ TOTAL RATING COUNT */
-        COUNT(r.rating) AS rating_count
-
-      FROM products p
-      LEFT JOIN product_ratings r 
-        ON p.id = r.product_id
-
-      WHERE p.category_id = $1
-      GROUP BY p.id
-      ORDER BY p.created_at DESC
-      `,
-      [categoryId]
-    );
-
-    return res.json({
-      success: true,
-      products: result.rows,
+    const products = await Product.findAll({
+      where: { category_id: category.id },
+      attributes: {
+        include: [
+          [fn("COALESCE", fn("AVG", col("ProductRatings.rating")), 0), "avg_rating"],
+          [fn("COUNT", col("ProductRatings.rating")), "rating_count"],
+        ],
+      },
+      include: [
+        {
+          model: ProductImage,
+          attributes: ["image_url"],
+          required: false,
+        },
+        {
+          model: ProductRating,
+          attributes: [],
+          required: false,
+        },
+      ],
+      group: ["Product.id", "ProductImages.id"],
+      order: [["id", "DESC"]],
+      subQuery: false,
     });
 
+    const formatted = products.map((p) => ({
+      ...p.toJSON(),
+      main_image: normalizeImage(p.ProductImages?.[0]?.image_url),
+    }));
+
+    return res.json({ success: true, products: formatted });
   } catch (err) {
     console.error("❌ getProductsByCategorySlug ERROR:", err);
     return res.status(500).json({
@@ -145,35 +138,30 @@ exports.getProductDetails = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const result = await pool.query(
-      `
-      SELECT 
-        p.*,
+    const product = await Product.findByPk(id, {
+      attributes: {
+        include: [
+          [fn("COALESCE", fn("AVG", col("ProductRatings.rating")), 0), "avg_rating"],
+          [fn("COUNT", col("ProductRatings.rating")), "rating_count"],
+        ],
+      },
+      include: [
+        {
+          model: ProductImage,
+          attributes: ["image_url"],
+          required: false,
+        },
+        {
+          model: ProductRating,
+          attributes: [],
+          required: false,
+        },
+      ],
+      group: ["Product.id", "ProductImages.id"],
+      subQuery: false,
+    });
 
-        /* ⭐ ALL IMAGES ARRAY */
-        (
-          SELECT json_agg(image_url)
-          FROM product_images
-          WHERE product_id = p.id
-        ) AS images,
-
-        /* ⭐ AVERAGE RATING */
-        COALESCE(AVG(r.rating), 0) AS avg_rating,
-
-        /* ⭐ TOTAL RATINGS */
-        COUNT(r.rating) AS rating_count
-
-      FROM products p
-      LEFT JOIN product_ratings r
-        ON p.id = r.product_id
-
-      WHERE p.id = $1
-      GROUP BY p.id
-      `,
-      [id]
-    );
-
-    if (result.rowCount === 0) {
+    if (!product) {
       return res.status(404).json({
         success: false,
         message: "Product not found",
@@ -182,9 +170,13 @@ exports.getProductDetails = async (req, res) => {
 
     return res.json({
       success: true,
-      product: result.rows[0],
+      product: {
+        ...product.toJSON(),
+        images: (product.ProductImages || []).map((i) =>
+          normalizeImage(i.image_url)
+        ),
+      },
     });
-
   } catch (err) {
     console.error("❌ getProductDetails ERROR:", err);
     return res.status(500).json({
@@ -194,52 +186,51 @@ exports.getProductDetails = async (req, res) => {
   }
 };
 
-
-
-
-
-
+/* ============================================================
+   GET ACTIVE EXCLUSIVE OFFERS
+============================================================ */
 exports.getExclusiveOffers = async (req, res) => {
   try {
-    const result = await pool.query(`
-      SELECT
-        p.*,
+    const products = await Product.findAll({
+      where: {
+        tag: "exclusive-offer",
+        exclusive_offer_end: {
+          [Op.ne]: null, // ✅ prevent NULL crash
+          [Op.gt]: new Date(),
+        },
+      },
+      attributes: {
+        include: [
+          [fn("COALESCE", fn("AVG", col("ProductRatings.rating")), 0), "avg_rating"],
+          [fn("COUNT", col("ProductRatings.rating")), "rating_count"],
+        ],
+      },
+      include: [
+        {
+          model: ProductImage,
+          attributes: ["image_url"],
+          required: false,
+        },
+        {
+          model: ProductRating,
+          attributes: [],
+          required: false,
+        },
+      ],
+      group: ["Product.id", "ProductImages.id"],
+      order: [["exclusive_offer_end", "ASC"]],
+      subQuery: false,
+    });
 
-        /* ⭐ FIRST IMAGE */
-        (
-          SELECT image_url
-          FROM product_images
-          WHERE product_id = p.id
-          ORDER BY id ASC
-          LIMIT 1
-        ) AS main_image,
+    const formatted = products.map((p) => ({
+      ...p.toJSON(),
+      main_image: normalizeImage(p.ProductImages?.[0]?.image_url),
+    }));
 
-        /* ⭐ AVG RATING */
-        (
-          SELECT COALESCE(AVG(r.rating), 0)
-          FROM product_ratings r
-          WHERE r.product_id = p.id
-        ) AS avg_rating,
-
-        /* ⭐ RATING COUNT */
-        (
-          SELECT COUNT(*)
-          FROM product_ratings r
-          WHERE r.product_id = p.id
-        ) AS rating_count
-
-      FROM products p
-      WHERE
-        p.tag = 'exclusive-offer'
-        AND p.exclusive_offer_end IS NOT NULL
-        AND p.exclusive_offer_end > NOW()
-      ORDER BY p.exclusive_offer_end ASC
-    `);
-
-    res.status(200).json(result.rows);
+    return res.status(200).json(formatted);
   } catch (error) {
     console.error("❌ Exclusive offers error:", error);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Failed to fetch exclusive offers",
     });
   }
