@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import "./style/categoryPage.css";
 
@@ -12,44 +12,58 @@ export default function CategoryPage() {
   const { slug } = useParams();
 
   const [products, setProducts] = useState([]);
-  const [exclusiveOffers, setExclusiveOffers] = useState([]); // ✅ ADD
+  const [exclusiveOffers, setExclusiveOffers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    document.body.classList.add("women-page-body");
-    return () => {
-      document.body.classList.remove("women-page-body");
-    };
-  }, []);
-
-  useEffect(() => {
+  /* ================= LOAD DATA ================= */
+  const loadData = useCallback(async () => {
     if (!slug) return;
 
-    async function loadData() {
-      try {
-        setLoading(true);
+    try {
+      setLoading(true);
 
-        const res = await fetch(
-          `http://localhost:5000/api/user/products/category/${slug}`
-        );
-        const data = await res.json();
+      const res = await fetch(
+        `http://localhost:5000/api/user/products/category/${slug}`,
+        { cache: "no-store" }
+      );
 
-        const normalizedProducts = (data.products || []).map(p => ({
-          ...p,
-          images: p.main_image ? [p.main_image] : [],
-        }));
+      const data = await res.json();
 
-        setProducts(normalizedProducts);
-      } catch (err) {
-        console.error("Category Page Load Error:", err);
-      } finally {
-        setLoading(false);
-      }
+      const normalized = (data.products || []).map((p) => ({
+        ...p,
+        images: p.main_image ? [p.main_image] : [],
+      }));
+
+      setProducts(normalized);
+    } catch (err) {
+      console.error("Category load error:", err);
+      setProducts([]);
+    } finally {
+      setLoading(false);
     }
-
-    loadData();
   }, [slug]);
 
+  /* ================= INITIAL LOAD + SSE ================= */
+  useEffect(() => {
+    loadData();
+
+    const evtSource = new EventSource(
+      "http://localhost:5000/api/products/subscribe"
+    );
+
+    evtSource.addEventListener("product-update", () => {
+      console.log("🔔 SSE update → refreshing category:", slug);
+      loadData();
+    });
+
+    evtSource.onerror = (err) => {
+      console.error("❌ SSE error (category page):", err);
+    };
+
+    return () => evtSource.close();
+  }, [loadData, slug]);
+
+  /* ================= UI ================= */
   if (loading) return <h2 className="loading">Loading...</h2>;
 
   const config = CATEGORY_CONFIG[slug];
@@ -61,9 +75,9 @@ export default function CategoryPage() {
     );
   }
 
-  const bestSelling = products.filter(p => p.tag === "best-selling");
-  const newArrivals = products.filter(p => p.tag === "new-arrival");
-  const accessories = products.filter(p => p.tag === "accessories");
+  const bestSelling = products.filter((p) => p.tag === "best-selling");
+  const newArrivals = products.filter((p) => p.tag === "new-arrival");
+  const accessories = products.filter((p) => p.tag === "accessories");
 
   return (
     <Layout>
@@ -97,13 +111,8 @@ export default function CategoryPage() {
           />
         )}
 
-        {/* ✅ Banner + countdown */}
-        <OfferSection
-          category={slug}
-          onOffersLoaded={setExclusiveOffers}
-        />
+        <OfferSection category={slug} onOffersLoaded={setExclusiveOffers} />
 
-        {/* ✅ Product cards (only when offers exist) */}
         {exclusiveOffers.length > 0 && (
           <ProductsSection
             title="Exclusive Offers"
