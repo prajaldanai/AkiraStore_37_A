@@ -10,20 +10,22 @@ const {
   getCategoryBySlug,   
   getProductById,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  subscribeProductUpdates // ✅ REQUIRED
 } = require("../controllers/productController");
 
+// ---------------------- LIVE PRODUCT STREAM (SSE) ----------------------
+router.get("/products/subscribe", subscribeProductUpdates);
 
-// ---------------------- CATEGORY ROUTE (REQUIRED!) ----------------------
+// ---------------------- CATEGORY ROUTE ----------------------
 router.get("/categories/:slug", getCategoryBySlug);
 
+// ---------------------- ADMIN PRODUCT ROUTES ----------------------
 
-// ---------------------- PRODUCT ROUTES ----------------------
-
-// Get all products in a category
+// Get all products in a category (ADMIN)
 router.get("/admin/products/category/:categoryId", getProductsByCategory);
 
-// Get one product by ID (EDIT PAGE)
+// Get one product by ID (ADMIN EDIT)
 router.get("/admin/products/:id", getProductById);
 
 // Add new product
