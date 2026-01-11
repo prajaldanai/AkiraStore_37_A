@@ -1,10 +1,9 @@
-const { getProductsByCategoryId } = require("../models/productModel");
+const { getProductsByCategoryId } = require("../services/productService");
 
 exports.getCategoryPage = async (req, res) => {
   try {
     const { slug } = req.params;
 
-    // Map slug → category ID safely
     const CATEGORY_MAP = {
       men: 1,
       women: 2,
@@ -20,12 +19,8 @@ exports.getCategoryPage = async (req, res) => {
       });
     }
 
-    // Fetch products from DB
     const products = await getProductsByCategoryId(categoryId);
 
-    console.log(`🔥 CATEGORY PAGE → ${slug} (${products.length} items)`);
-
-    // Build the response that frontend expects
     const response = {
       bestSelling: products.filter((p) => p.tag === "best-selling"),
       newArrivals: products.filter((p) => p.tag === "new-arrival"),
@@ -35,13 +30,10 @@ exports.getCategoryPage = async (req, res) => {
       all: products,
     };
 
-    return res.json(response);
+    res.json(response);
 
   } catch (error) {
-    console.error("❌ CATEGORY PAGE ERROR:", error.message);
-    res.status(500).json({
-      success: false,
-      message: "Server error",
-    });
+    console.error("❌ CATEGORY PAGE ERROR:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };

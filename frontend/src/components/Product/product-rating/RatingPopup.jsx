@@ -1,14 +1,68 @@
 // src/components/Product/product-rating/RatingPopup.jsx
+import ReactDOM from "react-dom";
+import { useEffect } from "react";
 
-/**
- * TEMPORARY DISABLED COMPONENT
- * -----------------------------
- * This component is intentionally disabled for current sprint.
- * It exists only to prevent import/runtime crashes.
- * Rating functionality will be restored in a future sprint.
- */
+export default function RatingPopup({
+  rating,
+  hoverRate,
+  setHoverRate,
+  onSubmit,
+  onClose,
+}) {
+  // ✅ Ensure portal root exists
+  let portalRoot = document.getElementById("popup-root");
+  if (!portalRoot) {
+    portalRoot = document.createElement("div");
+    portalRoot.id = "popup-root";
+    document.body.appendChild(portalRoot);
+  }
 
-export default function RatingPopup() {
-  return null; // 🔥 renders nothing, causes no crash
+  // ✅ Close on ESC key
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
+
+  return ReactDOM.createPortal(
+    <div
+      className="rating-popup"
+      onClick={onClose} // backdrop click
+      style={{ zIndex: 9999 }}
+    >
+      <div
+        className="rating-popup-box"
+        onClick={(e) => e.stopPropagation()} // 🔥 prevent close
+      >
+        <h2 className="rating-title">Rate this Product</h2>
+
+        <div className="rating-popup-stars">
+          {Array.from({ length: 5 }).map((_, i) => {
+            const num = i + 1;
+            const filled = num <= (hoverRate || rating);
+
+            return (
+              <span
+                key={num}
+                className={`rating-star ${filled ? "filled" : ""}`}
+                onMouseEnter={() => setHoverRate(num)}
+                onMouseLeave={() => setHoverRate(0)}
+                onClick={() => onSubmit(num)}
+                role="button"
+              >
+                ★
+              </span>
+            );
+          })}
+        </div>
+
+        <button className="rating-close-btn" onClick={onClose}>
+          Close
+        </button>
+      </div>
+    </div>,
+    portalRoot
+  );
 }
-//nishan rai code c

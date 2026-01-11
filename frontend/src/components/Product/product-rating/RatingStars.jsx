@@ -1,13 +1,32 @@
 // src/components/Product/product-rating/RatingStars.jsx
 
-/**
- * TEMPORARILY DISABLED
- * -------------------
- * RatingStars is disabled for this sprint.
- * Component kept only to avoid import/runtime errors.
- * Will be re-enabled in a future sprint.
- */
+export default function RatingStars({ rating, ratingCount, onOpen }) {
+  return (
+    <div
+      className="rating-block"
+      onClick={(e) => {
+        e.stopPropagation(); // 🔥 IMPORTANT
+        onOpen();
+      }}
+      role="button"
+    >
+      <div className="rating-right">
+        {Array.from({ length: 5 }).map((_, i) => {
+          const filled = i + 1 <= Math.round(rating);
+          return (
+            <span
+              key={i}
+              className={`star ${filled ? "filled" : ""}`}
+            >
+              ★
+            </span>
+          );
+        })}
+      </div>
 
-export default function RatingStars() {
-  return null; // 🔥 no render, no crash, no side effects
+      <p className="rating-count">
+        ({ratingCount} people rated)
+      </p>
+    </div>
+  );
 }

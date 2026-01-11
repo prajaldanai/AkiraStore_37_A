@@ -1,36 +1,47 @@
 const express = require("express");
 const router = express.Router();
 
-// ✅ FIX: Use pool instead of db
-const { pool } = require("../database/db");
+const { ProductRating } = require("../models");
+const { fn, col } = require("sequelize");
 
 router.post("/add", async (req, res) => {
   try {
     const { product_id, rating } = req.body;
 
-    // Insert rating into DB
-    await pool.query(
-      "INSERT INTO product_ratings (product_id, rating) VALUES ($1, $2)",
-      [product_id, rating]
-    );
+    if (!product_id || !rating) {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID and rating are required",
+      });
+    }
 
-    // Recalculate average + total ratings
-    const avgData = await pool.query(
-      "SELECT AVG(rating) AS avg, COUNT(*) AS total FROM product_ratings WHERE product_id = $1",
-      [product_id]
-    );
+    // 1️⃣ Insert rating
+    await ProductRating.create({
+      product_id,
+      rating,
+    });
+
+    // 2️⃣ Recalculate average + count
+    const stats = await ProductRating.findOne({
+      where: { product_id },
+      attributes: [
+        [fn("AVG", col("rating")), "avg"],
+        [fn("COUNT", col("rating")), "total"],
+      ],
+      raw: true,
+    });
 
     return res.json({
       success: true,
-      newAverage: Number(avgData.rows[0].avg).toFixed(1),
-      totalRatings: avgData.rows[0].total
+      newAverage: Number(stats.avg).toFixed(1),
+      totalRatings: Number(stats.total),
     });
 
   } catch (error) {
     console.error("RATING ERROR:", error);
     return res.status(500).json({
       success: false,
-      message: "Failed to submit rating"
+      message: "Failed to submit rating",
     });
   }
 });
