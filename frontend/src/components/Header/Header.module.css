@@ -1,0 +1,165 @@
+/* =====================================================
+   APP HEADER (SCOPED – NO LEAKS)
+   ===================================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: #dcdcdc;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* Hide / show */
+.hide {
+  transform: translateY(-100%);
+}
+
+.show {
+  transform: translateY(0);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================================
+   INNER WRAPPER
+   ===================================================== */
+
+.inner {
+  height: 86px; /* 🔥 increased for better text breathing */
+  padding: 0 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =====================================================
+   LEFT
+   ===================================================== */
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 118px; /* 🔥 slightly larger logo */
+  cursor: pointer;
+}
+
+/* =====================================================
+   CENTER – SEARCH
+   ===================================================== */
+
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBar {
+  width: 460px; /* 🔥 slightly wider */
+  height: 46px; /* 🔥 slightly taller */
+  background: #ffffff;
+  border-radius: 50px;
+  border: 1.4px solid #bcbcbc;
+
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+
+.iconLeft,
+.iconRight {
+  width: 20px;
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.searchBar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font-size: 16.5px; /* 🔥 improved readability */
+  line-height: 1.4;
+}
+
+.searchBar input::placeholder {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+/* =====================================================
+   RIGHT – NAV
+   ===================================================== */
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.navLinks {
+  display: flex;
+  gap: 34px; /* 🔥 more breathing space */
+}
+
+.navLink {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+
+  font-size: 17.5px; /* 🔥 increased */
+  font-weight: 600;
+  color: #000;
+}
+
+/* Active state */
+.active {
+  color: #7b3fa1;
+  font-weight: 700;
+}
+
+/* underline animation */
+.navLink::after {
+  content: "";
+  height: 2px;
+  width: 0;
+  background: #7b3fa1;
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.navLink:hover::after,
+.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+.logoutBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  margin-left: 24px;
+  font-size: 17.5px; /* 🔥 increased */
+  font-weight: 700;
+  color: #000;
+}
+
+.logoutBtn:hover {
+  color: #7b3fa1;
+}

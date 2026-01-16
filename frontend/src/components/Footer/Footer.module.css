@@ -1,0 +1,96 @@
+/* =====================================================
+   FOOTER (SCOPED – NO LEAKS)
+   ===================================================== */
+
+.footer {
+  width: 100%;
+  background: #000;
+  color: #ffffff;
+  padding: 28px 0;
+}
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 40px;
+  gap: 60px;
+}
+
+/* =====================================================
+   LEFT
+   ===================================================== */
+
+.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  width: 130px;
+  margin-bottom: 12px;
+}
+
+/* =====================================================
+   COLUMNS
+   ===================================================== */
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* =====================================================
+   TEXT & LINKS
+   ===================================================== */
+
+.text,
+.link {
+  font-size: 14.5px;
+  margin-bottom: 6px;
+  color: #dcdcdc;
+}
+
+.link {
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.link:hover {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 22px;
+  }
+
+  .logo {
+    margin: 0 auto;
+  }
+}

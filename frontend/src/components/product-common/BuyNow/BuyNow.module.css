@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #111;
+}
+
+.subtitle {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #222;
+}
+
+.label {
+  color: #666;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.totalLabel {
+  color: #111;
+}
+
+.totalValue {
+  color: #111;
+}
+
+.buyButton {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buyButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -1,0 +1,51 @@
+.featuresSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 24px 0;
+  padding-bottom: 0;
+  color: #000;
+  border-bottom: none;
+}
+
+.featureList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  color: #222;
+  line-height: 1.5;
+}
+
+.emoji {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.text {
+  color: #222;
+  font-weight: 500;
+}
+
+.noData {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+}

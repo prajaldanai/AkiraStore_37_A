@@ -6,6 +6,9 @@
   align-items: center;
   position: relative;
   padding: 20px;
+    font-size: 18px !important;
+
+  
 }
 
 .fade-in {
@@ -74,6 +77,8 @@
   padding: 22px 34px;
   background: #f5cdfc;
   animation: slideInRight 0.7s ease forwards;
+    font-size: 18px;
+
 }
 
 @keyframes slideInRight {
@@ -86,6 +91,7 @@
   color: #6a0dad;
   font-size: 22px;
   font-weight: 700;
+  
   margin-bottom: 8px;
 }
 
@@ -105,11 +111,11 @@
 .success {
   color: green;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 label {
-  font-size: 14.5px;
+  font-size: 20px;
   color: #6a0dad;
   font-weight: 600;
   margin-bottom: 3px;
@@ -123,7 +129,7 @@ label {
   border: 2px solid #f3b6ff;
   outline: none;
   padding: 0 12px;
-  font-size: 14px;
+  font-size: 18px;
   border-radius: 8px;
   background: #ffffff;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease, background-color 0.25s ease;
@@ -147,7 +153,7 @@ label {
   border-radius: 22px;
   background: #7721b2;
   color: #fff;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -184,3 +190,4 @@ label {
     width: 100%;
   }
 }
+

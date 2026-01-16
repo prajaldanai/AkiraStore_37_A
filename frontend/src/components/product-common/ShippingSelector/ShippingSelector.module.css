@@ -1,0 +1,72 @@
+﻿.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+}
+
+.loading {
+  font-size: 12px;
+  color: #666;
+}
+
+.empty {
+  font-size: 13px;
+  color: #777;
+  margin: 0;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+  color: #222;
+}
+
+.optionLabel {
+  font-weight: 600;
+}
+
+.optionDesc {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.amount {
+  font-weight: 600;
+  color: #111;
+}

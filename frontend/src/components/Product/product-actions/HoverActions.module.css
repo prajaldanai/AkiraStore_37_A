@@ -1,0 +1,60 @@
+/* =====================================================
+   HOVER ACTIONS (SCOPED – NO LEAKS)
+   ===================================================== */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: auto;
+}
+
+/* dark overlay */
+.overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* show on image hover */
+.imageBox:hover .overlay {
+  opacity: 1;
+}
+
+/* icon box */
+.iconBox {
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  z-index: 2;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.iconBox:hover {
+  transform: translateY(-6px) scale(1.06);
+}
+
+/* icon image */
+.icon {
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+}

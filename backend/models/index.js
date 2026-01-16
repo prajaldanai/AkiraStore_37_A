@@ -5,6 +5,8 @@ const ProductFeature = require("./ProductFeature");
 const ProductSize = require("./ProductSize");
 const ShippingRule = require("./ShippingRule");
 const ProductRating = require("./ProductRating");
+const ProductComment = require("./ProductComment");
+const User = require("./User");
 
 /* =======================
    ASSOCIATIONS
@@ -34,6 +36,14 @@ ShippingRule.belongsTo(Product, { foreignKey: "product_id" });
 Product.hasMany(ProductRating, { foreignKey: "product_id" });
 ProductRating.belongsTo(Product, { foreignKey: "product_id" });
 
+// Product → Comments
+Product.hasMany(ProductComment, { foreignKey: "product_id" });
+ProductComment.belongsTo(Product, { foreignKey: "product_id" });
+
+// User → Comments
+User.hasMany(ProductComment, { foreignKey: "user_id" });
+ProductComment.belongsTo(User, { foreignKey: "user_id" });
+
 module.exports = {
   Product,
   Category,
@@ -42,4 +52,6 @@ module.exports = {
   ProductSize,
   ShippingRule,
   ProductRating,
+  ProductComment,
+  User,
 };
