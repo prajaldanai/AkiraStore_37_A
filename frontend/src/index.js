@@ -1,8 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./index.css";
 
+// ✅ IMPORT GLOBAL CSS (ONLY HERE)
+import "./styles/global.css";
+
+// ❌ REMOVE / DO NOT USE index.css anymore
+// import "./index.css";
+
+/* =====================================================
+   Ensure popup root exists (SAFE – no CSS impact)
+   ===================================================== */
 function ensurePopupRoot() {
   let el = document.getElementById("popup-root");
   if (!el) {
@@ -13,5 +21,12 @@ function ensurePopupRoot() {
 }
 ensurePopupRoot();
 
+/* =====================================================
+   Render App
+   ===================================================== */
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

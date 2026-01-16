@@ -1,0 +1,359 @@
+/* =====================================================
+   CUSTOMER REVIEWS - FULL WIDTH PREMIUM LAYOUT
+   ===================================================== */
+
+.reviewsSection {
+  width: 100%;
+  background: linear-gradient(180deg, #f8f9fb 0%, #f3f4f6 100%);
+  padding: 60px 0 70px;
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =====================================================
+   SECTION HEADER
+   ===================================================== */
+
+.sectionHeader {
+  margin-bottom: 36px;
+  text-align: left;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.5px;
+}
+
+.reviewCount {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* =====================================================
+   REVIEW FORM
+   ===================================================== */
+
+.reviewForm {
+  margin-bottom: 40px;
+}
+
+.reviewTextarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 18px 20px;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  resize: vertical;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.reviewTextarea::placeholder {
+  color: #aaa;
+}
+
+.reviewTextarea:focus {
+  outline: none;
+  border-color: #1a8f00;
+  box-shadow: 0 0 0 4px rgba(26, 143, 0, 0.1);
+}
+
+.reviewTextarea:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.errorMessage {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: #fff5f5;
+  border-radius: 8px;
+  color: #d32f2f;
+  font-size: 14px;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.postButton {
+  padding: 14px 36px;
+  background: #1a8f00;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.postButton:hover:not(:disabled) {
+  background: #158000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 143, 0, 0.3);
+}
+
+.postButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.postButton:disabled {
+  background: #ccc;
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* =====================================================
+   LOGIN NOTICE
+   ===================================================== */
+
+.loginNotice {
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.loginNotice p {
+  margin: 0;
+  color: #666;
+  font-size: 15px;
+}
+
+/* =====================================================
+   REVIEWS LIST
+   ===================================================== */
+
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =====================================================
+   LOADING STATE
+   ===================================================== */
+
+.loadingState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 20px;
+  color: #777;
+  font-size: 15px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e5e5e5;
+  border-top-color: #1a8f00;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =====================================================
+   EMPTY STATE
+   ===================================================== */
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.emptyDescription {
+  font-size: 15px;
+  color: #888;
+  margin: 0;
+  max-width: 320px;
+}
+
+/* =====================================================
+   REVIEW CARD
+   ===================================================== */
+
+.reviewCard {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+  
+}
+
+.reviewCard:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.reviewAccent {
+  width: 4px;
+  background: linear-gradient(180deg, #1a8f00 0%, #2cb800 100%);
+  flex-shrink: 0;
+}
+
+.reviewBody {
+  flex: 1;
+  padding: 20px 24px;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.userDetails {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #1a8f00 0%, #2cb800 100%);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.timestamp {
+  font-size: 13px;
+  color: #999;
+  font-weight: 500;
+}
+
+.reviewText {
+  margin: 0;
+  font-size: 20px;
+  color: #444;
+  line-height: 1.7;
+  font-family:'Times New Roman', Times, serif ;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+@media (max-width: 768px) {
+  .reviewsSection {
+    padding: 40px 0 50px;
+    margin-top: 30px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .sectionTitle {
+    font-size: 24px;
+  }
+
+  .reviewTextarea {
+    min-height: 100px;
+    padding: 16px;
+  }
+
+  .postButton {
+    width: 100%;
+    padding: 14px 24px;
+  }
+
+  .formActions {
+    justify-content: stretch;
+  }
+
+  .reviewBody {
+    padding: 16px 18px;
+  }
+
+  .reviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .timestamp {
+    margin-left: 48px;
+  }
+
+  .emptyState {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 22px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .username {
+    font-size: 14px;
+  }
+
+  .reviewText {
+    font-size: 14px;
+  }
+
+  .timestamp {
+    margin-left: 44px;
+  }
+}

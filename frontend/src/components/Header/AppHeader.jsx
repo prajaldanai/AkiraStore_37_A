@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./header.css";
+import styles from "./Header.module.css";
 
 import logo from "../../assets/icons/logo.png";
 import plusIcon from "../../assets/icons/plus.png";
@@ -17,7 +17,7 @@ export default function AppHeader() {
      HEADER HIDE / SHOW ON SCROLL
   =============================== */
   useEffect(() => {
-    const scrollContainer = document.querySelector(".page-content");
+    const scrollContainer = document.querySelector("main");
     if (!scrollContainer) return;
 
     const onScroll = () => {
@@ -40,7 +40,7 @@ export default function AppHeader() {
   }, []);
 
   /* ===============================
-     NAV ITEMS (UNCHANGED)
+     NAV ITEMS
   =============================== */
   const navItems = [
     { label: "Home", path: "/dashboard" },
@@ -53,69 +53,64 @@ export default function AppHeader() {
     { label: "About Us", path: "/about" },
   ];
 
-  /* ===============================
-     ✅ FIXED ACTIVE LOGIC
-     - Home active for:
-       /dashboard
-       /shoes
-       /electronics
-     - Categories active normally
-  =============================== */
   const isActive = (path) => {
     const currentPath = location.pathname;
 
-    // ✅ HOME stays active for discovery pages
     if (
       path === "/dashboard" &&
-      (
-        currentPath === "/dashboard" ||
+      (currentPath === "/dashboard" ||
         currentPath === "/shoes" ||
-        currentPath === "/electronics"
-      )
+        currentPath === "/electronics")
     ) {
       return true;
     }
 
-    // ✅ Category pages (women / men / kids)
     if (path.startsWith("/category") && currentPath.startsWith(path)) {
       return true;
     }
 
-    // ✅ Exact match for other routes
     return currentPath === path;
   };
 
-  /* ===============================
-     LOGOUT
-  =============================== */
   const handleLogout = () => {
     navigate("/", { replace: true });
   };
 
   return (
-    <header className={`app-header ${visible ? "show" : "hide"}`}>
-      <div className="app-header-inner">
+    <header
+      className={`${styles.header} ${
+        visible ? styles.show : styles.hide
+      }`}
+    >
+      <div className={styles.inner}>
         {/* LEFT */}
-        <div className="header-left">
-          <img src={logo} alt="logo" className="header-logo" />
+        <div className={styles.left}>
+          <img
+            src={logo}
+            alt="logo"
+            className={styles.logo}
+            onClick={() => navigate("/dashboard")}
+          />
         </div>
 
         {/* CENTER */}
-        <div className="header-center">
-          <div className="search-bar">
-            <img src={plusIcon} className="search-icon-left" alt="add" />
+        <div className={styles.center}>
+          <div className={styles.searchBar}>
+            <img src={plusIcon} className={styles.iconLeft} alt="add" />
             <input type="text" placeholder="Search product..." />
-            <img src={searchIcon} className="search-icon-right" alt="search" />
+            <img src={searchIcon} className={styles.iconRight} alt="search" />
           </div>
         </div>
 
         {/* RIGHT */}
-        <div className="header-right">
-          <div className="nav-links">
+        <div className={styles.right}>
+          <div className={styles.navLinks}>
             {navItems.map((item) => (
               <button
                 key={item.label}
-                className={`nav-link ${isActive(item.path) ? "active" : ""}`}
+                className={`${styles.navLink} ${
+                  isActive(item.path) ? styles.active : ""
+                }`}
                 onClick={() => navigate(item.path)}
               >
                 {item.label}
@@ -123,7 +118,10 @@ export default function AppHeader() {
             ))}
           </div>
 
-          <button className="logout-text-btn" onClick={handleLogout}>
+          <button
+            className={styles.logoutBtn}
+            onClick={handleLogout}
+          >
             Logout
           </button>
         </div>

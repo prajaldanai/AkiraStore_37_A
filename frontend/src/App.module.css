@@ -1,0 +1,51 @@
+/* =====================================================
+   ROOT APP CONTAINER (SCOPED)
+   ===================================================== */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+  text-align: left;
+}
+
+/* =====================================================
+   CRA DEFAULT HEADER (DISABLED SAFELY)
+   ===================================================== */
+
+.appHeader {
+  all: unset;
+}
+
+/* =====================================================
+   LOGO (ONLY IF USED)
+   ===================================================== */
+
+.appLogo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+/* Optional animation */
+@media (prefers-reduced-motion: no-preference) {
+  .appLogo {
+    animation: appLogoSpin infinite 20s linear;
+  }
+}
+
+@keyframes appLogoSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   OPTIONAL LINK STYLE
+   ===================================================== */
+
+.appLink {
+  color: #61dafb;
+}

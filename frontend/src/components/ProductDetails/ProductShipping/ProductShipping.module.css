@@ -1,0 +1,90 @@
+.shippingSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 24px 0;
+  padding-bottom: 0;
+  color: #000;
+  border-bottom: none;
+}
+
+.shippingContent {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.shippingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emoji {
+  font-size: 24px;
+}
+
+.groupTitle {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+.chargeList {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chargeItem {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chargeItem::before {
+  content: "•";
+  margin-right: 8px;
+  color: #222;
+}
+
+.chargeLabel {
+  color: #222;
+}
+
+.chargePrice {
+  font-weight: 700;
+  color: #000;
+}
+
+.chargeDesc {
+  color: #222;
+  margin-left: 4px;
+}
+
+.noData {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  margin: 0;
+}

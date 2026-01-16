@@ -1,0 +1,62 @@
+/* =====================================================
+   HOME SECTION (SCOPED – NO LEAKS)
+   ===================================================== */
+
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 60px;
+}
+
+/* =====================================================
+   HEADER (TITLE + VIEW BUTTON)
+   ===================================================== */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* =====================================================
+   VIEW BUTTON
+   ===================================================== */
+
+.viewBtn {
+  background: #e5e5e5;
+  padding: 10px 26px;
+  border-radius: 50px;
+
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.viewBtn:hover {
+  background: #d3d3d3;
+  transform: translateY(-2px);
+}
+
+/* =====================================================
+   SUBTITLE
+   ===================================================== */
+
+.subtitle {
+  font-size: 18px;
+  color: #666;
+  margin: 0 0 8px;
+    font-weight: 600;
+
+}

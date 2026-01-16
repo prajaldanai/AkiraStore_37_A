@@ -16,6 +16,9 @@ router.get("/category/:slug", userProductController.getProductsByCategorySlug);
 // 3️⃣ Single Product Details (use /product/:id to avoid route conflicts)
 router.get("/product/:id", userProductController.getProductDetails);
 
+// 3️⃣.5 Product Recommendations (same category, prioritize same tag, max 3)
+router.get("/product/:id/recommendations", userProductController.getProductRecommendations);
+
 // 4️⃣ 🔥 Exclusive offers (ACTIVE ONLY)
 router.get("/exclusive-offers", userProductController.getExclusiveOffers);
 

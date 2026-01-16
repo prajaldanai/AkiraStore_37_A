@@ -1,0 +1,110 @@
+/* ==============================
+   CORE SWIPER REPLACEMENT
+============================== */
+
+.swiper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper :global(.swiper-wrapper) {
+  display: flex;
+}
+
+.swiper :global(.swiper-slide) {
+  flex-shrink: 0;
+  width: calc(100% / 3); /* 🔥 FORCE 3 SLIDES ONLY */
+}
+
+/* ==============================
+   SLIDER WRAPPER (FULL WIDTH)
+============================== */
+
+.sliderWrapper {
+  width: 100%;
+  margin: 40px 0;
+  padding: 0 48px;
+  position: relative;
+}
+
+/* ==============================
+   SLIDE
+============================== */
+
+.slide {
+  display: flex;
+  justify-content: center;
+}
+
+/* ==============================
+   NAV BUTTONS (COLOR CONTROL)
+============================== */
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+
+  background: #6d28d9;          /* 🔥 PURPLE */
+  color: #ffffff;                  /* 🔥 ICON COLOR */
+
+  font-size: 22px;
+  font-weight: 800;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(109, 40, 217, 0.35);
+  transition: all 0.25s ease;
+}
+
+.navBtn:hover {
+  background: #5b21b6;          /* 🔥 DARKER PURPLE */
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev {
+  left: 12px;
+}
+
+.next {
+  right: 12px;
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 900px) {
+  .swiper :global(.swiper-slide) {
+    width: calc(100% / 2); /* 2 slides on tablet */
+  }
+}
+
+@media (max-width: 600px) {
+  .swiper :global(.swiper-slide) {
+    width: 100%;           /* 1 slide on mobile */
+  }
+
+  .sliderWrapper {
+    padding: 0 16px;
+      background: #ffffff; /* ✅ FIX */
+
+  }
+
+  .prev {
+    left: 6px;
+  }
+
+  .next {
+    right: 6px;
+  }
+}
