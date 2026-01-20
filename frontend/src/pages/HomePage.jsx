@@ -2,9 +2,13 @@ import React from "react";
 import Layout from "../components/Layout/Layout";
 import HeroSection from "../components/Home/HeroSection";
 import HomeSection from "../components/Home/HomeSection";
+import useGlobalSSE from "../hooks/useGlobalSSE"; // 🔥 GLOBAL SSE (ONE CONNECTION)
 import "./HomePage.css";
 
 export default function HomePage() {
+  // 🔥 Creates ONE SSE connection for the entire Home page
+  useGlobalSSE();
+
   return (
     <Layout>
       <div className="home-page">

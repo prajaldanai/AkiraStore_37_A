@@ -1,0 +1,106 @@
+/* =====================================================
+   PRODUCT DETAILS PAGE – FIXED DESKTOP LAYOUT (CONSISTENT)
+   ===================================================== */
+
+/* =====================
+   PAGE WRAPPER
+===================== */
+.page {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  box-sizing: border-box;
+}
+
+/* Inner content wrapper for bordered sections */
+.pageContent {
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==============================================
+   SHARED SYSTEM
+   Width  : 100%
+   Border : 2px solid black
+   Radius : 6px
+   Padding: 24px 28px
+============================================== */
+
+/* ==============================================
+   MAIN PRODUCT BOX (IMAGE + INFO)
+============================================== */
+.topSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+
+  width: 100%;
+  min-height: 820px;
+
+  padding: 24px 28px;
+
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  box-shadow: none;
+
+  box-sizing: border-box;
+}
+
+/* ==============================================
+   DESCRIPTION / FEATURES / SHIPPING
+============================================== */
+.descriptionContainer {
+  width: 100%;
+  margin-top: 24px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.descriptionMainTitle {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+  padding: 28px 36px 24px 36px;
+  color: #000;
+}
+
+.descriptionDivider {
+  width: 100%;
+  height: 2px;
+  background: #000000;
+}
+
+.middleSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.middleSection > * {
+  padding: 32px 36px;
+  border-right: 2px solid #000000;
+  box-sizing: border-box;
+  min-height: 320px;
+}
+
+.middleSection > *:last-child {
+  border-right: none;
+}
+
+/* ==============================================
+   COMMENTS SECTION – FULL WIDTH, NO BORDER
+============================================== */
+/* ProductComments is now full-width with its own styling */

@@ -1,86 +1,94 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
-import ProductSlider from "../Product/ProductSlider";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "./home.css";
+import ProductSlider from "../Product/ProductSlider";
+import styles from "./HomeSection.module.css";
 
 export default function HomeSection({ title, subtitle, slug }) {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const eventSourceRef = useRef(null);
 
-  /* ================= LOAD PRODUCTS ================= */
-  const loadProducts = useCallback(async () => {
+  const isMountedRef = useRef(false);
+  const hasLoadedRef = useRef(false);
+  const slugRef = useRef(slug);
+  const currentProductIdsRef = useRef("");
+
+  useEffect(() => {
+    slugRef.current = slug;
+  }, [slug]);
+
+  const loadProductsRef = useRef(async () => {
+    if (!isMountedRef.current) return;
+
     try {
       const res = await fetch(
-        `http://localhost:5000/api/user/products/latest/${slug}?limit=10`,
+        `http://localhost:5000/api/user/products/latest/${slugRef.current}?limit=10`,
         { cache: "no-store" }
       );
 
       const data = await res.json();
 
-      if (data.success) {
-        setProducts(data.products);
-      } else {
+      if (data.success && Array.isArray(data.products)) {
+        const newIds = data.products.map(p => p.id).join(",");
+
+        if (newIds !== currentProductIdsRef.current) {
+          currentProductIdsRef.current = newIds;
+          setProducts(data.products);
+        }
+      } else if (currentProductIdsRef.current !== "") {
+        currentProductIdsRef.current = "";
         setProducts([]);
       }
-    } catch (error) {
-      console.error("❌ Load products error:", error);
-      setProducts([]);
+    } catch {
+      // keep existing products
     }
-  }, [slug]);
+  });
 
-  /* ================= INITIAL LOAD ================= */
   useEffect(() => {
-    loadProducts();
-  }, [loadProducts]);
+    isMountedRef.current = true;
 
-  /* ================= SSE AUTO REFRESH ================= */
-  useEffect(() => {
-    // prevent duplicate connections
-    if (eventSourceRef.current) return;
-
-    const es = new EventSource(
-      "http://localhost:5000/api/products/subscribe"
-    );
-
-    eventSourceRef.current = es;
-
-    es.addEventListener("product-update", () => {
-      console.log(`🔄 Product update received → ${slug}`);
-      loadProducts();
-    });
-
-    es.onerror = (err) => {
-      console.warn("⚠️ SSE connection issue", err);
-    };
+    if (!hasLoadedRef.current) {
+      hasLoadedRef.current = true;
+      loadProductsRef.current();
+    }
 
     return () => {
-      es.close();
-      eventSourceRef.current = null;
+      isMountedRef.current = false;
     };
-  }, [loadProducts, slug]);
+  }, []);
 
-  /* ================= UI LOGIC ================= */
+  useEffect(() => {
+    const handleUpdate = () => {
+      loadProductsRef.current();
+    };
+
+    window.addEventListener("PRODUCT_UPDATED", handleUpdate);
+
+    return () => {
+      window.removeEventListener("PRODUCT_UPDATED", handleUpdate);
+    };
+  }, []);
+
   const hideViewButton = slug === "grocery" || slug === "glasses";
 
   return (
-    <div className="category-section">
-      <div className="section-header">
-        <h2>{title}</h2>
+    <section className={styles.section}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>{title}</h2>
 
         {!hideViewButton && (
           <button
-            className="view-btn"
+            type="button"
+            className={styles.viewBtn}
             onClick={() => navigate(`/category/${slug}`)}
           >
-            view
+            View
           </button>
         )}
       </div>
 
-      <p className="section-subtitle">{subtitle}</p>
+      <p className={styles.subtitle}>{subtitle}</p>
 
       <ProductSlider items={products} />
-    </div>
+    </section>
   );
 }

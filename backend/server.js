@@ -14,6 +14,10 @@ const productRoutes = require("./routes/productRoutes");
 const productUserRoutes = require("./routes/productUserRoutes");
 const ratingRoutes = require("./routes/ratingRoutes");
 const categoryPageRoutes = require("./routes/categoryPageRoutes");
+const commentRoutes = require("./routes/commentRoutes");
+const buyNowRoutes = require("./routes/buyNowRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const adminOrderRoutes = require("./routes/adminOrderRoutes");
 
 const app = express();
 
@@ -25,7 +29,13 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // -------------------------
 // MIDDLEWARE
 // -------------------------
-app.use(cors());
+// Configure CORS with explicit allowed headers
+app.use(cors({
+  origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -38,6 +48,10 @@ app.use("/api", productRoutes);                    // ADMIN PRODUCT ROUTES
 app.use("/api/user/products", productUserRoutes); // USER PRODUCT ROUTES
 app.use("/api/rating", ratingRoutes);
 app.use("/api/category-page", categoryPageRoutes);
+app.use("/api/comments", commentRoutes);          // COMMENT ROUTES
+app.use("/api/buy-now", buyNowRoutes);            // BUY NOW SESSION ROUTES
+app.use("/api/orders", orderRoutes);              // ORDER ROUTES
+app.use("/api/admin/orders", adminOrderRoutes);   // ADMIN ORDER ROUTES
 
 console.log("🔥 Routes mounted");
 
@@ -55,13 +69,24 @@ const PORT = process.env.PORT || 5000;
   try {
     // ✅ Test Sequelize connection
     await sequelize.authenticate();
-    await sequelize.sync({ force: false });
-
-    
     console.log("✅ Sequelize connected to PostgreSQL");
 
-    // ⚠️ OPTIONAL (keep false if DB already exists)
-    // await sequelize.sync({ alter: false });
+    // Sync models - force:false won't add new columns to existing tables
+    // If you need to add columns, run the migration SQL first
+    try {
+      await sequelize.sync({ force: false });
+      console.log("✅ Database models synchronized");
+    } catch (syncError) {
+      // Check if it's the user_id column missing error
+      if (syncError.message && syncError.message.includes('user_id')) {
+        console.error("❌ DATABASE MIGRATION REQUIRED:");
+        console.error("   The 'user_id' column is missing from 'product_ratings' table.");
+        console.error("   Run the migration: backend/migrations/add_user_id_to_product_ratings.sql");
+        console.error("   Then restart the server.");
+        process.exit(1);
+      }
+      throw syncError;
+    }
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);

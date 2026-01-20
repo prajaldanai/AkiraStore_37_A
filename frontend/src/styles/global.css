@@ -1,0 +1,87 @@
+/* =====================================================
+   GLOBAL BASE STYLES (SAFE + STABLE)
+   Do NOT add component styles here
+   ===================================================== */
+
+/* Box model reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Base document setup */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+
+  /* ✅ Preserved CRA font stack */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+
+  /* ✅ FIX: restore normal readable sizing */
+  font-size: 16px;
+  line-height: 1.5;
+
+  background-color: #ffff;
+  color: #111111;
+
+  /* Font smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Code blocks (from old index.css) */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas,
+    "Courier New", monospace;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Media safety */
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Form elements (SAFE defaults) */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.4;
+}
+
+/* ✅ FIX: usable buttons without shrinking UI */
+button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+/* Lists reset */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

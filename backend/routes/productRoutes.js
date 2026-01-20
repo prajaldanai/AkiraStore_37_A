@@ -25,6 +25,11 @@ router.get("/categories/:slug", getCategoryBySlug);
 // Get all products in a category (ADMIN)
 router.get("/admin/products/category/:categoryId", getProductsByCategory);
 
+
+// USER: Get one product by ID (public details)
+const userProductController = require("../controllers/userProductController");
+router.get("/products/:id", userProductController.getProductDetails);
+
 // Get one product by ID (ADMIN EDIT)
 router.get("/admin/products/:id", getProductById);
 

@@ -1,15 +1,14 @@
 import AppHeader from "../Header/AppHeader";
-import AppFooter from "../Footer/Footer"; 
-import "./layout.css";
-
+import AppFooter from "../Footer/Footer";
+import styles from "./Layout.module.css";
 
 export default function Layout({ children }) {
   return (
     <>
       <AppHeader />
-      <div className="page-content">
+      <main className={styles.pageContent}>
         {children}
-      </div>
+      </main>
       <AppFooter />
     </>
   );

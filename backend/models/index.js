@@ -5,6 +5,11 @@ const ProductFeature = require("./ProductFeature");
 const ProductSize = require("./ProductSize");
 const ShippingRule = require("./ShippingRule");
 const ProductRating = require("./ProductRating");
+const ProductComment = require("./ProductComment");
+const User = require("./User");
+const BuyNowSession = require("./BuyNowSession");
+const Order = require("./Order");
+const OrderItem = require("./OrderItem");
 
 /* =======================
    ASSOCIATIONS
@@ -34,6 +39,34 @@ ShippingRule.belongsTo(Product, { foreignKey: "product_id" });
 Product.hasMany(ProductRating, { foreignKey: "product_id" });
 ProductRating.belongsTo(Product, { foreignKey: "product_id" });
 
+// Product → Comments
+Product.hasMany(ProductComment, { foreignKey: "product_id" });
+ProductComment.belongsTo(Product, { foreignKey: "product_id" });
+
+// User → Comments
+User.hasMany(ProductComment, { foreignKey: "user_id" });
+ProductComment.belongsTo(User, { foreignKey: "user_id" });
+
+// User → BuyNowSessions
+User.hasMany(BuyNowSession, { foreignKey: "user_id" });
+BuyNowSession.belongsTo(User, { foreignKey: "user_id" });
+
+// Product → BuyNowSessions
+Product.hasMany(BuyNowSession, { foreignKey: "product_id" });
+BuyNowSession.belongsTo(Product, { foreignKey: "product_id" });
+
+// User → Orders
+User.hasMany(Order, { foreignKey: "user_id" });
+Order.belongsTo(User, { foreignKey: "user_id" });
+
+// BuyNowSession → Orders
+BuyNowSession.hasOne(Order, { foreignKey: "session_id" });
+Order.belongsTo(BuyNowSession, { foreignKey: "session_id" });
+
+// Order → OrderItems
+Order.hasMany(OrderItem, { foreignKey: "order_id", as: "items" });
+OrderItem.belongsTo(Order, { foreignKey: "order_id" });
+
 module.exports = {
   Product,
   Category,
@@ -42,4 +75,9 @@ module.exports = {
   ProductSize,
   ShippingRule,
   ProductRating,
+  ProductComment,
+  User,
+  BuyNowSession,
+  Order,
+  OrderItem,
 };

@@ -1,0 +1,8 @@
+/* =====================================================
+   PAGE CONTENT OFFSET (SCOPED – NO LEAKS)
+   ===================================================== */
+
+.pageContent {
+  padding-top: 86px; /* 🔥 MUST match header height */
+  min-height: calc(100vh - 86px);
+}

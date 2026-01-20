@@ -21,11 +21,16 @@ const AdminDashboardPage = () => {
 
   const [showCategoryPanel, setShowCategoryPanel] = useState(false);
 
-  const navigate = useNavigate();  // ✅ NEW
-const handleLogout = () => {
-  localStorage.removeItem("adminToken");
-  navigate("/");   // ← Load the picture login page
-};
+  const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    // Clear all auth-related data
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    localStorage.removeItem("userRole");
+    navigate("/login", { replace: true });
+  };
 
 
   return (
@@ -50,7 +55,8 @@ const handleLogout = () => {
             <span>Feedback</span>
           </div>
 
-          <div className="menu-item">
+          {/* ORDERS BUTTON - Navigate to Admin Orders */}
+          <div className="menu-item" onClick={() => navigate("/admin/orders")}>
             <img src={ordersIcon} alt="orders" />
             <span>Orders</span>
           </div>
@@ -70,7 +76,8 @@ const handleLogout = () => {
             <span>Users</span>
           </div>
 
-          <div className="menu-item">
+          {/* ORDER HISTORY BUTTON - Navigate to Order History */}
+          <div className="menu-item" onClick={() => navigate("/admin/order-history")}>
             <img src={orderHistoryIcon} alt="order-history" />
             <span>Order History</span>
           </div>

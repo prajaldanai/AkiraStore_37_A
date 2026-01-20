@@ -3,22 +3,22 @@
   position: absolute;
   top: 100px;
   left: 20px;   
-  width: 200px;
+  width: 250px;
   padding: 35px;
 
-  /* MATCH SIDEBAR COLOR FAMILY */
+  
   background: #1a0843;
 
   border-radius: 26px;
 
-  /* Same glow style as sidebar */
+  
   box-shadow:
     0 12px 30px rgba(0, 0, 0, 0.35),
     0 0 22px rgba(138, 47, 255, 0.55);
 
   z-index: 30;
 
-  /* Smooth slide + glow animation */
+  
   animation: panelGlowSlide 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -48,7 +48,7 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  
 }
 
 .category-panel-list li {
@@ -118,8 +118,6 @@
 
 
 
-
-/* CLOSE POP */
 @keyframes closePop {
   0% { transform: scale(0.5); opacity: 0; }
   60% { transform: scale(1.15); opacity: 1; }
