@@ -1,0 +1,435 @@
+/* ============================================================
+   MY ORDER DETAIL PAGE - View Order Details
+============================================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* Loading & Error States */
+.loadingState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  font-size: 18px;
+  color: #666;
+}
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+}
+
+.errorState p {
+  font-size: 18px;
+  color: #dc3545;
+  margin-bottom: 20px;
+}
+
+.errorButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.homeBtn {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.homeBtn:hover {
+  background-color: #1d4ed8;
+}
+
+.homeBtnSecondary {
+  background-color: #fff;
+  color: #1a1a1a;
+  padding: 12px 24px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.homeBtnSecondary:hover {
+  background-color: #f5f5f5;
+}
+
+/* Back Button */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.backCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover .backCircle {
+  background: #333;
+}
+
+.backArrow {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.backText {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+/* Title Row with Status */
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.statusBadge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusSuccess {
+  background: #d4edda;
+  color: #155724;
+}
+
+.statusProcessing {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.statusPending {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+.statusCancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.statusDefault {
+  background: #f0f0f0;
+  color: #666;
+}
+
+/* Order Meta */
+.orderMeta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+.orderId {
+  font-family: monospace;
+}
+
+/* Main Content */
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.leftPanel {
+  width: 100%;
+}
+
+.orderCard {
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  padding: 24px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Products Table */
+.productsTable {
+  width: 100%;
+  margin-bottom: 24px;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  background: #f9f9f9;
+}
+
+.tableHeader th {
+  padding: 12px 8px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tableRow td {
+  padding: 16px 8px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 15px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.tableRow:last-child td {
+  border-bottom: none;
+}
+
+.colProduct {
+  width: 50%;
+}
+
+.colQuantity,
+.colSize,
+.colPrice {
+  text-align: center;
+  width: 16.66%;
+}
+
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.productImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.productName {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+/* Customer Details */
+.customerDetails {
+  margin-top: 16px;
+}
+
+.detailRow {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.detailLabel {
+  width: 120px;
+  font-weight: 600;
+  color: #666;
+  font-size: 14px;
+}
+
+.detailValue {
+  flex: 1;
+  color: #1a1a1a;
+  font-size: 14px;
+}
+
+/* Right Panel - Summary */
+.rightPanel {
+  position: sticky;
+  top: 24px;
+}
+
+.summaryCard {
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  padding: 24px;
+}
+
+.summaryTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+.summaryBody {
+  margin-bottom: 20px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.summaryLabel {
+  color: #666;
+  font-size: 15px;
+}
+
+.summaryValue {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 15px;
+}
+
+.discountValue {
+  color: #28a745;
+}
+
+.summaryDivider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 16px 0;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.totalLabel {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.totalValue {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.backToOrdersButton {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.backToOrdersButton:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+.dashboardButton {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.dashboardButton:hover {
+  background: #1d4ed8;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+
+  .rightPanel {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .orderMeta {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

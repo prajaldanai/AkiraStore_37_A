@@ -1,207 +1,73 @@
-import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+// src/components/Product/product-rating/useRating.js
+import { useEffect, useState, useRef } from "react";
 
-const API_BASE = "http://localhost:5000/api";
-
-function submitRatingToAPI(productId, rating, token, onComplete) {
-  fetch(`${API_BASE}/rating/add`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    body: JSON.stringify({ product_id: productId, rating }),
-  })
-    .then(async (response) => {
-      const data = await response.json();
-      onComplete(null, { status: response.status, data });
-    })
-    .catch((error) => {
-      onComplete(error, null);
-    });
-}
-
-export default function useRating({ productId, initialAvg = 0, initialCount = 0 }) {
-  const safeId = useMemo(
-    () => (productId == null ? "" : String(productId)),
-    [productId]
-  );
+export default function useRating(item) {
+  const [rating, setRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState(0);
 
   const [showPopup, setShowPopup] = useState(false);
-  const [fetchingRating, setFetchingRating] = useState(true);
+  const [hoverRate, setHoverRate] = useState(0);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
-  const [avg, setAvg] = useState(initialAvg);
-  const [count, setCount] = useState(initialCount);
-  const [userRating, setUserRating] = useState(0);
+  // 🔐 Track if THIS user already rated THIS product
+  const hasRatedRef = useRef(false);
+  const lastItemId = useRef(null);
 
-  const [tempValue, setTempValue] = useState(0);
-  const [hoverValue, setHoverValue] = useState(0);
+  // 🔁 Reset ONLY when product changes
+  useEffect(() => {
+    if (item?.id !== lastItemId.current) {
+      lastItemId.current = item?.id;
 
-  const [message, setMessage] = useState({ type: "", text: "" });
+      setRating(Number(item?.avg_rating) || 0);
+      setRatingCount(Number(item?.rating_count) || 0);
 
-  const hasFetched = useRef(false);
-  const isMounted = useRef(true);
-  const hasLoggedError = useRef(false);
+      hasRatedRef.current = false; // reset per product
+      setHoverRate(0);
+      setShowPopup(false);
+      setShowToast(false);
+      setToastMessage("");
+    }
+  }, [item?.id, item?.avg_rating, item?.rating_count]);
 
-  const hasRated = userRating > 0;
+  const submitRating = (value) => {
+    const newRating = Number(value);
+    if (!newRating || newRating < 1 || newRating > 5) return;
 
-  const clearMessage = useCallback(() => {
-    setMessage({ type: "", text: "" });
-  }, []);
+    // ❌ USER ALREADY RATED THIS PRODUCT
+    if (hasRatedRef.current) {
+      setShowPopup(false);
+      setToastMessage("You have already rated this product ⭐");
+      setShowToast(true);
 
-  const pushMessage = useCallback((type, text) => {
-    setMessage({ type, text });
-    setTimeout(() => {
-      setMessage({ type: "", text: "" });
-    }, 3000);
-  }, []);
-
-  const isLoggedIn = useCallback(() => {
-    return !!localStorage.getItem("authToken");
-  }, []);
-
-  const fetchRatingData = useCallback(async () => {
-    if (!safeId) {
-      setFetchingRating(false);
+      setTimeout(() => setShowToast(false), 1800);
       return;
     }
 
-    try {
-      setFetchingRating(true);
+    // ✅ FIRST TIME RATING
+    setRating(newRating);
+    setRatingCount((prev) => prev + 1);
+    hasRatedRef.current = true;
 
-      const token = localStorage.getItem("authToken");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
-      const res = await fetch(`${API_BASE}/rating/product/${safeId}`, { headers });
-      const data = await res.json();
-
-      if (!isMounted.current) return;
-
-      if (data.success) {
-        setAvg(Number(data.avg_rating) || 0);
-        setCount(Number(data.rating_count) || 0);
-        setUserRating(data.user_rating || 0);
-        hasLoggedError.current = false;
-      }
-    } catch (err) {
-      if (!hasLoggedError.current) {
-        hasLoggedError.current = true;
-      }
-    } finally {
-      if (isMounted.current) {
-        setFetchingRating(false);
-      }
-    }
-  }, [safeId]);
-
-  useEffect(() => {
-    isMounted.current = true;
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    hasFetched.current = false;
-    hasLoggedError.current = false;
-  }, [safeId]);
-
-  useEffect(() => {
-    if (safeId && !hasFetched.current) {
-      hasFetched.current = true;
-      fetchRatingData();
-    }
-  }, [safeId, fetchRatingData]);
-
-  const openRate = useCallback(() => {
-    if (!safeId) {
-      pushMessage("info", "Product not available for rating.");
-      return;
-    }
-
-    if (!isLoggedIn()) {
-      pushMessage("info", "Please log in to rate this product.");
-      return;
-    }
-
-    clearMessage();
-    setTempValue(userRating || 0);
-    setHoverValue(0);
-    setShowPopup(true);
-  }, [safeId, isLoggedIn, userRating, pushMessage, clearMessage]);
-
-  const closePopup = useCallback(() => {
     setShowPopup(false);
-    setTempValue(0);
-    setHoverValue(0);
-  }, []);
+    setToastMessage("⭐ Thanks for rating!");
+    setShowToast(true);
 
-    const submitRating = useCallback(() => {
-  return new Promise((resolve, reject) => {
-    const finalValue = hoverValue || tempValue;
-
-    if (!safeId) {
-      pushMessage("error", "Product not found.");
-      setShowPopup(false);
-      reject();
-      return;
-    }
-
-    if (!finalValue || finalValue < 1 || finalValue > 5) {
-      pushMessage("info", "Please select a rating from 1 to 5 stars.");
-      reject();
-      return;
-    }
-
-    if (!isLoggedIn()) {
-      pushMessage("error", "Please log in to rate.");
-      setShowPopup(false);
-      reject();
-      return;
-    }
-
-    const token = localStorage.getItem("authToken");
-
-    submitRatingToAPI(safeId, finalValue, token, (error, result) => {
-      if (error) {
-        pushMessage("error", "Network error. Please try again.");
-        reject(error);
-        return;
-      }
-
-      const { status, data } = result;
-
-      if (status === 200 && data.success) {
-        setAvg(Number(data.avg_rating) || 0);
-        setCount(Number(data.rating_count) || 0);
-        setUserRating(data.user_rating);
-        setShowPopup(false);
-        pushMessage("success", data.is_update ? "Rating updated!" : "Thanks for rating!");
-        resolve();
-      } else {
-        pushMessage("error", data.message || "Failed to submit rating.");
-        reject();
-      }
-    });
-  });
-}, [hoverValue, tempValue, safeId, isLoggedIn, pushMessage]);
-
+    setTimeout(() => setShowToast(false), 1800);
+  };
 
   return {
-    avg,
-    count,
-    hasRated,
-    userRating,
-    fetchingRating,
+    rating,
+    ratingCount,
+
     showPopup,
-    tempValue,
-    hoverValue,
-    setTempValue,
-    setHoverValue,
-    openRate,
-    closePopup,
+    setShowPopup,
+
+    hoverRate,
+    setHoverRate,
+
+    showToast,
+    toastMessage,
     submitRating,
-    refetch: fetchRatingData,
-    message,
-    clearMessage,
   };
 }

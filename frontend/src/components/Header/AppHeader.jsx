@@ -12,6 +12,17 @@ export default function AppHeader() {
 
   const lastScrollY = useRef(0);
   const [visible, setVisible] = useState(true);
+  
+  // Check if user is logged in by looking for auth token
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return !!localStorage.getItem("authToken");
+  });
+
+  // Re-check auth state when location changes (e.g., after login redirect)
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    setIsLoggedIn(!!token);
+  }, [location.pathname]);
 
   /* ===============================
      HEADER HIDE / SHOW ON SCROLL
@@ -73,7 +84,21 @@ export default function AppHeader() {
   };
 
   const handleLogout = () => {
-    navigate("/", { replace: true });
+    // Clear all auth-related data from localStorage
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    localStorage.removeItem("userRole");
+    
+    // Update local state
+    setIsLoggedIn(false);
+    
+    // Redirect to login page
+    navigate("/login", { replace: true });
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
   };
 
   return (
@@ -120,9 +145,9 @@ export default function AppHeader() {
 
           <button
             className={styles.logoutBtn}
-            onClick={handleLogout}
+            onClick={isLoggedIn ? handleLogout : handleLogin}
           >
-            Logout
+            {isLoggedIn ? "Logout" : "Login"}
           </button>
         </div>
       </div>

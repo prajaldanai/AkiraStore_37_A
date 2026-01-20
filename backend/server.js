@@ -15,6 +15,9 @@ const productUserRoutes = require("./routes/productUserRoutes");
 const ratingRoutes = require("./routes/ratingRoutes");
 const categoryPageRoutes = require("./routes/categoryPageRoutes");
 const commentRoutes = require("./routes/commentRoutes");
+const buyNowRoutes = require("./routes/buyNowRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const adminOrderRoutes = require("./routes/adminOrderRoutes");
 
 const app = express();
 
@@ -26,7 +29,13 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // -------------------------
 // MIDDLEWARE
 // -------------------------
-app.use(cors());
+// Configure CORS with explicit allowed headers
+app.use(cors({
+  origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -40,6 +49,9 @@ app.use("/api/user/products", productUserRoutes); // USER PRODUCT ROUTES
 app.use("/api/rating", ratingRoutes);
 app.use("/api/category-page", categoryPageRoutes);
 app.use("/api/comments", commentRoutes);          // COMMENT ROUTES
+app.use("/api/buy-now", buyNowRoutes);            // BUY NOW SESSION ROUTES
+app.use("/api/orders", orderRoutes);              // ORDER ROUTES
+app.use("/api/admin/orders", adminOrderRoutes);   // ADMIN ORDER ROUTES
 
 console.log("🔥 Routes mounted");
 

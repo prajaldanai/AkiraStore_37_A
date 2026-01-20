@@ -1,0 +1,414 @@
+/* ============================================================
+   PRODUCT CONFIRMATION PAGE - Matches User Screenshot
+============================================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* Loading & Error States */
+.loadingState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  font-size: 18px;
+  color: #666;
+}
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+}
+
+.errorState p {
+  font-size: 18px;
+  color: #dc3545;
+  margin-bottom: 20px;
+}
+
+.homeBtn {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.homeBtn:hover {
+  background-color: #1d4ed8;
+}
+
+/* Back Button - Black Circle + Text */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.backCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover .backCircle {
+  background: #333;
+}
+
+.backArrow {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.backText {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+/* Page Title */
+.pageTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+}
+
+/* Main Content Layout */
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* Left Panel */
+.leftPanel {
+  width: 100%;
+}
+
+.orderCard {
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  padding: 24px;
+}
+
+/* Products Table */
+.productsTable {
+  width: 100%;
+  margin-bottom: 24px;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  background: #f9f9f9;
+}
+
+.tableHeader th {
+  padding: 12px 8px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tableRow td {
+  padding: 16px 8px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 15px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.tableRow:last-child td {
+  border-bottom: none;
+}
+
+.colProduct {
+  text-align: left;
+}
+
+.colQuantity,
+.colSize,
+.colPrice {
+  text-align: center;
+}
+
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.productImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f3f4f6;
+}
+
+.productName {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+/* Customer Details */
+.customerDetails {
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.detailRow {
+  display: flex;
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.detailLabel {
+  width: 160px;
+  color: #6b7280;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.detailValue {
+  color: #1a1a1a;
+  flex: 1;
+}
+
+/* Right Panel - Order Summary */
+.rightPanel {
+  position: sticky;
+  top: 24px;
+}
+
+.summaryCard {
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  padding: 24px;
+}
+
+.summaryTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.summaryBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.summaryLabel {
+  color: #6b7280;
+}
+
+.summaryValue {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.discountValue {
+  color: #16a34a;
+}
+
+/* Checkbox Section */
+.checkboxSection {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+/* Checkboxes */
+.checkboxRow {
+  padding: 8px 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #555;
+  cursor: default;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #2563eb;
+  cursor: default;
+}
+
+.checkbox:disabled {
+  opacity: 0.7;
+}
+
+.checkboxPrice {
+  margin-left: auto;
+  color: #333;
+  font-weight: 500;
+}
+
+.checkboxNote {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.hintText {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+/* Divider */
+.summaryDivider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 16px 0;
+}
+
+/* Total Row */
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.totalLabel {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.totalValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* NEXT Button - Blue */
+.nextButton {
+  width: 100%;
+  background-color: #2563eb;
+  color: #fff;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.nextButton:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.nextButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.nextButton:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+
+  .rightPanel {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .orderCard {
+    padding: 16px;
+  }
+
+  .tableHeader {
+    display: none;
+  }
+
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    text-align: left;
+    padding: 16px;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: none;
+  }
+
+  .colProduct,
+  .colQuantity,
+  .colSize,
+  .colPrice {
+    text-align: left;
+  }
+
+  .colQuantity::before { content: "Qty: "; color: #6b7280; }
+  .colSize::before { content: "Size: "; color: #6b7280; }
+  .colPrice::before { content: "Price: "; color: #6b7280; }
+
+  .detailRow {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .detailLabel {
+    width: 100%;
+  }
+}
