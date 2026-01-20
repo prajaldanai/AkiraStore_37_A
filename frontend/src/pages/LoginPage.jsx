@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginPage.css";
 import loginIllustration from "../assets/images/login-illustration.png";
 import { loginUser } from "../services/authService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the intended destination from location state (if redirected from ProtectedRoute)
+  const from = location.state?.from || null;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,32 +17,51 @@ const LoginPage = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
+  // ⭐ REDIRECT AWAY FROM LOGIN IF ALREADY AUTHENTICATED
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      // User is already logged in - redirect them away from login page
+      const role = localStorage.getItem("role");
+      if (role === "admin") {
+        navigate("/admin-dashboard", { replace: true });
+      } else if (from) {
+        navigate(from, { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+    }
+  }, [navigate, from]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
     setSuccessMsg("");
     setLoading(true);
 
-  try {
+    try {
       // ⭐ CALL BACKEND LOGIN API
       const data = await loginUser(username, password);
 
-      // ⭐ SAVE TOKEN + USERNAME + ROLE
-      localStorage.setItem("authToken", data.token);   // token
-      localStorage.setItem("username", data.username); // ⭐ NEW
-      localStorage.setItem("role", data.role);         // ⭐ NEW
+      // ⭐ SAVE TOKEN + USERNAME + ROLE (authService already saves, but ensure consistency)
+      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("role", data.role);
 
       setSuccessMsg("Login successful!");
 
-      // ⭐ ROLE-BASED REDIRECTION
+      // ⭐ ROLE-BASED REDIRECTION (with support for intended destination)
+      // Use shorter timeout for better UX
       setTimeout(() => {
         if (data.role === "admin") {
-          navigate("/admin-dashboard");      // ⭐ ADMIN GO HERE
+          navigate("/admin-dashboard", { replace: true });
+        } else if (from) {
+          navigate(from, { replace: true });
         } else {
-          navigate("/dashboard");            // ⭐ NORMAL USER
+          navigate("/dashboard", { replace: true });
         }
-      }, 800);
-     } catch (err) {
+      }, 500);
+    } catch (err) {
       setErrorMsg(err.message);
     } finally {
       setLoading(false);

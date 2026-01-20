@@ -1,7 +1,9 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./ProductInfo.module.css";
 import useRating from "../../Product/product-rating/useRating";
 import RatingPopup from "../../Product/product-rating/RatingPopup";
+import { createBuyNowSession } from "../../../services/buyNowService";
 
 
 function getStockStatus(stock) {
@@ -90,6 +92,8 @@ export default function ProductInfo({
   sizes = [],
   stock = 0,
 }) {
+  const navigate = useNavigate();
+
   // Use the rating hook for interactive rating
   const rating = useRating({
     productId,
@@ -111,6 +115,7 @@ export default function ProductInfo({
   const [qty, setQty] = useState(1);
   const [selectedSizes, setSelectedSizes] = useState([]); // Array for multi-size selection
   const [sizeWarning, setSizeWarning] = useState(""); // Warning message for size limit
+  const [buyNowLoading, setBuyNowLoading] = useState(false); // Buy Now button loading state
 
   // Auto-trim selectedSizes when quantity decreases
   useEffect(() => {
@@ -145,6 +150,31 @@ export default function ProductInfo({
 
     // Add the size
     setSelectedSizes((prev) => [...prev, size]);
+  };
+
+  // Handle Buy Now click - creates session and navigates to checkout
+  const handleBuyNow = async () => {
+    if (!canBuy || buyNowLoading) return;
+
+    try {
+      setBuyNowLoading(true);
+      const result = await createBuyNowSession({
+        productId,
+        selectedSize: selectedSizes,
+        quantity: qty,
+      });
+
+      if (result.success && result.sessionId) {
+        navigate(`/buy-now/${result.sessionId}`);
+      } else {
+        alert(result.message || "Failed to start checkout");
+      }
+    } catch (error) {
+      console.error("Buy Now error:", error);
+      alert(error.message || "Failed to start checkout. Please try again.");
+    } finally {
+      setBuyNowLoading(false);
+    }
   };
 
   // Computed values
@@ -347,7 +377,8 @@ export default function ProductInfo({
         <button
           type="button"
           className={styles.buyNow}
-          disabled={!canBuy}
+          disabled={!canBuy || buyNowLoading}
+          onClick={handleBuyNow}
           title={
             !stockInfo.canPurchase
               ? "Out of stock"
@@ -356,7 +387,7 @@ export default function ProductInfo({
               : ""
           }
         >
-          Buy Now
+          {buyNowLoading ? "Loading..." : "Buy Now"}
         </button>
       </div>
 
