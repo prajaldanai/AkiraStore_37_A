@@ -1,5 +1,6 @@
 const { Order, BuyNowSession, User, Product } = require("../models");
 const { Op } = require("sequelize");
+const stockService = require("../services/inventory/stockService");
 
 /* ============================================================
    HELPERS
@@ -448,6 +449,8 @@ exports.getUserOrderById = async (req, res) => {
 /* ============================================================
    CONFIRM ORDER (USER - finalize order)
    POST /api/orders/:orderId/confirm
+   - Validates stock before confirmation
+   - Decreases stock atomically on success
 ============================================================ */
 exports.confirmOrder = async (req, res) => {
   try {
@@ -466,6 +469,35 @@ exports.confirmOrder = async (req, res) => {
       return res.status(400).json({ 
         success: false, 
         message: `Order cannot be confirmed. Current status: ${order.status}` 
+      });
+    }
+
+    // ✅ STOCK VALIDATION: Check stock availability before confirming
+    const productId = order.product_id;
+    const quantity = order.quantity || 1;
+    
+    const stockCheck = await stockService.checkStock(productId, quantity);
+    
+    if (!stockCheck.available) {
+      return res.status(400).json({
+        success: false,
+        message: stockCheck.message,
+        availableQty: stockCheck.availableQty,
+        requestedQty: stockCheck.requestedQty,
+        code: "INSUFFICIENT_STOCK",
+      });
+    }
+
+    // ✅ STOCK DECREASE: Atomically decrease stock (race-condition safe)
+    const stockResult = await stockService.decreaseStock(productId, quantity);
+    
+    if (!stockResult.success) {
+      return res.status(400).json({
+        success: false,
+        message: stockResult.message,
+        availableQty: stockResult.availableQty,
+        requestedQty: stockResult.requestedQty,
+        code: "INSUFFICIENT_STOCK",
       });
     }
 
@@ -488,6 +520,11 @@ exports.confirmOrder = async (req, res) => {
         status: order.status,
         total: order.total,
         updatedAt: order.updated_at,
+      },
+      stockUpdate: {
+        productId: stockResult.productId,
+        previousStock: stockResult.previousStock,
+        newStock: stockResult.newStock,
       },
     });
 

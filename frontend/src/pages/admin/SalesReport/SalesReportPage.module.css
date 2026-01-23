@@ -1,0 +1,109 @@
+/* Sales Report Page - Premium SaaS Dashboard Layout */
+
+/* Base */
+.page {
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+/* Main Content Area */
+.main {
+  padding: 24px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Error Banner */
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #dc2626;
+}
+
+.errorText {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.retryBtn {
+  padding: 6px 14px;
+  background: #dc2626;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.retryBtn:hover {
+  background: #b91c1c;
+}
+
+/* Grid Layout */
+.gridRow {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.colWide {
+  min-width: 0;
+}
+
+.colNarrow {
+  min-width: 0;
+}
+
+.fullWidth {
+  margin-bottom: 20px;
+}
+
+.fullWidth:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .gridRow {
+    grid-template-columns: 1fr;
+  }
+
+  .main {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 16px;
+  }
+
+  .gridRow {
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .fullWidth {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 12px;
+  }
+}

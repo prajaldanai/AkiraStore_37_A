@@ -47,11 +47,21 @@ exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({
       where: { username },
-      attributes: ["id", "username", "password_hash", "role"],
+      attributes: ["id", "username", "password_hash", "role", "is_blocked", "block_reason"],
     });
 
     if (!user) {
       return res.status(400).json({ success: false, message: "User not found" });
+    }
+
+    // ========== CHECK IF USER IS BLOCKED ==========
+    if (user.is_blocked) {
+      return res.status(403).json({
+        success: false,
+        statusCode: "BLOCKED",
+        message: "Your account has been blocked. Please contact support.",
+        reason: user.block_reason || null,
+      });
     }
 
     const isMatch = await bcrypt.compare(password, user.password_hash);
@@ -60,6 +70,14 @@ exports.loginUser = async (req, res) => {
       return res
         .status(400)
         .json({ success: false, message: "Invalid password" });
+    }
+
+    // ========== INCREMENT LOGIN COUNT ==========
+    try {
+      await User.increment("login_count", { where: { id: user.id } });
+    } catch (countError) {
+      console.error("Failed to increment login count:", countError);
+      // Don't fail login for this
     }
 
     const token = jwt.sign(

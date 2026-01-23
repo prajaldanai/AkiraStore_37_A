@@ -1,0 +1,292 @@
+/* Filters Bar - Premium compact design */
+
+.filtersBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Mobile Toggle */
+.mobileToggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  margin-bottom: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.mobileToggle:hover {
+  background: #f9fafb;
+}
+
+.chevronUp {
+  transform: rotate(180deg);
+}
+
+/* Segmented Control */
+.segmentedControl {
+  display: flex;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.segment {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.segment:hover:not(:disabled):not(.active) {
+  color: #374151;
+}
+
+.segment.active {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.segment:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.segment:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 1px;
+}
+
+/* Divider */
+.divider {
+  width: 1px;
+  height: 24px;
+  background: #e5e7eb;
+}
+
+/* Date Range */
+.dateRange {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dateField {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dateLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.dateInput {
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #374151;
+  background: #ffffff;
+  min-width: 130px;
+  transition: border-color 0.15s ease;
+}
+
+.dateInput:hover:not(:disabled) {
+  border-color: #d1d5db;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.dateInput:disabled {
+  background: #f9fafb;
+  cursor: not-allowed;
+}
+
+/* Category Dropdown */
+.categoryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.categoryLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.categorySelect {
+  padding: 6px 28px 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #374151;
+  background: #ffffff url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%236B7280' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+  appearance: none;
+  cursor: pointer;
+  min-width: 140px;
+  transition: border-color 0.15s ease;
+}
+
+.categorySelect:hover:not(:disabled) {
+  border-color: #d1d5db;
+}
+
+.categorySelect:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.categorySelect:disabled {
+  background-color: #f9fafb;
+  cursor: not-allowed;
+}
+
+/* Reset Button */
+.resetBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-left: auto;
+}
+
+.resetBtn:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.resetBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.resetBtn:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .segmentedControl {
+    order: 1;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .divider:first-of-type {
+    display: none;
+  }
+
+  .dateRange {
+    order: 2;
+  }
+
+  .categoryWrapper {
+    order: 3;
+  }
+
+  .resetBtn {
+    order: 4;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .mobileToggle {
+    display: flex;
+  }
+
+  .filtersBar {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .filtersBar.mobileOpen {
+    display: flex;
+  }
+
+  .segmentedControl {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .dateRange {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .dateField {
+    width: 100%;
+  }
+
+  .dateInput {
+    width: 100%;
+  }
+
+  .categoryWrapper {
+    width: 100%;
+  }
+
+  .categorySelect {
+    width: 100%;
+  }
+
+  .resetBtn {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+  }
+}

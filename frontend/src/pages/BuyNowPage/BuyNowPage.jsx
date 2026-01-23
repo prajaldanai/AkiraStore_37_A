@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import BargainChatModal from "../../components/product-common/BargainModal/BargainChatModal";
+import AccountStatusModal from "../../components/AccountStatusModal/AccountStatusModal";
 import {
   getBuyNowSession,
   createOrder,
@@ -50,6 +51,9 @@ export default function BuyNowPage() {
   const [submitting, setSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [previewItems, setPreviewItems] = useState([]);
+
+  // Account status modal (blocked/suspended)
+  const [statusModal, setStatusModal] = useState({ isOpen: false, statusCode: null, message: '', suspendedUntil: null });
 
   // Load session data
   useEffect(() => {
@@ -211,7 +215,17 @@ export default function BuyNowPage() {
         navigate(`/order-confirmation/${result.order.id}`);
       }
     } catch (err) {
-      setFormErrors({ submit: err.message || "Failed to place order" });
+      // Check for account status errors (blocked/suspended)
+      if (err.statusCode === 'BLOCKED' || err.statusCode === 'SUSPENDED') {
+        setStatusModal({
+          isOpen: true,
+          statusCode: err.statusCode,
+          message: err.message,
+          suspendedUntil: err.suspendedUntil
+        });
+      } else {
+        setFormErrors({ submit: err.message || "Failed to place order" });
+      }
     } finally {
       setSubmitting(false);
     }
@@ -542,6 +556,15 @@ export default function BuyNowPage() {
             onClose={() => setShowBargainModal(false)}
           />
         )}
+
+        {/* Account Status Modal (Blocked/Suspended) */}
+        <AccountStatusModal
+          isOpen={statusModal.isOpen}
+          onClose={() => setStatusModal({ isOpen: false, statusCode: null, message: '', suspendedUntil: null })}
+          statusCode={statusModal.statusCode}
+          message={statusModal.message}
+          suspendedUntil={statusModal.suspendedUntil}
+        />
       </div>
     </Layout>
   );
