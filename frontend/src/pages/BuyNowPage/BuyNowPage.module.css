@@ -267,6 +267,29 @@
   gap: 4px;
 }
 
+.previewItems {
+  display: grid;
+  gap: 12px;
+}
+
+.previewItem {
+  background: #fff;
+  border-radius: 18px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.previewImage {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #f6f6f6;
+}
+
 .productName {
   font-size: 15px;
   font-weight: 600;

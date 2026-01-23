@@ -13,6 +13,8 @@ import styles from "./BuyNowPage.module.css";
 
 const API_BASE = "http://localhost:5000";
 const GIFT_BOX_FEE = 20;
+const PREVIEW_STORAGE_KEY = "akira_store_selected_preview";
+const PLACEHOLDER_IMAGE = "https://via.placeholder.com/200x200?text=No+Image";
 
 export default function BuyNowPage() {
   const { sessionId } = useParams();
@@ -48,6 +50,7 @@ export default function BuyNowPage() {
   // Submit state
   const [submitting, setSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const [previewItems, setPreviewItems] = useState([]);
 
   // Account status modal (blocked/suspended)
   const [statusModal, setStatusModal] = useState({ isOpen: false, statusCode: null, message: '', suspendedUntil: null });
@@ -91,6 +94,21 @@ export default function BuyNowPage() {
     return () => { isMounted = false; };
   }, [sessionId]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const raw = window.localStorage.getItem(PREVIEW_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          setPreviewItems(parsed);
+        }
+      }
+    } catch (error) {
+      console.error("Unable to read preview items", error);
+    }
+  }, []);
+
   // Handle form changes
   const handleFormChange = useCallback((field, value) => {
     setCustomerForm(prev => ({ ...prev, [field]: value }));
@@ -126,7 +144,15 @@ export default function BuyNowPage() {
   }, []);
 
   // Calculate totals
-  const subtotal = session ? (session.unitPrice * session.quantity) : 0;
+  const previewItemCount = previewItems.reduce(
+    (sum, item) => sum + (Number(item.quantity) || 0),
+    0
+  );
+  const previewSubtotal = previewItems.reduce(
+    (sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 0),
+    0
+  );
+  const subtotal = previewItems.length ? previewSubtotal : session ? session.unitPrice * session.quantity : 0;
   const shippingCharge = selectedShipping?.amount || 0;
   const giftBoxFee = giftBox ? GIFT_BOX_FEE : 0;
   const taxAmount = 0; // For future use
@@ -383,22 +409,45 @@ export default function BuyNowPage() {
           {/* Right: Order Summary */}
           <aside className={styles.summarySection}>
             {/* Product Preview */}
-            <div className={styles.productPreview}>
-              {session.productImage && (
-                <img
-                  src={`${API_BASE}${session.productImage}`}
-                  alt={session.productName}
-                  className={styles.productImage}
-                />
-              )}
-              <div className={styles.productInfo}>
-                <h3 className={styles.productName}>{session.productName}</h3>
-                {session.selectedSize && (
-                  <p className={styles.productSize}>Size: {session.selectedSize}</p>
-                )}
-                <p className={styles.productQty}>Qty: {session.quantity}</p>
+            {previewItems.length > 0 ? (
+              <div className={styles.previewItems}>
+                {previewItems.map((item) => (
+                  <article key={`checkout-${item.id}`} className={styles.previewItem}>
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className={styles.previewImage}
+                        onError={(event) => {
+                          event.target.src = PLACEHOLDER_IMAGE;
+                        }}
+                      />
+                    )}
+                    <div>
+                      <h3 className={styles.productName}>{item.name}</h3>
+                      <p className={styles.productQty}>Qty: {item.quantity}</p>
+                    </div>
+                  </article>
+                ))}
               </div>
-            </div>
+            ) : (
+              <div className={styles.productPreview}>
+                {session.productImage && (
+                  <img
+                    src={`${API_BASE}${session.productImage}`}
+                    alt={session.productName}
+                    className={styles.productImage}
+                  />
+                )}
+                <div className={styles.productInfo}>
+                  <h3 className={styles.productName}>{session.productName}</h3>
+                  {session.selectedSize && (
+                    <p className={styles.productSize}>Size: {session.selectedSize}</p>
+                  )}
+                  <p className={styles.productQty}>Qty: {session.quantity}</p>
+                </div>
+              </div>
+            )}
 
             {/* Order Summary Card */}
             <div className={styles.summaryCard}>
@@ -406,7 +455,9 @@ export default function BuyNowPage() {
 
               <div className={styles.summaryRows}>
                 <div className={styles.summaryRow}>
-                  <span>Price ({session.quantity} item{session.quantity > 1 ? "s" : ""})</span>
+                  <span>
+                    Price ({previewItems.length ? `${previewItemCount} item${previewItemCount > 1 ? "s" : ""}` : `${session.quantity} item${session.quantity > 1 ? "s" : ""}`})
+                  </span>
                   <span>Rs. {subtotal.toLocaleString()}</span>
                 </div>
                 <div className={styles.summaryRow}>

@@ -31,6 +31,10 @@ import MyOrderDetailPage from "./pages/MyOrderDetailPage/MyOrderDetailPage";
 import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage";
 // Search Results Page
 import SearchResultsPage from "./pages/SearchResults/SearchResultsPage";
+// Cart Page
+import MyCartPage from "./pages/MyCartPage/MyCartPage";
+// Feedback Page
+import FeedbackPage from "./pages/FeedbackPage/FeedbackPage";
 
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 
@@ -44,6 +48,7 @@ import AdminDashboardPage from "./pages/admin/Dashboard";
 import AdminCategoryPage from "./pages/AdminCategoryPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage/AdminOrdersPage";
 import AdminOrderHistoryPage from "./pages/AdminOrderHistoryPage/AdminOrderHistoryPage";
+import AdminFeedbackPage from "./pages/AdminFeedbackPage/AdminFeedbackPage";
 import InventoryPage from "./pages/admin/Inventory/InventoryPage";
 import SalesReportPage from "./pages/admin/SalesReport/SalesReportPage";
 import UsersPage from "./pages/admin/Users/UsersPage";
@@ -154,6 +159,26 @@ function App() {
             element={
               <ProtectedRoute>
                 <SearchResultsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ================= CART PAGE ================= */}
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <MyCartPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ================= FEEDBACK PAGE ================= */}
+          <Route
+            path="/feedback"
+            element={
+              <ProtectedRoute>
+                <FeedbackPage />
               </ProtectedRoute>
             }
           />
@@ -280,6 +305,15 @@ function App() {
             element={
               <AdminProtectedRoute>
                 <AdminOrdersPage />
+              </AdminProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/feedback"
+            element={
+              <AdminProtectedRoute>
+                <AdminFeedbackPage />
               </AdminProtectedRoute>
             }
           />

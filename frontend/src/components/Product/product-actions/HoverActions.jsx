@@ -19,7 +19,7 @@ import cart from "../../../assets/icons/cart.png";
  * 
  * Without these, clicks can bubble up and trigger unwanted navigation or reload.
  */
-export default function HoverActions({ productId, onRate }) {
+export default function HoverActions({ productId, onRate, onCart }) {
   const navigate = useNavigate();
 
   /* ===============================
@@ -50,7 +50,9 @@ export default function HoverActions({ productId, onRate }) {
   const handleCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: Implement cart functionality
+    if (typeof onCart === "function") {
+      onCart();
+    }
   };
 
   return (

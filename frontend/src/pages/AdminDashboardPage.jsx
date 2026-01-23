@@ -50,7 +50,7 @@ const AdminDashboardPage = () => {
             <span>Category</span>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={() => navigate("/admin/feedback")}>
             <img src={feedbackIcon} alt="feedback" />
             <span>Feedback</span>
           </div>
