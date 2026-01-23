@@ -470,6 +470,43 @@
   color: #1565c0;
 }
 
+.cartMessage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  margin-bottom: 10px;
+}
+
+.cartMessage.success {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+.cartMessage.info {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #312e81;
+}
+
+.cartMessageClose {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 0;
+}
+
+.cartMessageClose:hover {
+  opacity: 1;
+}
+
 .ratingToast.error {
   background: #ffebee;
   border: 1px solid #ffcdd2;
