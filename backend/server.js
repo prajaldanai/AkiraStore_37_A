@@ -18,6 +18,11 @@ const commentRoutes = require("./routes/commentRoutes");
 const buyNowRoutes = require("./routes/buyNowRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const adminOrderRoutes = require("./routes/adminOrderRoutes");
+const inventoryRoutes = require("./routes/inventoryRoutes");
+const salesReportRoutes = require("./routes/salesReportRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const adminUserRoutes = require("./routes/adminUserRoutes");
+const searchRoutes = require("./routes/searchRoutes");
 
 const app = express();
 
@@ -52,6 +57,11 @@ app.use("/api/comments", commentRoutes);          // COMMENT ROUTES
 app.use("/api/buy-now", buyNowRoutes);            // BUY NOW SESSION ROUTES
 app.use("/api/orders", orderRoutes);              // ORDER ROUTES
 app.use("/api/admin/orders", adminOrderRoutes);   // ADMIN ORDER ROUTES
+app.use("/api/admin/inventory", inventoryRoutes); // ADMIN INVENTORY ROUTES
+app.use("/api/admin/sales-report", salesReportRoutes); // ADMIN SALES REPORT ROUTES
+app.use("/api/admin/dashboard", dashboardRoutes); // ADMIN DASHBOARD ROUTES
+app.use("/api/admin/users", adminUserRoutes);     // ADMIN USER MANAGEMENT ROUTES
+app.use("/api/search", searchRoutes);             // PRODUCT SEARCH ROUTES
 
 console.log("🔥 Routes mounted");
 

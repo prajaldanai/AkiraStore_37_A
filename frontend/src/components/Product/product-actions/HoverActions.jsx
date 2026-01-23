@@ -28,7 +28,6 @@ export default function HoverActions({ productId, onRate }) {
      - Stops event from bubbling to parent card
   =============================== */
   const handleView = (e) => {
-    console.log("🚨 [HoverActions] handleView CALLED - THIS CAUSES NAVIGATION!");
     e.preventDefault();
     e.stopPropagation();
     navigate(`/product/${productId}`);

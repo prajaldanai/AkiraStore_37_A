@@ -1,0 +1,135 @@
+/* Account Status Modal Styles */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon */
+.iconWrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.iconWrapper.blocked {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.iconWrapper.suspended {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+/* Title */
+.title {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Message */
+.message {
+  margin: 0 0 20px;
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Date Info */
+.dateInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.dateLabel {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.dateValue {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Support Info */
+.supportInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f0f9ff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: #0369a1;
+}
+
+.supportInfo svg {
+  flex-shrink: 0;
+}
+
+/* Close Button */
+.closeBtn {
+  width: 100%;
+  padding: 14px 24px;
+  border: none;
+  background: #111827;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.closeBtn:hover {
+  background: #374151;
+}

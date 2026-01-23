@@ -8,10 +8,12 @@ const {
 } = require("../controllers/buyNowController");
 
 const { optionalAuth } = require("../middlewares/authMiddleware");
+const { enforceUserStatus } = require("../middlewares/enforceUserStatus");
 
 // Create a new Buy Now session (snapshots product data)
 // POST /api/buy-now/session
-router.post("/session", optionalAuth, createSession);
+// Apply enforceUserStatus to prevent blocked/suspended users from starting buy now
+router.post("/session", optionalAuth, enforceUserStatus, createSession);
 
 // Get session by ID
 // GET /api/buy-now/session/:sessionId

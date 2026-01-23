@@ -38,19 +38,6 @@ function ProductSlider({ items = [] }) {
   const nextRef = useRef(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
 
-  // 🔍 DEBUG: Track mount/unmount
-  useEffect(() => {
-    console.log("🟢 [ProductSlider] MOUNTED");
-    return () => {
-      console.log("🔴 [ProductSlider] UNMOUNTED");
-    };
-  }, []);
-
-  // 🔍 DEBUG: Track items changes
-  useEffect(() => {
-    console.log("🔵 [ProductSlider] items changed, count:", items.length);
-  }, [items]);
-
   /**
    * Update navigation AFTER Swiper is initialized AND refs are mounted.
    * This runs once when swiperInstance becomes available.

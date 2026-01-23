@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
+import SignatureSearch from "../navbar/SignatureSearch";
 
 import logo from "../../assets/icons/logo.png";
-import plusIcon from "../../assets/icons/plus.png";
-import searchIcon from "../../assets/icons/search.png";
 
 export default function AppHeader() {
   const navigate = useNavigate();
@@ -118,13 +117,9 @@ export default function AppHeader() {
           />
         </div>
 
-        {/* CENTER */}
+        {/* CENTER - Signature Search */}
         <div className={styles.center}>
-          <div className={styles.searchBar}>
-            <img src={plusIcon} className={styles.iconLeft} alt="add" />
-            <input type="text" placeholder="Search product..." />
-            <img src={searchIcon} className={styles.iconRight} alt="search" />
-          </div>
+          <SignatureSearch />
         </div>
 
         {/* RIGHT */}

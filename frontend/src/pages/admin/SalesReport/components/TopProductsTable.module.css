@@ -1,0 +1,271 @@
+/* Top Products Table - Clean design with hover effects */
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table thead {
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.15s ease;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+
+/* Product Column */
+.tdProduct {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.rank1 {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #ffffff;
+}
+
+.rank2 {
+  background: linear-gradient(135deg, #d1d5db, #9ca3af);
+  color: #ffffff;
+}
+
+.rank3 {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #ffffff;
+}
+
+.productImage {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f3f4f6;
+  flex-shrink: 0;
+}
+
+.noImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.productName {
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* Category Badge */
+.categoryBadge {
+  display: inline-flex;
+  padding: 3px 8px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+/* Units & Revenue */
+.tdUnits,
+.tdRevenue {
+  font-weight: 500;
+  color: #374151;
+}
+
+.tdRevenue {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Stock Badge */
+.stockBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+.stockOk {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.stockLow {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.stockOut {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.pageBtn {
+  padding: 6px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.pageBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Skeleton */
+.skeleton {
+  padding: 0;
+}
+
+.skeletonHeader {
+  height: 40px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.skeletonRow {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.skeletonCell {
+  height: 20px;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+.emptyTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0 0 4px;
+}
+
+.emptyHint {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    padding: 10px 12px;
+  }
+
+  .productName {
+    max-width: 120px;
+  }
+
+  .thCategory,
+  .tdCategory {
+    display: none;
+  }
+}

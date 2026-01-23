@@ -1,0 +1,104 @@
+/* Admin Dashboard Page Styles */
+
+.dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Main Grid Layout */
+.mainGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.chartSection {
+  width: 100%;
+}
+
+.widgetGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.widgetColumn {
+  min-height: 320px;
+}
+
+.topProductsSection {
+  width: 100%;
+}
+
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.recentOrdersSection {
+  min-height: 400px;
+}
+
+.quickActionsSection {
+  min-height: 400px;
+}
+
+/* Error State */
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+  text-align: center;
+  padding: 40px;
+}
+
+.error h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.error p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  max-width: 400px;
+}
+
+.retryBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #6366f1;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.retryBtn:hover {
+  background: #4f46e5;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .widgetGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 0;
+  }
+}

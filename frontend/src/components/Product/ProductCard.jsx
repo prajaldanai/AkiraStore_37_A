@@ -1,5 +1,5 @@
 // src/components/Product/ProductCard.jsx
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import useRating from "./product-rating/useRating";
 import RatingStars from "./product-rating/RatingStars";
 import RatingPopup from "./product-rating/RatingPopup";
@@ -11,13 +11,6 @@ import "./product.css";
  * ProductCard - Full rating interaction support
  */
 export default function ProductCard({ item }) {
-  // 🔍 DEBUG: Track mount/unmount
-  useEffect(() => {
-    console.log(`🟢 [ProductCard] MOUNTED - id: ${item?.id}`);
-    return () => {
-      console.log(`🔴 [ProductCard] UNMOUNTED - id: ${item?.id}`);
-    };
-  }, [item?.id]);
   // CRITICAL: productId must be a valid number or string ID
   // Priority: id (most common) > _id (MongoDB) > product_id > fallback to slug/name
   const productId = useMemo(() => {

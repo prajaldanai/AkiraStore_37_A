@@ -1,0 +1,172 @@
+/* Order Status Chart - Donut with legend */
+
+.chartContent {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Donut */
+.donutWrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.donutSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.donutSegment {
+  transition: opacity 0.15s ease;
+}
+
+.donutSegment:hover {
+  opacity: 0.85;
+}
+
+.donutCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.totalCount {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+
+.totalLabel {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  font-size: 13px;
+  color: #374151;
+  font-weight: 500;
+  flex: 1;
+  text-transform: capitalize;
+}
+
+.legendStats {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legendCount {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.legendPercent {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Skeleton */
+.skeleton {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.skeletonDonut {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeletonLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.skeletonItem {
+  height: 16px;
+  width: 80%;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+.emptyTitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .chartContent {
+    flex-direction: column;
+  }
+
+  .donutWrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .legend {
+    width: 100%;
+  }
+}
