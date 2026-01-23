@@ -121,6 +121,31 @@
   color: #000;
 }
 
+.cartLink {
+  border-radius: 999px;
+  padding: 6px 14px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cartLink:hover {
+  background: rgba(123, 63, 161, 0.08);
+  transform: translateY(-2px);
+}
+
+.navMessage {
+  font-size: 13px;
+  font-weight: 600;
+  color: #7b3fa1;
+  margin-top: 6px;
+  min-height: 18px;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.navMessageVisible {
+  opacity: 1;
+}
+
 /* Active state */
 .active {
   color: #7b3fa1;

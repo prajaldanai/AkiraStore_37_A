@@ -85,17 +85,18 @@ export default function ProductDetailsPage() {
         <div className={styles.pageContent}>
           {/* Main Product Box: 1440x871, white bg, 1px black border */}
           <div className={styles.topSection}>
-            <ProductImageGallery images={images} />
-            <ProductInfo
-              productId={id}
-              name={name}
-              price={price}
-              old_price={old_price}
-              avg_rating={avg_rating}
-              rating_count={rating_count}
-              sizes={sizes}
-              stock={stock}
-            />
+          <ProductImageGallery images={images} />
+          <ProductInfo
+            productId={id}
+            name={name}
+            price={price}
+            old_price={old_price}
+            avg_rating={avg_rating}
+            rating_count={rating_count}
+            sizes={sizes}
+            stock={stock}
+            image={images?.[0] ?? ""}
+          />
           </div>
           
           {/* Description Section: 3-column with borders */}

@@ -28,6 +28,8 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import MyOrderDetailPage from "./pages/MyOrderDetailPage/MyOrderDetailPage";
 // My Orders List Page
 import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage";
+import MyCartPage from "./pages/MyCartPage/MyCartPage";
+import FeedbackPage from "./pages/FeedbackPage/FeedbackPage";
 
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 
@@ -41,6 +43,7 @@ import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminCategoryPage from "./pages/AdminCategoryPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage/AdminOrdersPage";
 import AdminOrderHistoryPage from "./pages/AdminOrderHistoryPage/AdminOrderHistoryPage";
+import AdminFeedbackPage from "./pages/AdminFeedbackPage/AdminFeedbackPage";
 
 // Components
 import AddProductModal from "./components/AddProductModal";
@@ -128,6 +131,23 @@ function App() {
             element={
               <ProtectedRoute>
                 <HomePage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <MyCartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/feedback"
+            element={
+              <ProtectedRoute>
+                <FeedbackPage />
               </ProtectedRoute>
             }
           />
@@ -254,6 +274,15 @@ function App() {
             element={
               <AdminProtectedRoute>
                 <AdminOrdersPage />
+              </AdminProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/feedback"
+            element={
+              <AdminProtectedRoute>
+                <AdminFeedbackPage />
               </AdminProtectedRoute>
             }
           />

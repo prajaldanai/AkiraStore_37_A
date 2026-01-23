@@ -1,73 +1,110 @@
 // src/components/Product/product-rating/useRating.js
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function useRating(item) {
-  const [rating, setRating] = useState(0);
-  const [ratingCount, setRatingCount] = useState(0);
+const normalizeAvg = (value) => Number(value) || 0;
+const normalizeCount = (value) => Math.max(0, Number(value) || 0);
 
+export default function useRating({
+  productId,
+  initialAvg = 0,
+  initialCount = 0,
+}) {
+  const [avg, setAvg] = useState(() => normalizeAvg(initialAvg));
+  const [count, setCount] = useState(() => normalizeCount(initialCount));
+  const [userRating, setUserRating] = useState(null);
+  const [hasRated, setHasRated] = useState(false);
+  const [tempValue, setTempValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
-  const [hoverRate, setHoverRate] = useState(0);
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
+  const [message, setMessage] = useState(null);
+  const lastProductId = useRef(productId);
 
-  // 🔐 Track if THIS user already rated THIS product
-  const hasRatedRef = useRef(false);
-  const lastItemId = useRef(null);
-
-  // 🔁 Reset ONLY when product changes
   useEffect(() => {
-    if (item?.id !== lastItemId.current) {
-      lastItemId.current = item?.id;
+    setAvg(normalizeAvg(initialAvg));
+    setCount(normalizeCount(initialCount));
+  }, [initialAvg, initialCount]);
 
-      setRating(Number(item?.avg_rating) || 0);
-      setRatingCount(Number(item?.rating_count) || 0);
-
-      hasRatedRef.current = false; // reset per product
-      setHoverRate(0);
+  useEffect(() => {
+    if (lastProductId.current !== productId) {
+      lastProductId.current = productId;
+      setHasRated(false);
+      setUserRating(null);
+      setTempValue(0);
+      setHoverValue(0);
       setShowPopup(false);
-      setShowToast(false);
-      setToastMessage("");
+      setMessage(null);
     }
-  }, [item?.id, item?.avg_rating, item?.rating_count]);
+  }, [productId]);
+
+  useEffect(() => {
+    if (!message) return;
+    const timer = setTimeout(() => setMessage(null), 2200);
+    return () => clearTimeout(timer);
+  }, [message]);
+
+  const clearMessage = () => setMessage(null);
+
+  const openRate = () => {
+    setTempValue(userRating ?? 0);
+    setHoverValue(0);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setHoverValue(0);
+    setTempValue(userRating ?? 0);
+  };
 
   const submitRating = (value) => {
-    const newRating = Number(value);
-    if (!newRating || newRating < 1 || newRating > 5) return;
-
-    // ❌ USER ALREADY RATED THIS PRODUCT
-    if (hasRatedRef.current) {
-      setShowPopup(false);
-      setToastMessage("You have already rated this product ⭐");
-      setShowToast(true);
-
-      setTimeout(() => setShowToast(false), 1800);
+    const numeric = Number(value ?? tempValue);
+    if (!numeric || numeric < 1 || numeric > 5) {
+      setMessage({
+        type: "info",
+        text: "Please select between 1 and 5 stars before submitting.",
+      });
       return;
     }
 
-    // ✅ FIRST TIME RATING
-    setRating(newRating);
-    setRatingCount((prev) => prev + 1);
-    hasRatedRef.current = true;
+    const previousTotal = avg * count;
+    let updatedAvg = avg;
+    let updatedCount = count;
 
+    if (hasRated && typeof userRating === "number") {
+      const adjustedTotal = previousTotal - userRating + numeric;
+      updatedAvg =
+        updatedCount > 0 ? adjustedTotal / updatedCount : normalizeAvg(numeric);
+      setMessage({ type: "success", text: "Rating updated!" });
+    } else {
+      updatedCount += 1;
+      updatedAvg = (previousTotal + numeric) / updatedCount;
+      setCount(updatedCount);
+      setHasRated(true);
+      setMessage({ type: "success", text: "Thanks for rating!" });
+    }
+
+    setAvg(updatedAvg);
+    setUserRating(numeric);
+    setTempValue(numeric);
+    setHoverValue(0);
     setShowPopup(false);
-    setToastMessage("⭐ Thanks for rating!");
-    setShowToast(true);
-
-    setTimeout(() => setShowToast(false), 1800);
   };
 
   return {
-    rating,
-    ratingCount,
-
+    avg,
+    count,
+    userRating,
+    hasRated,
+    tempValue,
+    hoverValue,
+    setHoverValue,
+    setTempValue,
     showPopup,
-    setShowPopup,
-
-    hoverRate,
-    setHoverRate,
-
-    showToast,
-    toastMessage,
+    openRate,
+    closePopup,
     submitRating,
+    loading: false,
+    message,
+    clearMessage,
   };
 }

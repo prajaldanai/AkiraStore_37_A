@@ -1,9 +1,10 @@
 // src/components/Product/ProductCard.jsx
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useCallback } from "react";
 import useRating from "./product-rating/useRating";
 import RatingStars from "./product-rating/RatingStars";
 import RatingPopup from "./product-rating/RatingPopup";
 import HoverActions from "./product-actions/HoverActions";
+import useCartAction from "./product-actions/useCartAction";
 
 import "./product.css";
 
@@ -30,6 +31,17 @@ export default function ProductCard({ item }) {
     return item?.slug ?? item?.name ?? null;
   }, [item?.id, item?._id, item?.product_id, item?.slug, item?.name]);
   
+  const {
+    addToCart,
+    message: cartMessage,
+    clearMessage: clearCartMessage,
+  } = useCartAction();
+
+  const handleCart = useCallback(() => {
+    if (!item) return;
+    addToCart(item);
+  }, [addToCart, item]);
+  
   // Full rating hook with submit capability
   const rating = useRating({
     productId,
@@ -53,21 +65,16 @@ export default function ProductCard({ item }) {
 
   return (
     <div className="product-card">
+      {/* Cart + rating toasts */}
+      {cartMessage?.text && (
+        <div key={cartMessage.id} className={`product-toast ${cartMessage.type}`}>
+          <span className="product-toast-text">{cartMessage.text}</span>
+        </div>
+      )}
       {/* Rating Message Toast */}
       {rating.message?.text && (
         <div className={`product-toast ${rating.message.type}`}>
-          <span className="product-toast-icon">
-            {rating.message.type === "success" ? "★" : "ℹ"}
-          </span>
           <span className="product-toast-text">{rating.message.text}</span>
-          <button
-            className="product-toast-close"
-            type="button"
-            onClick={rating.clearMessage}
-            aria-label="Close message"
-          >
-            ✕
-          </button>
         </div>
       )}
 
@@ -84,6 +91,7 @@ export default function ProductCard({ item }) {
         <HoverActions 
           productId={productId}
           onRate={rating.openRate}
+          onCart={handleCart}
         />
 
         {/* Rating Popup */}
@@ -114,7 +122,7 @@ export default function ProductCard({ item }) {
               ({rating.count} {rating.count === 1 ? "rating" : "ratings"})
             </span>
             {rating.hasRated && (
-              <div className="product-your-rating">Your rating: {rating.userRating}★</div>
+              <div className="product-your-rating">Your rating: {rating.userRating}*</div>
             )}
           </div>
         </div>
