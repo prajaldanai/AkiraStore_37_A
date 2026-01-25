@@ -267,3 +267,70 @@
     font-size: 14px;
   }
 }
+/* simran */
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .heroInner {
+    max-width: 100%;
+    padding: 40px 24px;
+  }
+  
+  .title {
+    font-size: 46px;
+  }
+}
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: 1fr;
+    grid-template-areas: none; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    /* Changed from auto to 0 to fix Firefox compatibility */
+    min-height: 0; 
+  }
+
+  .targetImage {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 0; /* Changed from auto to 0 */
+    padding-bottom: 40px;
+  }
+
+  .title {
+    font-size: 32px;
+    letter-spacing: 0.4px;
+    line-height: 1.2;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .card h2 {
+    font-size: 20px;
+  }
+
+  .card p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .heroInner {
+    padding: 30px 15px;
+  }
+  
+  .title {
+    font-size: 28px;
+  }
+}

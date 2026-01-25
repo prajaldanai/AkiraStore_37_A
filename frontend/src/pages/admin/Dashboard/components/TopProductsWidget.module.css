@@ -155,3 +155,78 @@
     opacity: 0.5;
   }
 }
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .card {
+    padding: 16px;
+  }
+  
+  .table td, .table th {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .productName {
+    max-width: 150px; /* Prevents long names from stretching the row */
+  }
+}
+
+@media (max-width: 640px) {
+  .tableWrapper {
+    overflow-x: auto;
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .rank {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .productName {
+    font-size: 12px;
+    max-width: 100px;
+  }
+
+  .sold, .revenue {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Hide the subtitle to save vertical space */
+  .subtitle {
+    display: none;
+  }
+
+  .table th {
+    font-size: 10px;
+    padding: 8px;
+  }
+
+  .table td {
+    padding: 10px 8px;
+  }
+
+  /* Ensure the revenue column is always prioritized */
+  .tdRight {
+    min-width: 70px;
+  }
+
+  .productName {
+    max-width: 80px;
+  }
+}

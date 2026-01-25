@@ -42,3 +42,70 @@
 ========================== */
 
 /* DO NOT override offer section */
+
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .home-page .home-section,
+  .home-page .products-section {
+    padding: 40px 24px; /* Slightly tighter for tablets */
+  }
+
+  .home-page .product-slider {
+    padding: 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  /* HERO & OFFER SECTIONS (Green) */
+  /* These will retain their green background naturally as per your base CSS */
+  .home-page .hero-section,
+  .home-page .offer-section {
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  /* PRODUCT SECTIONS (Force White) */
+  .home-page .home-section,
+  .home-page .products-section,
+  .home-page .slider-section {
+    padding: 32px 16px !important;
+  }
+
+  /* Adjust headings for mobile */
+  .home-page .section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* Swiper / Slider Mobile Fixes */
+  .home-page .swiper-button-next,
+  .home-page .swiper-button-prev {
+    display: none; /* Hide arrows on mobile; rely on touch swiping */
+  }
+
+  .home-page .swiper-pagination {
+    bottom: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page .home-section,
+  .home-page .products-section {
+    padding: 24px 12px !important;
+  }
+
+  /* Ensure product cards within the white sections have breathing room */
+  .home-page .swiper-slide {
+    width: 85% !important; /* Peek at the next slide to encourage swiping */
+  }
+
+  .home-page .section-title {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+  }
+}

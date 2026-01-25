@@ -649,3 +649,107 @@
     width: 100%;
   }
 }
+
+
+
+
+/*---simran---*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .category-page {
+    padding: 20px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .header-left {
+    justify-content: space-between;
+  }
+
+  .header-right {
+    display: grid;
+    grid-template-columns: 1fr 50px; /* Expands Add button, keeps Home small */
+    gap: 10px;
+  }
+
+  .add-product-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .filter-section {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .search-group {
+    max-width: 100%;
+    order: -1; /* Keeps search at the very top */
+  }
+}
+
+@media (max-width: 650px) {
+  .category-header h1 {
+    font-size: 22px;
+  }
+
+  .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .filter-input, .filter-select {
+    flex: 1; /* Inputs grow to fill row */
+  }
+
+  .price-input {
+    width: 45%; /* Better fit for min/max on mobile */
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+  /* Modal/Popup Responsive */
+  .delete-popup {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .edit-btn, .delete-btn {
+    width: 100%;
+  }
+}

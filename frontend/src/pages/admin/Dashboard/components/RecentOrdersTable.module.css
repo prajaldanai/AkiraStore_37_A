@@ -207,3 +207,76 @@
     display: none;
   }
 }
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .card {
+    padding: 16px;
+  }
+  
+  .table td, .table th {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .customerEmail {
+    display: none;
+  }
+
+  .table th:nth-child(3),
+  .table td:nth-child(3) {
+    display: none; 
+  }
+
+  .orderId {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .viewAllBtn {
+    width: 100%;
+    text-align: center;
+    background: #f8fafc;
+    padding: 8px;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+    /* Standard smooth scrolling for modern browsers */
+    scroll-behavior: smooth; 
+    margin: 0 -16px; 
+    padding: 0 16px;
+  }
+
+  .status {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .amount {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table th:nth-child(4), 
+  .table td:nth-child(4) {
+    display: none; 
+  }
+  
+  .customerName {
+    font-size: 12px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
