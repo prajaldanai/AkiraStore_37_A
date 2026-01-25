@@ -1,0 +1,114 @@
+/* KPI Cards - Four metric cards */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: box-shadow 0.15s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.iconWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.subLabel {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Skeleton Loading */
+.skeleton {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.skeletonText {
+  width: 80px;
+  height: 14px;
+  border-radius: 4px;
+  background: #e5e7eb;
+  margin-bottom: 8px;
+}
+
+.skeletonValue {
+  width: 100px;
+  height: 28px;
+  border-radius: 6px;
+  background: #e5e7eb;
+  margin-bottom: 8px;
+}
+
+.skeletonSub {
+  width: 60px;
+  height: 12px;
+  border-radius: 4px;
+  background: #e5e7eb;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .value {
+    font-size: 24px;
+  }
+}

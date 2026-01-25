@@ -5,7 +5,7 @@
  * Uses LOCAL submitting state to avoid triggering parent re-renders
  * that could cause Swiper to rebuild slides on Home page.
  */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RatingStars from "./RatingStars";
 
 export default function RatingPopup({
@@ -24,14 +24,6 @@ export default function RatingPopup({
   
   // Combined loading state (external OR local)
   const isLoading = loading || isSubmitting;
-
-  // 🔍 DEBUG: Track mount/unmount
-  useEffect(() => {
-    console.log("🟢 [RatingPopup] MOUNTED");
-    return () => {
-      console.log("🔴 [RatingPopup] UNMOUNTED - popup state will be LOST");
-    };
-  }, []);
 
   /**
    * Handle submit button click
@@ -59,12 +51,9 @@ const handleSubmit = async (event) => {
    * Handle close button click
    */
   const handleClose = (event) => {
-    console.log("🔵 [RatingPopup] Close button clicked");
     event.preventDefault();
     event.stopPropagation();
-    console.log("🔵 [RatingPopup] onClose exists:", !!onClose);
     if (onClose) {
-      console.log("🔵 [RatingPopup] Calling onClose()");
       onClose();
     }
   };

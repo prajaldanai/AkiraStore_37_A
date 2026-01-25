@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAdminOrders, updateOrderStatus } from "../../services/adminOrderService";
 import AdminOrderDetailsModal from "../../components/AdminOrderDetailsModal/AdminOrderDetailsModal";
 import styles from "./AdminOrdersPage.module.css";
@@ -62,6 +63,7 @@ const getNextStatuses = (currentStatus) => {
 };
 
 export default function AdminOrdersPage() {
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -178,36 +180,90 @@ export default function AdminOrdersPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.pageTitle}>Orders</h1>
-
-      {/* Top Bar */}
-      <div className={styles.topBar}>
-        <input
-          type="text"
-          className={styles.searchInput}
-          placeholder="Search by Order ID, Email, Phone, or Name..."
-          value={search}
-          onChange={handleSearchChange}
-          onKeyDown={handleSearchSubmit}
-        />
-        
-        <select
-          className={styles.filterSelect}
-          value={statusFilter}
-          onChange={handleFilterChange}
+      {/* Header with Back Button */}
+      <div className={styles.header}>
+        <button 
+          className={styles.backBtn}
+          onClick={() => navigate("/admin-dashboard")}
+          aria-label="Back to Dashboard"
         >
-          <option value="">All Active</option>
-          <option value="PLACED">Placed</option>
-          <option value="PROCESSING">Processing</option>
-          <option value="SHIPPED">Shipped</option>
-        </select>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Back</span>
+        </button>
+        
+        <div className={styles.headerContent}>
+          <h1 className={styles.pageTitle}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            Active Orders
+          </h1>
+          <p className={styles.pageSubtitle}>Manage and track all customer orders</p>
+        </div>
+        
+        <div className={styles.headerStats}>
+          <div className={styles.statCard}>
+            <span className={styles.statValue}>{pagination.total}</span>
+            <span className={styles.statLabel}>Total Orders</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Controls Bar */}
+      <div className={styles.controlsBar}>
+        <div className={styles.searchBox}>
+          <svg className={styles.searchIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder="Search by Order ID, Email, Phone, or Name..."
+            value={search}
+            onChange={handleSearchChange}
+            onKeyDown={handleSearchSubmit}
+          />
+          {search && (
+            <button 
+              className={styles.clearSearchBtn}
+              onClick={() => { setSearch(""); fetchOrders(1); }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          )}
+        </div>
+        
+        <div className={styles.filterGroup}>
+          <label className={styles.filterLabel}>Status:</label>
+          <select
+            className={styles.filterSelect}
+            value={statusFilter}
+            onChange={handleFilterChange}
+          >
+            <option value="">All Active</option>
+            <option value="PLACED">Placed</option>
+            <option value="PROCESSING">Processing</option>
+            <option value="SHIPPED">Shipped</option>
+          </select>
+        </div>
 
         <button 
           className={styles.refreshBtn}
           onClick={() => fetchOrders(pagination.page)}
           disabled={loading}
         >
-          🔄 Refresh
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={loading ? styles.spinning : ""}>
+            <path d="M23 4v6h-6M1 20v-6h6"/>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+          </svg>
+          Refresh
         </button>
       </div>
 
@@ -222,12 +278,21 @@ export default function AdminOrdersPage() {
       )}
 
       {/* Table */}
-      <div className={styles.tableWrapper}>
+      <div className={styles.tableCard}>
         {loading ? (
-          <div className={styles.loading}>Loading orders...</div>
+          <div className={styles.loading}>
+            <div className={styles.spinner}></div>
+            <span>Loading orders...</span>
+          </div>
         ) : orders.length === 0 ? (
           <div className={styles.emptyState}>
-            <div className={styles.emptyIcon}>📦</div>
+            <div className={styles.emptyIcon}>
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+            </div>
             <h3 className={styles.emptyTitle}>No Active Orders</h3>
             <p className={styles.emptyMessage}>
               {search || statusFilter 
@@ -237,79 +302,92 @@ export default function AdminOrdersPage() {
           </div>
         ) : (
           <>
-            <table className={styles.ordersTable}>
-              <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Date</th>
-                  <th>Customer</th>
-                  <th>Items</th>
-                  <th>Shipping</th>
-                  <th>Total</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order) => (
-                  <tr key={order.id}>
-                    <td>
-                      <span className={styles.orderId}>{shortenId(order.id)}</span>
-                    </td>
-                    <td>{formatDate(order.createdAt)}</td>
-                    <td>
-                      <div className={styles.customerCell}>
-                        <span className={styles.customerName}>{order.customer?.fullName}</span>
-                        <span className={styles.customerEmail}>{order.customer?.email}</span>
-                        <span className={styles.customerPhone}>{order.customer?.phone}</span>
-                      </div>
-                    </td>
-                    <td>{order.itemsCount || order.items?.length || 1}</td>
-                    <td>{order.shippingMethodLabel}</td>
-                    <td>{formatRs(order.total)}</td>
-                    <td>
-                      <span className={`${styles.statusBadge} ${getStatusClass(order.status)}`}>
-                        {order.status}
-                      </span>
-                    </td>
-                    <td>
-                      <div className={styles.actionsCell}>
-                        <button
-                          className={styles.viewBtn}
-                          onClick={() => setSelectedOrderId(order.id)}
-                        >
-                          View
-                        </button>
-                        
-                        {getNextStatuses(order.status).length > 0 && (
-                          <select
-                            className={styles.statusSelect}
-                            value=""
-                            onChange={(e) => {
-                              if (e.target.value) {
-                                handleStatusChange(order.id, e.target.value);
-                              }
-                            }}
-                            disabled={updatingOrderId === order.id}
-                          >
-                            <option value="">Update Status</option>
-                            {getNextStatuses(order.status).map((s) => (
-                              <option key={s} value={s}>{s}</option>
-                            ))}
-                          </select>
-                        )}
-                      </div>
-                    </td>
+            <div className={styles.tableWrapper}>
+              <table className={styles.ordersTable}>
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Items</th>
+                    <th>Shipping</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {orders.map((order) => (
+                    <tr key={order.id}>
+                      <td>
+                        <span className={styles.orderId}>{shortenId(order.id)}</span>
+                      </td>
+                      <td className={styles.dateCell}>{formatDate(order.createdAt)}</td>
+                      <td>
+                        <div className={styles.customerCell}>
+                          <span className={styles.customerName}>{order.customer?.fullName}</span>
+                          <span className={styles.customerEmail}>{order.customer?.email}</span>
+                          <span className={styles.customerPhone}>{order.customer?.phone}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span className={styles.itemsCount}>{order.itemsCount || order.items?.length || 1}</span>
+                      </td>
+                      <td>
+                        <span className={styles.shippingLabel}>{order.shippingMethodLabel}</span>
+                      </td>
+                      <td>
+                        <span className={styles.totalAmount}>{formatRs(order.total)}</span>
+                      </td>
+                      <td>
+                        <span className={`${styles.statusBadge} ${getStatusClass(order.status)}`}>
+                          {order.status}
+                        </span>
+                      </td>
+                      <td>
+                        <div className={styles.actionsCell}>
+                          <button
+                            className={styles.viewBtn}
+                            onClick={() => setSelectedOrderId(order.id)}
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            View
+                          </button>
+                          
+                          {getNextStatuses(order.status).length > 0 && (
+                            <select
+                              className={styles.statusSelect}
+                              value=""
+                              onChange={(e) => {
+                                if (e.target.value) {
+                                  handleStatusChange(order.id, e.target.value);
+                                }
+                              }}
+                              disabled={updatingOrderId === order.id}
+                            >
+                              <option value="">Update →</option>
+                              {getNextStatuses(order.status).map((s) => (
+                                <option key={s} value={s}>{s}</option>
+                              ))}
+                            </select>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
             {/* Pagination */}
             {pagination.totalPages > 1 && (
               <div className={styles.pagination}>
                 <span className={styles.pageInfo}>
-                  Showing page {pagination.page} of {pagination.totalPages} ({pagination.total} orders)
+                  Page <strong>{pagination.page}</strong> of <strong>{pagination.totalPages}</strong> 
+                  <span className={styles.totalCount}>({pagination.total} orders)</span>
                 </span>
                 <div className={styles.pageButtons}>
                   <button
@@ -317,6 +395,9 @@ export default function AdminOrdersPage() {
                     onClick={() => handlePageChange(pagination.page - 1)}
                     disabled={pagination.page <= 1}
                   >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
                     Previous
                   </button>
                   <button
@@ -325,6 +406,9 @@ export default function AdminOrdersPage() {
                     disabled={pagination.page >= pagination.totalPages}
                   >
                     Next
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 18l6-6-6-6"/>
+                    </svg>
                   </button>
                 </div>
               </div>

@@ -14,6 +14,7 @@ import styles from "./App.module.css";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage/AboutPage";
 // Product Details Page
 import ProductDetailsPage from "./pages/ProductDetails/ProductDetailsPage";
 // Buy Now Page
@@ -28,6 +29,12 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import MyOrderDetailPage from "./pages/MyOrderDetailPage/MyOrderDetailPage";
 // My Orders List Page
 import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage";
+// Search Results Page
+import SearchResultsPage from "./pages/SearchResults/SearchResultsPage";
+// Cart Page
+import MyCartPage from "./pages/MyCartPage/MyCartPage";
+// Feedback Page
+import FeedbackPage from "./pages/FeedbackPage/FeedbackPage";
 
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 
@@ -37,10 +44,14 @@ import ShoesPage from "./components/Shoes/ShoesPage";
 import ElectronicsPage from "./components/Electronics/ElectronicsPage";
 
 // Admin Pages
-import AdminDashboardPage from "./pages/AdminDashboardPage";
+import AdminDashboardPage from "./pages/admin/Dashboard";
 import AdminCategoryPage from "./pages/AdminCategoryPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage/AdminOrdersPage";
 import AdminOrderHistoryPage from "./pages/AdminOrderHistoryPage/AdminOrderHistoryPage";
+import AdminFeedbackPage from "./pages/AdminFeedbackPage/AdminFeedbackPage";
+import InventoryPage from "./pages/admin/Inventory/InventoryPage";
+import SalesReportPage from "./pages/admin/SalesReport/SalesReportPage";
+import UsersPage from "./pages/admin/Users/UsersPage";
 
 // Components
 import AddProductModal from "./components/AddProductModal";
@@ -128,6 +139,46 @@ function App() {
             element={
               <ProtectedRoute>
                 <HomePage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ================= ABOUT PAGE ================= */}
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute>
+                <AboutPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ================= SEARCH RESULTS ================= */}
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <SearchResultsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ================= CART PAGE ================= */}
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <MyCartPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ================= FEEDBACK PAGE ================= */}
+          <Route
+            path="/feedback"
+            element={
+              <ProtectedRoute>
+                <FeedbackPage />
               </ProtectedRoute>
             }
           />
@@ -259,10 +310,49 @@ function App() {
           />
 
           <Route
+            path="/admin/feedback"
+            element={
+              <AdminProtectedRoute>
+                <AdminFeedbackPage />
+              </AdminProtectedRoute>
+            }
+          />
+
+          <Route
             path="/admin/order-history"
             element={
               <AdminProtectedRoute>
                 <AdminOrderHistoryPage />
+              </AdminProtectedRoute>
+            }
+          />
+
+          {/* ================= ADMIN INVENTORY ================= */}
+          <Route
+            path="/admin/inventory"
+            element={
+              <AdminProtectedRoute>
+                <InventoryPage />
+              </AdminProtectedRoute>
+            }
+          />
+
+          {/* ================= ADMIN SALES REPORT ================= */}
+          <Route
+            path="/admin/sales-report"
+            element={
+              <AdminProtectedRoute>
+                <SalesReportPage />
+              </AdminProtectedRoute>
+            }
+          />
+
+          {/* ================= ADMIN USERS ================= */}
+          <Route
+            path="/admin/users"
+            element={
+              <AdminProtectedRoute>
+                <UsersPage />
               </AdminProtectedRoute>
             }
           />

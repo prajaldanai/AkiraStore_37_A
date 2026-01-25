@@ -50,7 +50,11 @@ export async function createBuyNowSession(data) {
     const result = await response.json();
     
     if (!response.ok) {
-      throw new Error(result.message || "Failed to create session");
+      // Handle user status errors (blocked/suspended)
+      const error = new Error(result.message || "Failed to create session");
+      error.statusCode = result.statusCode;
+      error.suspendedUntil = result.suspendedUntil;
+      throw error;
     }
     
     return result;
@@ -132,7 +136,11 @@ export async function createOrder(orderData) {
     const result = await response.json();
     
     if (!response.ok) {
-      throw new Error(result.message || "Failed to create order");
+      // Handle user status errors (blocked/suspended)
+      const error = new Error(result.message || "Failed to create order");
+      error.statusCode = result.statusCode;
+      error.suspendedUntil = result.suspendedUntil;
+      throw error;
     }
     
     return result;

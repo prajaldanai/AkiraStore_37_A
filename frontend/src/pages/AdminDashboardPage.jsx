@@ -50,7 +50,7 @@ const AdminDashboardPage = () => {
             <span>Category</span>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={() => navigate("/admin/feedback")}>
             <img src={feedbackIcon} alt="feedback" />
             <span>Feedback</span>
           </div>
@@ -61,12 +61,14 @@ const AdminDashboardPage = () => {
             <span>Orders</span>
           </div>
 
-          <div className="menu-item">
+          {/* INVENTORY BUTTON - Navigate to Admin Inventory */}
+          <div className="menu-item" onClick={() => navigate("/admin/inventory")}>
             <img src={inventoryIcon} alt="inventory" />
             <span>Inventory</span>
           </div>
 
-          <div className="menu-item">
+          {/* SALES REPORT BUTTON - Navigate to Admin Sales Report */}
+          <div className="menu-item" onClick={() => navigate("/admin/sales-report")}>
             <img src={salesIcon} alt="sales" />
             <span>Sales Report</span>
           </div>

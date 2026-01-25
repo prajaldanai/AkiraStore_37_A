@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styles from "./ProductInfo.module.css";
 import useRating from "../../Product/product-rating/useRating";
 import RatingPopup from "../../Product/product-rating/RatingPopup";
+import useCartAction from "../../Product/product-actions/useCartAction";
 import { createBuyNowSession } from "../../../services/buyNowService";
+import AccountStatusModal from "../../AccountStatusModal/AccountStatusModal";
 
 
 function getStockStatus(stock) {
@@ -91,6 +93,7 @@ export default function ProductInfo({
   rating_count = 0,
   sizes = [],
   stock = 0,
+  image = "",
 }) {
   const navigate = useNavigate();
 
@@ -100,6 +103,12 @@ export default function ProductInfo({
     initialAvg: Number(avg_rating) || 0,
     initialCount: Number(rating_count) || 0,
   });
+
+  const {
+    addToCart,
+    message: cartMessage,
+    clearMessage: clearCartMessage,
+  } = useCartAction();
 
   // Parse admin data safely - ONCE at the top
   const parsedPrice = Number(price) || 0;
@@ -116,6 +125,7 @@ export default function ProductInfo({
   const [selectedSizes, setSelectedSizes] = useState([]); // Array for multi-size selection
   const [sizeWarning, setSizeWarning] = useState(""); // Warning message for size limit
   const [buyNowLoading, setBuyNowLoading] = useState(false); // Buy Now button loading state
+  const [statusModal, setStatusModal] = useState({ isOpen: false, statusCode: null, message: '', suspendedUntil: null });
 
   // Auto-trim selectedSizes when quantity decreases
   useEffect(() => {
@@ -171,7 +181,17 @@ export default function ProductInfo({
       }
     } catch (error) {
       console.error("Buy Now error:", error);
-      alert(error.message || "Failed to start checkout. Please try again.");
+      // Check for account status errors (blocked/suspended)
+      if (error.statusCode === 'BLOCKED' || error.statusCode === 'SUSPENDED') {
+        setStatusModal({
+          isOpen: true,
+          statusCode: error.statusCode,
+          message: error.message,
+          suspendedUntil: error.suspendedUntil
+        });
+      } else {
+        alert(error.message || "Failed to start checkout. Please try again.");
+      }
     } finally {
       setBuyNowLoading(false);
     }
@@ -182,6 +202,23 @@ export default function ProductInfo({
   
   // Can only buy if: has stock AND (has no sizes OR at least one size is selected)
   const canBuy = stockInfo.canPurchase && (!hasSizes || selectedSizes.length > 0);
+
+  const handleAddToCart = () => {
+    if (!canBuy) return;
+    addToCart(
+      {
+        id: productId,
+        name,
+        price: parsedPrice,
+        main_image: image,
+      },
+      {
+        quantity: qty,
+        selectedSizes,
+        price: parsedPrice,
+      }
+    );
+  };
 
   // Quantity handlers
   const handleDecrement = () => {
@@ -233,6 +270,20 @@ export default function ProductInfo({
           )}
         </div>
       </div>
+
+      {cartMessage?.text && (
+        <div className={`${styles.cartMessage} ${styles[cartMessage.type] || ""}`}>
+          <span>{cartMessage.text}</span>
+          <button
+            type="button"
+            className={styles.cartMessageClose}
+            onClick={clearCartMessage}
+            aria-label="Close cart message"
+          >
+            âœ•
+          </button>
+        </div>
+      )}
 
       {/* Rating Popup */}
       {rating.showPopup && (
@@ -363,6 +414,7 @@ export default function ProductInfo({
         <button
           type="button"
           className={styles.addToCart}
+          onClick={handleAddToCart}
           disabled={!canBuy}
           title={
             !stockInfo.canPurchase
@@ -401,6 +453,15 @@ export default function ProductInfo({
           <div className={styles.whyItem}>💵 Cash on Delivery</div>
         </div>
       </div>
+
+      {/* Account Status Modal (Blocked/Suspended) */}
+      <AccountStatusModal
+        isOpen={statusModal.isOpen}
+        onClose={() => setStatusModal({ isOpen: false, statusCode: null, message: '', suspendedUntil: null })}
+        statusCode={statusModal.statusCode}
+        message={statusModal.message}
+        suspendedUntil={statusModal.suspendedUntil}
+      />
     </div>
   );
 }

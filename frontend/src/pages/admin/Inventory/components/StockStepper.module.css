@@ -1,0 +1,71 @@
+/* StockStepper Component Styles */
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.stepBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.stepBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.decreaseBtn {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.decreaseBtn:hover:not(:disabled) {
+  background-color: #ee5a5a;
+  transform: scale(1.05);
+}
+
+.decreaseBtn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.increaseBtn {
+  background-color: #51cf66;
+  color: white;
+}
+
+.increaseBtn:hover:not(:disabled) {
+  background-color: #40c057;
+  transform: scale(1.05);
+}
+
+.increaseBtn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.stockValue {
+  min-width: 40px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  padding: 0 8px;
+}
+
+.stockValue.loading {
+  color: #999;
+  font-style: italic;
+}

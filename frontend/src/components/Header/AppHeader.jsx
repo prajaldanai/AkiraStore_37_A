@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
+import SignatureSearch from "../navbar/SignatureSearch";
 
 import logo from "../../assets/icons/logo.png";
-import plusIcon from "../../assets/icons/plus.png";
-import searchIcon from "../../assets/icons/search.png";
+import { getCartSnapshot } from "../../components/Product/product-actions/useCartAction";
 
 export default function AppHeader() {
   const navigate = useNavigate();
@@ -17,6 +17,8 @@ export default function AppHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return !!localStorage.getItem("authToken");
   });
+  const [navMessage, setNavMessage] = useState("");
+  const navMessageTimer = useRef(null);
 
   // Re-check auth state when location changes (e.g., after login redirect)
   useEffect(() => {
@@ -47,6 +49,29 @@ export default function AppHeader() {
 
     return () => {
       scrollContainer.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  const triggerNavMessage = (text) => {
+    if (!text) {
+      setNavMessage("");
+      return;
+    }
+    setNavMessage(text);
+    if (navMessageTimer.current) {
+      clearTimeout(navMessageTimer.current);
+    }
+    navMessageTimer.current = setTimeout(() => {
+      setNavMessage("");
+      navMessageTimer.current = null;
+    }, 2800);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (navMessageTimer.current) {
+        clearTimeout(navMessageTimer.current);
+      }
     };
   }, []);
 
@@ -81,6 +106,18 @@ export default function AppHeader() {
     }
 
     return currentPath === path;
+  };
+
+  const handleNavItemClick = (item) => {
+    if (item.path === "/cart") {
+      const items = getCartSnapshot();
+      const total = items.reduce((sum, entry) => sum + (Number(entry.quantity) || 0), 0);
+      const message = total
+        ? `You have ${total} item${total !== 1 ? "s" : ""} in your cart.`
+        : "Your cart is empty.";
+      triggerNavMessage(message);
+    }
+    navigate(item.path);
   };
 
   const handleLogout = () => {
@@ -118,29 +155,36 @@ export default function AppHeader() {
           />
         </div>
 
-        {/* CENTER */}
+        {/* CENTER - Signature Search */}
         <div className={styles.center}>
-          <div className={styles.searchBar}>
-            <img src={plusIcon} className={styles.iconLeft} alt="add" />
-            <input type="text" placeholder="Search product..." />
-            <img src={searchIcon} className={styles.iconRight} alt="search" />
-          </div>
+          <SignatureSearch />
         </div>
 
         {/* RIGHT */}
         <div className={styles.right}>
           <div className={styles.navLinks}>
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                className={`${styles.navLink} ${
-                  isActive(item.path) ? styles.active : ""
-                }`}
-                onClick={() => navigate(item.path)}
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              const isCartLink = item.label?.toLowerCase() === "my cart";
+              return (
+                <button
+                  key={item.label}
+                  className={`${styles.navLink} ${isActive(item.path) ? styles.active : ""} ${
+                    isCartLink ? styles.cartLink : ""
+                  }`}
+                  onClick={() => handleNavItemClick(item)}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+          <div
+            className={`${styles.navMessage} ${
+              navMessage ? styles.navMessageVisible : ""
+            }`}
+            role="status"
+          >
+            {navMessage || "\u00a0"}
           </div>
 
           <button

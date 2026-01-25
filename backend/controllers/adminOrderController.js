@@ -1,5 +1,6 @@
 const { Order, OrderItem, User } = require("../models");
 const { Op } = require("sequelize");
+const stockService = require("../services/inventory/stockService");
 
 /* ============================================================
    ORDER STATUS STATE MACHINE
@@ -389,6 +390,28 @@ exports.updateOrderStatus = async (req, res) => {
       updateData[timestampField] = new Date();
     }
     
+    // ✅ STOCK RESTORATION: If order is being cancelled, restore stock
+    let stockRestoreResult = null;
+    if (normalizedStatus === ORDER_STATUSES.CANCELLED) {
+      // Only restore stock if order was previously confirmed (stock was deducted)
+      // Orders in pending_confirmation status haven't had stock deducted yet
+      const previousConfirmedStatuses = ["confirmed", "PLACED", "processing", "PROCESSING", "shipped", "SHIPPED"];
+      const wasConfirmed = previousConfirmedStatuses.includes(order.status);
+      
+      if (wasConfirmed && order.product_id && order.quantity) {
+        try {
+          stockRestoreResult = await stockService.restoreStock(
+            order.product_id,
+            order.quantity
+          );
+          console.log(`📦 Stock restored for cancelled order #${orderId}:`, stockRestoreResult);
+        } catch (stockError) {
+          console.error(`❌ Failed to restore stock for order #${orderId}:`, stockError);
+          // Continue with order cancellation even if stock restore fails
+        }
+      }
+    }
+    
     await order.update(updateData);
     
     // Reload with items
@@ -406,6 +429,11 @@ exports.updateOrderStatus = async (req, res) => {
       success: true,
       message: `Order status updated to ${normalizedStatus}`,
       order: formatOrderResponse(order, true),
+      stockRestored: stockRestoreResult ? {
+        productId: stockRestoreResult.productId,
+        restoredBy: stockRestoreResult.restoredBy,
+        newStock: stockRestoreResult.newStock,
+      } : null,
     });
     
   } catch (error) {
