@@ -198,6 +198,7 @@ async function getProductsByCategory(req, res) {
       old_price: p.old_price, // ✅ include for admin table if needed
       tag: p.tag,
       exclusive_offer_end: p.exclusive_offer_end,
+      stock: p.stock ?? 0,
       images: (p.ProductImages || []).map((i) =>
         String(i.image_url || "")
           .replace(/\\/g, "/")
