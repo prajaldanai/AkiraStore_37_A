@@ -214,3 +214,95 @@
     gap: 12px;
   }
 }
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .mainContent {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .filterSidebar {
+    width: 100%;
+    /* Ensure filters don't take up too much vertical space */
+    max-height: none; 
+  }
+
+  .header {
+    padding: 12px 20px;
+  }
+
+  .headerSpacer {
+    display: none; /* Removes the placeholder to let title center/align better */
+  }
+
+  .pageTitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsBar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .loadingText {
+    grid-column: span 2;
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-start;
+  }
+
+  .backBtn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .mainContent {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .statsBar {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .pageBtn {
+    width: 100%; /* Better tap targets for thumb reach */
+    text-align: center;
+  }
+
+  .errorMessage {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .pageTitle {
+    font-size: 18px;
+  }
+  
+  .statValue {
+    font-size: 14px;
+  }
+}

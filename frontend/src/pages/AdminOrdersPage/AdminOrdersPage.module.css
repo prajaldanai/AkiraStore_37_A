@@ -696,3 +696,150 @@
     text-align: center;
   }
 }
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 24px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .headerContent {
+    order: 1;
+  }
+
+  .headerStats {
+    order: 2;
+    justify-content: flex-start;
+  }
+  
+  .statCard {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+    gap: 8px;
+  }
+
+  .headerStats {
+    flex-direction: column;
+  }
+
+  .statCard {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .controlsBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .searchBox {
+    max-width: none;
+    min-width: 0;
+  }
+
+  .filterGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filterSelect {
+    width: 100%;
+  }
+
+  .refreshBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tableWrapper {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .ordersTable {
+    min-width: 950px; /* Forces scroll to protect data integrity */
+  }
+
+  .actionsCell {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .viewBtn, .statusSelect {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .pageButtons {
+    width: 100%;
+  }
+
+  .pageBtn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .toast {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 1.25rem;
+  }
+
+  .pageSubtitle {
+    font-size: 0.85rem;
+  }
+
+  .backBtn {
+    padding: 10px;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+  }
+
+  .backBtn span {
+    display: none; /* Icon-only back button on tiny screens */
+  }
+
+  .customerEmail, .customerPhone {
+    display: none; /* Critical space saving */
+  }
+
+  .statusBadge {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+}

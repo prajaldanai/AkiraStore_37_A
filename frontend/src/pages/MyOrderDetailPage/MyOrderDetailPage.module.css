@@ -433,3 +433,139 @@
     gap: 4px;
   }
 }
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .rightPanel {
+    position: static; /* Disables sticky behavior for tablets */
+  }
+
+  .colProduct {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Transforming Table to Card-style list for mobile */
+  .tableHeader {
+    display: none; /* Hide table headers on mobile */
+  }
+
+  .productsTable, 
+  .tableRow, 
+  .tableRow td {
+    display: block;
+    width: 100%;
+  }
+
+  .tableRow {
+    padding: 16px 0;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+  .tableRow td {
+    border: none;
+    padding: 8px 0;
+    text-align: left !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tableRow td::before {
+    content: attr(data-label); /* Requires data-label attribute in your HTML td */
+    font-weight: 700;
+    color: #666;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+
+  .productCell {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .productImage {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px;
+  }
+
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .statusBadge {
+    width: 100%;
+    text-align: center;
+  }
+
+  .orderMeta {
+    flex-direction: column;
+    gap: 8px;
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .detailLabel {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .totalValue {
+    font-size: 18px;
+  }
+
+  .errorButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .homeBtn, .homeBtnSecondary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .backButton {
+    gap: 6px;
+  }
+  
+  .backCircle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .backArrow {
+    width: 16px;
+  }
+}

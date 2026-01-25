@@ -124,3 +124,76 @@
   100% { transform: scale(1); }
 }
 
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .category-panel {
+    width: 220px;
+    padding: 25px;
+    left: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-panel {
+    position: fixed; /* Switch to fixed so it stays in view while scrolling */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%; /* Take up most of the screen width */
+    max-width: 320px;
+    padding: 30px 20px;
+    animation: panelMobileFadeIn 0.3s ease-out;
+  }
+
+  /* Different animation for mobile centered pop-up */
+  @keyframes panelMobileFadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -45%) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  /* Disable the horizontal slide animation on mobile to prevent overflow */
+  @keyframes panelGlowSlide {
+    from { transform: translate(-50%, -45%); }
+    to { transform: translate(-50%, -50%); }
+  }
+
+  .category-panel-list li {
+    font-size: 18px;
+    padding: 12px 15px;
+    text-align: center; /* Better for centered mobile popups */
+  }
+
+  /* Reset the indicator bar for centered text */
+  .category-panel-list li::before {
+    display: none; 
+  }
+
+  .category-panel-list li:hover {
+    transform: scale(1.02); /* Scale instead of slide on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .category-panel {
+    width: 90%;
+    border-radius: 20px;
+  }
+
+  .category-close-btn {
+    top: 15px;
+    right: 15px;
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+}

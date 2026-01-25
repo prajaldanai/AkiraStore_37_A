@@ -104,3 +104,72 @@
    COMMENTS SECTION – FULL WIDTH, NO BORDER
 ============================================== */
 /* ProductComments is now full-width with its own styling */
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1100px) {
+  .topSection {
+    gap: 32px;
+    /* Changed from auto to 0 to fix Firefox compatibility */
+    min-height: 0; 
+    padding: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .topSection {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .middleSection {
+    grid-template-columns: 1fr; 
+  }
+
+  .middleSection > * {
+    border-right: none;
+    border-bottom: 2px solid #000000;
+    /* Changed from auto to 0 to fix Firefox compatibility */
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .middleSection > *:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .pageContent {
+    padding: 4px;
+  }
+
+  .topSection, 
+  .descriptionContainer {
+    padding: 16px;
+    border-radius: 4px;
+  }
+
+  .descriptionMainTitle {
+    font-size: 20px;
+    padding: 20px 16px;
+  }
+
+  .middleSection > * {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topSection {
+    padding: 12px;
+  }
+
+  .descriptionMainTitle {
+    font-size: 18px;
+  }
+}
