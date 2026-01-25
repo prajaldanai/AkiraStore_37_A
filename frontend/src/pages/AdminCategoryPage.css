@@ -489,55 +489,163 @@
 }
 
 
+ 
+
 /* ============================================================
-   RESPONSIVE
+   LARGE DESKTOP (1200px+)
 ============================================================ */
-@media (max-width: 1000px) {
-  .filter-section {
-    gap: 10px;
+@media (min-width: 1200px) {
+  .category-page {
+    padding: 40px;
   }
-  
-  .search-group {
-    max-width: 100%;
-    width: 100%;
+
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (max-width: 650px) {
-  .category-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+/* ============================================================
+   TABLET LANDSCAPE (900px – 1199px)
+============================================================ */
+@media (max-width: 1199px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  .header-left {
-    width: 100%;
-    flex-wrap: wrap;
+  .category-header h1 {
+    font-size: 24px;
   }
-  
+
+  .add-product-btn {
+    padding: 10px 16px;
+  }
+}
+
+/* ============================================================
+   TABLET PORTRAIT (650px – 899px)
+============================================================ */
+@media (max-width: 899px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-header {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .header-left,
   .header-right {
     width: 100%;
+  }
+
+  .header-right {
     justify-content: flex-start;
   }
-  
+
   .filter-section {
-    flex-direction: column;
-    align-items: stretch;
+    padding: 14px;
   }
-  
-  .filter-group {
-    width: 100%;
-  }
-  
+
   .search-group {
     max-width: 100%;
   }
-  
-  .price-group {
+}
+
+
+/* ============================================================
+   MOBILE (≤ 649px)
+============================================================ */
+
+@media (max-width: 649px) {
+  .category-page {
+    padding: 16px;
+  }
+
+  /* Header stack */
+  .category-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .category-header h1 {
+    font-size: 20px;
+    white-space: normal;
+  }
+
+  .header-left {
+    gap: 10px;
+  }
+
+  .header-right {
+    gap: 10px;
     flex-wrap: wrap;
   }
-  
-  .filter-select {
+
+  .add-product-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Filters stack cleanly */
+  .filter-section {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .filter-group,
+  .search-group,
+  .filter-select,
+  .filter-input {
+    width: 100%;
+  }
+
+  .price-input {
+    width: 100%;
+  }
+
+  /* Grid → single column */
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* Cards */
+  .product-card {
+    padding: 14px;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+  .product-info h3 {
+    font-size: 16px;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+  }
+
+  /* Delete popup */
+  .delete-popup {
+    width: 90%;
+    padding: 22px;
+  }
+
+  .delete-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cancel-delete,
+  .confirm-delete {
     width: 100%;
   }
 }
