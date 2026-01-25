@@ -320,3 +320,107 @@
     justify-self: flex-start;
   }
 }
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1200px) {
+  .cartItem {
+    grid-template-columns: 48px 100px 1fr 120px 140px 48px;
+    gap: 16px;
+    padding: 18px 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cartItem {
+    /* Reflow: Checkbox and Image stay, others wrap to a second row */
+    grid-template-columns: 48px 100px 1fr 60px;
+    grid-template-areas: 
+      "check image name trash"
+      "check image controls price";
+    align-items: center;
+    gap: 12px;
+  }
+
+  .checkboxWrapper { grid-area: check; }
+  .itemImageWrapper { grid-area: image; }
+  .itemName { grid-area: name; }
+  .trashButton { grid-area: trash; justify-self: end; }
+  .quantityControl { grid-area: controls; justify-self: start; }
+  .itemPrice { grid-area: price; justify-self: end; text-align: right; }
+}
+
+@media (max-width: 768px) {
+  .summaryBar {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .selectionInfo {
+    text-align: left;
+    width: 100%;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+  }
+
+  .previewGrid {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero h1 { font-size: 32px; }
+  
+  .cartItem {
+    /* Mobile Card Layout */
+    grid-template-columns: 48px 80px 1fr;
+    grid-template-areas: 
+      "check name name"
+      "image controls trash"
+      "image price price";
+    padding: 16px;
+  }
+
+  .itemImageWrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .itemName { font-size: 16px; }
+
+  .buyNowButton {
+    width: 100%;
+    padding: 16px;
+    letter-spacing: 1px;
+  }
+
+  .totalSummary {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cartItem {
+    grid-template-areas: 
+      "check name name"
+      "image controls controls"
+      "image price trash";
+  }
+  
+  .quantityControl {
+    gap: 8px;
+    padding: 4px 8px;
+  }
+
+  .quantityButton {
+    width: 30px;
+    height: 30px;
+  }
+}

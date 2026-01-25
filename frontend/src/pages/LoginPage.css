@@ -152,3 +152,89 @@
   font-size: 16px;
 }
 
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .login-card {
+    width: 90%;
+    max-width: 900px;
+  }
+
+  .login-right {
+    padding: 40px 50px;
+  }
+}
+
+@media (max-width: 850px) {
+  .login-card {
+    flex-direction: column; /* Stack image on top of form */
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .login-left {
+    border-radius: 12px 12px 0 0;
+    padding: 20px;
+    display: flex; /* Ensure image is visible and centered */
+  }
+
+  .login-image {
+    max-width: 250px; /* Shrink image for mobile */
+  }
+
+  .login-right {
+    border-radius: 0 0 12px 12px;
+    padding: 30px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    padding: 10px;
+  }
+
+  .login-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .input-row {
+    max-width: 100%;
+  }
+
+  .icon-box {
+    width: 50px;
+    height: 48px;
+  }
+
+  .input-field {
+    height: 48px;
+    font-size: 18px; /* Slightly smaller text for mobile */
+  }
+
+  .login-btn {
+    width: 100%; /* Button takes full width of card */
+    height: 52px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-left {
+    display: none; /* Hide the image entirely on very small screens to save space */
+  }
+
+  .login-right {
+    border-radius: 12px; /* Smooth corners for the now-solo card */
+    padding: 25px 15px;
+  }
+
+  .create-text {
+    font-size: 14px;
+    text-align: center;
+  }
+}

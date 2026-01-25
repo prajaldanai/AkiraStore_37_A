@@ -217,3 +217,83 @@
     font-size: 20px;
   }
 }
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .mainContent {
+    gap: 30px;
+  }
+  
+  .illustrationCard {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 900px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+    /* Changed from auto to 0 to fix Firefox compatibility */
+    min-height: 0; 
+    gap: 40px;
+    padding-top: 20px;
+  }
+
+  .rightPanel {
+    order: 1; /* Card comes first on mobile */
+  }
+
+  .leftPanel {
+    order: 2; /* Illustration comes second */
+  }
+
+  .illustrationCard {
+    max-width: 300px;
+    opacity: 0.8;
+  }
+
+  .pageTitle {
+    text-align: center;
+    font-size: 28px;
+  }
+
+  .backButton {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 16px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .errorCard {
+    padding: 30px 20px;
+    border-radius: 12px;
+  }
+
+  .iconWrapper {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+
+  .errorTitle {
+    font-size: 20px;
+  }
+
+  .primaryButton, 
+  .secondaryButton {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

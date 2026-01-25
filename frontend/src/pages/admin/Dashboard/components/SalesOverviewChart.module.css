@@ -146,3 +146,77 @@
     align-items: center;
   }
 }
+/*simean*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .chartWrapper {
+    height: 250px; /* Slightly shorter for tablets to save vertical space */
+  }
+
+  .stats {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .stats {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 32px;
+    padding-top: 12px;
+    border-top: 1px solid #f3f4f6; /* Visual separator for mobile stats */
+  }
+
+  .stat {
+    align-items: flex-start; /* Better readability when stacked */
+  }
+
+  .chartWrapper {
+    height: 220px;
+  }
+}
+
+@media (max-width: 520px) {
+  .card {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Grid layout for better alignment */
+    gap: 16px;
+  }
+
+  .statValue {
+    font-size: 15px;
+  }
+
+  .chartWrapper {
+    height: 200px; /* Compact height for small mobile views */
+  }
+
+  .tooltip {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .stats {
+    grid-template-columns: 1fr; /* Single column for very narrow phones */
+  }
+}

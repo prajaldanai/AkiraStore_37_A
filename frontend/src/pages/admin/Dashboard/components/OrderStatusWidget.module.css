@@ -162,3 +162,68 @@
     gap: 12px;
   }
 }
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .content {
+    gap: 16px;
+  }
+
+  .chartContainer {
+    flex: 0 0 150px; /* Slightly smaller chart for tablets */
+    height: 150px;
+  }
+
+  .centerValue {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 16px;
+  }
+
+  .content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .chartContainer {
+    flex: 0 0 180px;
+    height: 180px;
+    margin: 0 auto;
+  }
+
+  .legend {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for legend items */
+    gap: 12px;
+    text-align: left;
+  }
+
+  .legendItem {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .legend {
+    grid-template-columns: 1fr; /* Single column for very small phones */
+    gap: 8px;
+  }
+
+  .centerValue {
+    font-size: 22px;
+  }
+
+  .centerText {
+    font-size: 11px;
+  }
+
+  .tooltip {
+    padding: 8px; /* Smaller tooltips for mobile touch */
+  }
+}

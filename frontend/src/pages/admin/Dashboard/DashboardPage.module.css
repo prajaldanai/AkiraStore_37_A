@@ -102,3 +102,56 @@
     padding: 0;
   }
 }
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .widgetGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bottomGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .widgetColumn,
+  .recentOrdersSection,
+  .quickActionsSection {
+    min-height: 0; /* Allows content to define height on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 12px;
+  }
+
+  .mainGrid {
+    gap: 16px;
+  }
+
+  .error {
+    padding: 24px;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .error h3 {
+    font-size: 16px;
+  }
+
+  .error p {
+    font-size: 13px;
+  }
+
+  .retryBtn {
+    width: 100%; /* Makes button easier to tap on mobile */
+    padding: 12px;
+  }
+}

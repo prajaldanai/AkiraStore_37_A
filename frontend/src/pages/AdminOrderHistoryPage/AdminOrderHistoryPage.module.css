@@ -314,3 +314,88 @@
     min-width: 800px;
   }
 }
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .searchInput, 
+  .filterSelect, 
+  .refreshBtn {
+    width: 100%; /* Full width for easier interaction */
+    min-width: 0;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+    /* Smooth horizontal scrolling for tables */
+    scroll-behavior: smooth;
+    margin: 0 -20px; 
+    padding: 0 20px;
+    border-radius: 0; /* Flat look on mobile for more space */
+  }
+
+  .ordersTable {
+    min-width: 700px; /* Forces scroll instead of squishing columns */
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .pageButtons {
+    width: 100%;
+  }
+
+  .pageBtn {
+    flex: 1; /* Equal width buttons for mobile paging */
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 16px;
+  }
+
+  .customerEmail, 
+  .customerPhone {
+    display: none; /* Hide secondary info to keep rows compact */
+  }
+
+  .statusBadge {
+    padding: 3px 8px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 1.25rem;
+  }
+
+  .ordersTable th {
+    padding: 10px 8px;
+    font-size: 0.65rem;
+  }
+
+  .ordersTable td {
+    padding: 10px 8px;
+  }
+}

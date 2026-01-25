@@ -107,3 +107,79 @@
     padding: 12px;
   }
 }
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .gridRow {
+    grid-template-columns: 1fr; /* Stacks the 1.6fr 1fr layout into a single column */
+    gap: 20px;
+  }
+
+  .main {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 16px;
+  }
+
+  .gridRow {
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .fullWidth {
+    margin-bottom: 16px;
+  }
+
+  .errorBanner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .retryBtn {
+    width: 100%;
+    text-align: center;
+    padding: 10px; /* Better touch target */
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0; /* Let cards handle internal padding */
+  }
+
+  .errorText {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 12px;
+  }
+
+  /* Resetting potential min-heights from child cards to avoid overflow */
+  .colWide, .colNarrow {
+    min-height: 0;
+  }
+}
+
+/* Landscape mode fix for mobile */
+@media (max-height: 450px) and (orientation: landscape) {
+  .main {
+    padding: 10px 24px;
+  }
+  
+  .gridRow {
+    grid-template-columns: 1fr 1fr; /* Side-by-side works better in short/wide views */
+  }
+}

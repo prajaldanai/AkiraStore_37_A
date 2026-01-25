@@ -191,3 +191,102 @@ label {
   }
 }
 
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .signup-wrapper {
+    width: 90%;
+    height: auto; /* Allow the card to grow with content */
+    min-height: 520px;
+  }
+  
+  .signup-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 950px) {
+  .home-icon {
+    top: 15px;
+    right: 20px;
+    width: 32px;
+  }
+
+  .signup-wrapper {
+    width: 95%;
+    height: auto;
+    padding: 0; /* Tighten edge gap */
+  }
+
+  .signup-card {
+    flex-direction: column; /* Stacks the purple/pink sections */
+    height: auto;
+    border-radius: 15px; /* Slightly softer corners for mobile */
+  }
+
+  .signup-left {
+    width: 100%;
+    height: 200px; /* Shortens the image section to prioritize the form */
+  }
+
+  .signup-image {
+    object-position: center; /* Ensures the focus of the image stays centered */
+  }
+
+  .signup-right {
+    width: 100%;
+    padding: 24px 20px;
+    transform: none; /* Disable horizontal slide-in to prevent layout shifting */
+    animation: fadeIn 0.7s ease forwards;
+  }
+
+  .signup-btn {
+    width: 100%; /* Full width for easier thumb-reach */
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .signup-container {
+    padding: 10px;
+    align-items: flex-start; /* Better for long forms on mobile to avoid top-clipping */
+  }
+
+  .signup-wrapper {
+    margin-top: 50px; /* Room for the home icon */
+  }
+
+  label {
+    font-size: 16px; /* Prevents labels from taking up too much vertical space */
+  }
+
+  .signup-input {
+    height: 44px; /* Slightly taller for easier touch input */
+    font-size: 16px;
+  }
+
+  .signup-title {
+    font-size: 18px;
+  }
+
+  .success {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .signup-left {
+    display: none; /* Hide the image entirely on small phones for a faster UX */
+  }
+
+  .signup-right {
+    padding: 20px 15px;
+  }
+
+  .signup-input:hover {
+    transform: none; /* Disable scale on tiny screens to avoid edge flickering */
+  }
+}
