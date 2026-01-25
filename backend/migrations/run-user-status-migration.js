@@ -1,76 +1,83 @@
-/**
- * Run User Status Migration
- * Adds user management fields to the users table
- */
+const sequelize = require("../database/sequelize");
 
-const sequelize = require('../database/sequelize');
+async function runUserStatusMigration() {
+  console.log("[MIGRATION] Running user status migration...");
 
-async function runMigration() {
+  const statements = [
+    {
+      sql: `ALTER TABLE users ADD COLUMN IF NOT EXISTS is_blocked BOOLEAN DEFAULT FALSE;`,
+      desc: "is_blocked column",
+    },
+    {
+      sql: `ALTER TABLE users ADD COLUMN IF NOT EXISTS blocked_at TIMESTAMP WITH TIME ZONE;`,
+      desc: "blocked_at column",
+    },
+    {
+      sql: `ALTER TABLE users ADD COLUMN IF NOT EXISTS block_reason VARCHAR(500);`,
+      desc: "block_reason column",
+    },
+    {
+      sql: `ALTER TABLE users ADD COLUMN IF NOT EXISTS suspended_until TIMESTAMP WITH TIME ZONE;`,
+      desc: "suspended_until column",
+    },
+    {
+      sql: `ALTER TABLE users ADD COLUMN IF NOT EXISTS suspension_reason VARCHAR(500);`,
+      desc: "suspension_reason column",
+    },
+    {
+      sql: `ALTER TABLE users ADD COLUMN IF NOT EXISTS login_count INTEGER DEFAULT 0;`,
+      desc: "login_count column",
+    },
+    {
+      sql: `ALTER TABLE users ADD COLUMN IF NOT EXISTS created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP;`,
+      desc: "created_at column",
+    },
+    {
+      sql: `ALTER TABLE users ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP;`,
+      desc: "updated_at column",
+    },
+  ];
+
+  for (const { sql, desc } of statements) {
+    await sequelize.query(sql);
+    console.log(`[MIGRATION] Added ${desc}`);
+  }
+
+  await sequelize.query(`UPDATE users SET login_count = 0 WHERE login_count IS NULL;`);
+  console.log("[MIGRATION] Reset null login_count values");
+
+  const indexes = [
+    {
+      sql: `CREATE INDEX IF NOT EXISTS idx_users_is_blocked ON users(is_blocked);`,
+      desc: "idx_users_is_blocked",
+    },
+    {
+      sql: `CREATE INDEX IF NOT EXISTS idx_users_suspended_until ON users(suspended_until);`,
+      desc: "idx_users_suspended_until",
+    },
+  ];
+
+  for (const { sql, desc } of indexes) {
+    await sequelize.query(sql);
+    console.log(`[MIGRATION] Created ${desc}`);
+  }
+
+  console.log("[MIGRATION] User status migration completed");
+}
+
+async function runCliMigration() {
   try {
-    console.log('🔄 Running user status migration...');
-
-    // Add all columns
-    await sequelize.query(`
-      ALTER TABLE users ADD COLUMN IF NOT EXISTS is_blocked BOOLEAN DEFAULT FALSE;
-    `);
-    console.log('  ✓ Added is_blocked column');
-
-    await sequelize.query(`
-      ALTER TABLE users ADD COLUMN IF NOT EXISTS blocked_at TIMESTAMP WITH TIME ZONE;
-    `);
-    console.log('  ✓ Added blocked_at column');
-
-    await sequelize.query(`
-      ALTER TABLE users ADD COLUMN IF NOT EXISTS block_reason VARCHAR(500);
-    `);
-    console.log('  ✓ Added block_reason column');
-
-    await sequelize.query(`
-      ALTER TABLE users ADD COLUMN IF NOT EXISTS suspended_until TIMESTAMP WITH TIME ZONE;
-    `);
-    console.log('  ✓ Added suspended_until column');
-
-    await sequelize.query(`
-      ALTER TABLE users ADD COLUMN IF NOT EXISTS suspension_reason VARCHAR(500);
-    `);
-    console.log('  ✓ Added suspension_reason column');
-
-    await sequelize.query(`
-      ALTER TABLE users ADD COLUMN IF NOT EXISTS login_count INTEGER DEFAULT 0;
-    `);
-    console.log('  ✓ Added login_count column');
-
-    await sequelize.query(`
-      ALTER TABLE users ADD COLUMN IF NOT EXISTS created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP;
-    `);
-    console.log('  ✓ Added created_at column');
-
-    await sequelize.query(`
-      ALTER TABLE users ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP;
-    `);
-    console.log('  ✓ Added updated_at column');
-
-    // Update null login_count values
-    await sequelize.query(`
-      UPDATE users SET login_count = 0 WHERE login_count IS NULL;
-    `);
-    console.log('  ✓ Updated null login_count values');
-
-    // Create indexes
-    await sequelize.query(`
-      CREATE INDEX IF NOT EXISTS idx_users_is_blocked ON users(is_blocked);
-    `);
-    await sequelize.query(`
-      CREATE INDEX IF NOT EXISTS idx_users_suspended_until ON users(suspended_until);
-    `);
-    console.log('  ✓ Created indexes');
-
-    console.log('\n✅ Migration completed successfully!');
+    await runUserStatusMigration();
+    console.log("[MIGRATION] Migration finished successfully");
     process.exit(0);
   } catch (error) {
-    console.error('❌ Migration failed:', error.message);
+    console.error("[MIGRATION] Migration failed", error);
     process.exit(1);
   }
 }
 
-runMigration();
+module.exports = runUserStatusMigration;
+
+if (require.main === module) {
+  runCliMigration();
+}

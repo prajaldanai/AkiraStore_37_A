@@ -6,6 +6,7 @@ const cors = require("cors");
 
 // ✅ Import Sequelize instance (NEW)
 const sequelize = require("./database/sequelize");
+const runUserStatusMigration = require("./migrations/run-user-status-migration");
 
 // Import routes
 const authRoutes = require("./routes/authRoutes");
@@ -80,6 +81,13 @@ const PORT = process.env.PORT || 5000;
     // ✅ Test Sequelize connection
     await sequelize.authenticate();
     console.log("✅ Sequelize connected to PostgreSQL");
+
+    try {
+      await runUserStatusMigration();
+    } catch (migrationError) {
+      console.error("Migration failed:", migrationError);
+      throw migrationError;
+    }
 
     // Sync models - force:false won't add new columns to existing tables
     // If you need to add columns, run the migration SQL first
