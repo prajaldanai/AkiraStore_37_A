@@ -27,7 +27,7 @@ const UsersTable = ({
 
   // Format currency
   const formatCurrency = (value) => {
-    return `₹${(value || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
+    return `Rs. ${(value || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
   };
 
   // Get status badge style

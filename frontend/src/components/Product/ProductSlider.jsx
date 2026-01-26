@@ -83,8 +83,26 @@ function ProductSlider({ items = [] }) {
       <Swiper
         modules={[Navigation]}
         onSwiper={setSwiperInstance}
-        slidesPerView={3}
-        spaceBetween={28}
+        slidesPerView={1}
+        spaceBetween={12}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          900: {
+            slidesPerView: 2,
+            spaceBetween: 24,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+          },
+          1280: {
+            slidesPerView: 3,
+            spaceBetween: 28,
+          },
+        }}
         loop={false}              /* CRITICAL: Disabled to prevent DOM cloning */
         rewind={true}             /* Allow cycling without cloning */
         observer={false}          /* CRITICAL: Disabled to prevent rebuilds */

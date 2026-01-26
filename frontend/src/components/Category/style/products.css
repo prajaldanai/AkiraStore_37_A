@@ -210,102 +210,110 @@
   }
 
   .products-section {
-    padding: 24px 10px;
+    padding: 22px 10px;
   }
 
   .slider-section {
-    padding: 24px 0;
+    padding: 22px 0;
   }
 
   .figma-section-title {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .figma-section-description {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .figma-section-header {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    padding: 0 10px;
   }
 }
 
 /* Mobile phones - 480px and below */
 @media (max-width: 480px) {
   .products-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     padding: 0 8px;
   }
 
   .products-section {
-    padding: 20px 8px;
+    padding: 18px 8px;
   }
 
   .figma-section-title {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.25;
   }
 
   .figma-section-description {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.5;
   }
 
   .figma-section-tag {
-    font-size: 11px;
-    padding: 3px 10px;
+    font-size: 10px;
+    padding: 3px 8px;
   }
 
   .figma-section-header {
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+    padding: 0 8px;
   }
 
   .category-page .product-price-row {
-    gap: 8px;
+    gap: 6px;
   }
 
   .category-page .product-new-price {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .category-page .product-old-price {
-    font-size: 14px;
+    font-size: 11px;
   }
 
   .category-page .product-name {
-    font-size: 15px;
+    font-size: 13px;
   }
 }
 
 /* Very small devices - 360px and below */
 @media (max-width: 360px) {
   .products-grid {
+    grid-template-columns: repeat(2, 1fr);
     padding: 0 6px;
-    gap: 14px;
+    gap: 8px;
   }
 
   .products-section {
-    padding: 16px 6px;
+    padding: 14px 6px;
   }
 
   .figma-section-title {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .figma-section-description {
-    font-size: 12px;
+    font-size: 11px;
+  }
+
+  .figma-section-header {
+    margin-bottom: 12px;
+    padding: 0 6px;
   }
 
   .category-page .product-new-price {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .category-page .product-old-price {
-    font-size: 13px;
+    font-size: 10px;
   }
 
   .category-page .product-name {
-    font-size: 14px;
+    font-size: 12px;
   }
 }

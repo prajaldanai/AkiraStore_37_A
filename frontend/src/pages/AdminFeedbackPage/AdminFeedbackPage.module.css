@@ -1,225 +1,469 @@
+/* ========================================
+   ADMIN FEEDBACK PAGE - MODERN DESIGN
+======================================== */
+
 .page {
-  min-height: calc(100vh - 86px);
-  background: #f5f5f5;
-  padding: 48px clamp(24px, 4vw, 80px) 64px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 0;
+  position: relative;
+  overflow-x: hidden;
 }
 
-.header {
+.page::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ========================================
+   TOP HEADER (Similar to Inventory Page)
+======================================== */
+
+.topHeader {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.headerLeft {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  padding: 16px 24px;
+  background-color: #fff;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 20;
 }
 
 .backBtn {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 18px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  color: #374151;
-  font-size: 0.9rem;
-  font-weight: 500;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s;
 }
 
 .backBtn:hover {
-  background: #f3f4f6;
-  color: #111827;
-  border-color: #d1d5db;
+  background-color: #e0e0e0;
 }
 
-.backBtn svg {
-  flex-shrink: 0;
+.backArrow {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.headerSpacer {
+  width: 80px;
+}
+
+/* ========================================
+   HEADER SECTION
+======================================== */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+  padding: 32px 40px 24px;
+}
+
+.headerContent {
+  text-align: center;
 }
 
 .subTitle {
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: #475569;
-  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 8px 0;
+  font-weight: 600;
 }
 
 .title {
-  margin: 4px 0 0;
-  font-size: clamp(32px, 4vw, 44px);
-  font-weight: 700;
-  color: #111;
+  margin: 0;
+  font-size: 40px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.stats {
+.headerDesc {
+  margin: 12px 0 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+}
+
+/* ========================================
+   STATS CARDS
+======================================== */
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.statCard {
   display: flex;
-  gap: 32px;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.statIcon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  border-radius: 14px;
+  color: white;
+  flex-shrink: 0;
 }
 
 .statLabel {
+  display: block;
   font-size: 13px;
-  color: #6b7280;
-  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .statValue {
   font-size: 28px;
   font-weight: 700;
-  color: #111;
+  color: #ffffff;
 }
+
+.statValue small {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+}
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+
+.empty {
+  padding: 80px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin: 0 40px 60px;
+}
+
+.emptyIcon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.empty h3 {
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.empty p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+}
+
+/* ========================================
+   FEEDBACK LIST
+======================================== */
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+  padding: 0 40px 60px;
 }
 
+/* ========================================
+   FEEDBACK CARD
+======================================== */
+
 .card {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 24px;
-  padding: 22px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
 }
 
 .cardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  border-radius: 14px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .username {
-  font-size: 19px;
-  font-weight: 600;
   margin: 0;
-  color: #111;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
 }
 
 .timestamp {
-  margin: 4px 0 0;
-  color: #6b7280;
+  margin: 4px 0 0 0;
   font-size: 13px;
+  color: #64748b;
 }
 
-.rating {
-  font-size: 16px;
-  color: #4338ca;
+.ratingBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 18px;
+  border-radius: 14px;
+  color: white;
+  min-width: 90px;
+}
+
+.ratingNumber {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ratingLabel {
+  font-size: 11px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
 }
 
-.improvement {
-  margin: 0;
-  color: #1f2937;
-  line-height: 1.6;
+/* ========================================
+   CARD BODY
+======================================== */
+
+.cardBody {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fieldLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+}
+
+.fieldLabel svg {
+  color: #8b5cf6;
+}
+
+.ratingStars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  font-size: 24px;
+  color: #e2e8f0;
+  transition: color 0.2s ease;
+}
+
+.starFilled {
+  color: #f59e0b;
+}
+
+.ratingText {
+  margin-left: 12px;
   font-size: 15px;
+  font-weight: 600;
+  color: #475569;
 }
 
-.empty {
-  padding: 40px;
-  background: #fff;
-  border-radius: 18px;
-  text-align: center;
-  color: #6b7280;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+.feedbackText {
+  margin: 0;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  border-left: 4px solid #8b5cf6;
+  color: #334155;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
 
-/*simran*/
-/* --- RESPONSIVENESS ONLY --- */
-
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .page {
-    padding: 32px 24px 48px;
+    padding: 20px 16px 40px;
     gap: 24px;
   }
 
-  .statValue {
-    font-size: 24px;
+  .backBtn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
   }
-}
 
-@media (max-width: 768px) {
-  .header {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardHeader {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .stats {
-    width: 100%;
-    justify-content: space-between;
     gap: 16px;
-    padding: 16px 0;
-    border-top: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
+    padding: 20px;
   }
 
-  .statValue {
-    font-size: 22px;
+  .ratingBadge {
+    flex-direction: row;
+    gap: 8px;
+    padding: 8px 16px;
+  }
+
+  .ratingNumber {
+    font-size: 18px;
+  }
+
+  .cardBody {
+    padding: 20px;
+  }
+
+  .star {
+    font-size: 20px;
+  }
+
+  .feedbackText {
+    padding: 16px 20px;
   }
 }
 
-@media (max-width: 640px) {
-  .page {
-    padding: 24px 16px 40px;
-    min-height: 0; /* Prevents height calculation issues on mobile */
+@media (max-width: 480px) {
+  .backBtn span {
+    display: none;
+  }
+
+  .backBtn {
+    padding: 12px;
+    border-radius: 12px;
   }
 
   .title {
     font-size: 28px;
   }
 
-  .subTitle {
-    letter-spacing: 2px;
-    font-size: 12px;
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .card {
-    border-radius: 16px;
-    padding: 18px;
-  }
-
-  .cardHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .rating {
-    order: -1; /* Moves rating to the top of the card header */
-    font-size: 14px;
+  .avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 10px;
   }
 
   .username {
-    font-size: 17px;
-  }
-}
-
-@media (max-width: 400px) {
-  .stats {
-    grid-template-columns: 1fr;
+    font-size: 16px;
   }
 
   .statValue {
-    font-size: 20px;
+    font-size: 24px;
   }
 }
