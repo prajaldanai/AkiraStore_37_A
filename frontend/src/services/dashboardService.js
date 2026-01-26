@@ -3,15 +3,40 @@
  * API client for admin dashboard endpoints
  */
 
+import { getToken, validateToken, clearAuth } from "../utils/auth";
+
 const API_BASE = "http://localhost:5000/api/admin/dashboard";
 
-// Get auth headers
+// Get auth headers with token validation
 function getAuthHeaders() {
-  const token = localStorage.getItem("authToken");
+  const token = getToken();
+  const { valid } = validateToken(token);
+  
+  if (!valid) {
+    return {
+      "Content-Type": "application/json",
+    };
+  }
+  
   return {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
+}
+
+// Handle auth errors
+function handleAuthError(response) {
+  if (response.status === 401 || response.status === 403) {
+    clearAuth();
+    const currentPath = window.location.pathname;
+    if (currentPath !== "/login") {
+      sessionStorage.setItem("authMessage", "Please login to continue");
+      sessionStorage.setItem("authRedirect", currentPath);
+      window.location.href = "/login";
+    }
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -23,6 +48,10 @@ export async function getDashboard(days = 7) {
     method: "GET",
     headers: getAuthHeaders(),
   });
+  
+  if (handleAuthError(response)) {
+    throw new Error("Authentication required");
+  }
   
   if (!response.ok) {
     throw new Error("Failed to fetch dashboard data");

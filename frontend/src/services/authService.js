@@ -1,5 +1,7 @@
 // src/services/authService.js
 
+import { setToken, setRole, getToken, validateToken } from "../utils/auth";
+
 export async function loginUser(username, password) {
   const response = await fetch("http://localhost:5000/api/auth/login", {
     method: "POST",
@@ -15,13 +17,13 @@ export async function loginUser(username, password) {
     throw new Error(data.message || "Login failed");
   }
 
-  // ⭐ SAVE JWT TOKEN + ROLE
+  // ⭐ SAVE JWT TOKEN + ROLE using auth utilities
   if (data.token) {
-    localStorage.setItem("authToken", data.token);
+    setToken(data.token);
   }
 
   if (data.role) {
-    localStorage.setItem("userRole", data.role); // <-- IMPORTANT for redirect
+    setRole(data.role);
   }
 
   return data;
@@ -50,9 +52,14 @@ export async function signupUser(username, question, answer, password) {
   return data;
 }
 
-// ⭐ PROTECTED REQUEST
+// ⭐ PROTECTED REQUEST (with token validation)
 export async function fetchProtected(url) {
-  const token = localStorage.getItem("authToken");
+  const token = getToken();
+  const { valid } = validateToken(token);
+  
+  if (!valid) {
+    throw new Error("Authentication required");
+  }
 
   const response = await fetch(url, {
     method: "GET",
@@ -60,6 +67,10 @@ export async function fetchProtected(url) {
       "Authorization": `Bearer ${token}`,
     },
   });
+
+  if (response.status === 401 || response.status === 403) {
+    throw new Error("Authentication required");
+  }
 
   return response.json();
 }

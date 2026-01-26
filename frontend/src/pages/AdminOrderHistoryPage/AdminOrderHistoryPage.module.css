@@ -7,11 +7,43 @@
   margin: 0 auto;
 }
 
+/* Header with Back Button */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backBtn:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.backBtn svg {
+  flex-shrink: 0;
+}
+
 .pageTitle {
   font-size: 1.75rem;
   font-weight: 700;
   color: #1f2937;
-  margin: 0 0 24px 0;
+  margin: 0;
 }
 
 /* Top Bar */

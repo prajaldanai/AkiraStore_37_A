@@ -5,6 +5,7 @@
 
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { clearAuth } from "../../../utils/auth";
 import styles from "./Sidebar.module.css";
 
 // Category list - matches database
@@ -120,9 +121,7 @@ const Sidebar = ({ collapsed, onToggle }) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("user");
+    clearAuth();
     navigate("/login");
   };
 

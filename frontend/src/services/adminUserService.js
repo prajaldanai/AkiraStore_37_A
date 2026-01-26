@@ -3,15 +3,46 @@
  * API client for admin user management endpoints
  */
 
+import { getToken, validateToken, clearAuth } from "../utils/auth";
+
 const API_BASE = "http://localhost:5000/api/admin/users";
 
-// Get auth headers
+// Get auth headers with validation
 function getAuthHeaders() {
-  const token = localStorage.getItem("authToken");
+  const token = getToken();
+  const { valid } = validateToken(token);
+  
+  if (!valid) {
+    return {
+      "Content-Type": "application/json",
+    };
+  }
+  
   return {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
+}
+
+// Handle auth errors
+async function handleResponse(response) {
+  if (response.status === 401 || response.status === 403) {
+    clearAuth();
+    const currentPath = window.location.pathname;
+    if (currentPath !== "/login") {
+      sessionStorage.setItem("authMessage", "Please login to continue");
+      sessionStorage.setItem("authRedirect", currentPath);
+      window.location.href = "/login";
+    }
+    throw new Error("Authentication required");
+  }
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || `HTTP error ${response.status}`);
+  }
+
+  return response.json();
 }
 
 /**
@@ -30,12 +61,7 @@ export async function getUsers({ search = "", status = "", page = 1, limit = 20 
     headers: getAuthHeaders(),
   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Failed to fetch users");
-  }
-
-  return response.json();
+  return handleResponse(response);
 }
 
 /**
@@ -48,12 +74,7 @@ export async function getUserById(userId) {
     headers: getAuthHeaders(),
   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Failed to fetch user");
-  }
-
-  return response.json();
+  return handleResponse(response);
 }
 
 /**
@@ -68,12 +89,7 @@ export async function blockUser(userId, reason = null) {
     body: JSON.stringify({ reason }),
   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Failed to block user");
-  }
-
-  return response.json();
+  return handleResponse(response);
 }
 
 /**
@@ -86,12 +102,7 @@ export async function unblockUser(userId) {
     headers: getAuthHeaders(),
   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Failed to unblock user");
-  }
-
-  return response.json();
+  return handleResponse(response);
 }
 
 /**
@@ -107,12 +118,7 @@ export async function suspendUser(userId, days, reason = null) {
     body: JSON.stringify({ days, reason }),
   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Failed to suspend user");
-  }
-
-  return response.json();
+  return handleResponse(response);
 }
 
 /**
@@ -125,12 +131,7 @@ export async function unsuspendUser(userId) {
     headers: getAuthHeaders(),
   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Failed to unsuspend user");
-  }
-
-  return response.json();
+  return handleResponse(response);
 }
 
 export default {

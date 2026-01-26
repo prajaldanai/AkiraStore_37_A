@@ -139,7 +139,7 @@ const InventoryPage = () => {
       <header className={styles.header}>
         <button className={styles.backBtn} onClick={handleBack}>
           <span className={styles.backArrow}>←</span>
-          <span>Back to Dashboard</span>
+          <span>Back</span>
         </button>
         <h1 className={styles.pageTitle}>Inventory Management</h1>
         <div className={styles.headerSpacer}></div>

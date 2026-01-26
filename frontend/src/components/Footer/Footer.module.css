@@ -72,6 +72,8 @@
 .link {
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+  display: block;
 }
 
 .link:hover {

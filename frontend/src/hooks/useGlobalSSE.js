@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getToken, validateToken, clearAuth } from "../utils/auth";
 
 export default function useGlobalSSE() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Check if user is logged in by looking for auth token
+  // Check if user is logged in by validating auth token
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return !!localStorage.getItem("authToken");
+    const token = getToken();
+    const { valid } = validateToken(token);
+    return valid;
   });
 
   // Re-check auth state when location changes (e.g., after login redirect)
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    setIsLoggedIn(!!token);
+    const token = getToken();
+    const { valid } = validateToken(token);
+    setIsLoggedIn(valid);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -37,10 +41,7 @@ export default function useGlobalSSE() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("username");
-    localStorage.removeItem("role");
-    localStorage.removeItem("userRole");
+    clearAuth();
     setIsLoggedIn(false);
     navigate("/login", { replace: true });
   };

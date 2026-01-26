@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ProductComments.module.css";
+import { getToken, validateToken } from "../../../utils/auth";
 
 const API_BASE = "http://localhost:5000/api";
 
@@ -14,9 +15,10 @@ export default function ProductComments({ productId }) {
 
   // Check if user is logged in
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = getToken();
+    const { valid } = validateToken(token);
     const storedUsername = localStorage.getItem("username");
-    if (token && storedUsername) {
+    if (valid && storedUsername) {
       setIsLoggedIn(true);
       setUsername(storedUsername);
     }
@@ -62,7 +64,7 @@ export default function ProductComments({ productId }) {
     setError(null);
 
     try {
-      const token = localStorage.getItem("authToken");
+      const token = getToken();
       const res = await fetch(`${API_BASE}/comments`, {
         method: "POST",
         headers: {

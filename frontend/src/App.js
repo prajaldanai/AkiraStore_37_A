@@ -10,6 +10,14 @@ import {
 // ✅ App scoped styles (NO global leak)
 import styles from "./App.module.css";
 
+// Auth Context Provider
+import { AuthProvider, useAuth } from "./context/AuthContext";
+
+// Route Protectors
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
+import PublicRoute from "./routes/PublicRoute";
+
 // Pages
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -56,20 +64,29 @@ import UsersPage from "./pages/admin/Users/UsersPage";
 // Components
 import AddProductModal from "./components/AddProductModal";
 
-// Route Protectors
-import ProtectedRoute from "./components/ProtectedRoute";
-import AdminProtectedRoute from "./components/AdminProtectedRoute";
-
 /* ============================================================
    ROOT REDIRECT - Smart redirect based on auth status
 ============================================================ */
 function RootRedirect() {
-  const token = localStorage.getItem("authToken");
-  const role = localStorage.getItem("role");
+  const { isAuthenticated, isAuthReady, isAdmin } = useAuth();
   
-  if (token) {
+  // Wait for auth check
+  if (!isAuthReady) {
+    return (
+      <div style={{ 
+        display: "flex", 
+        justifyContent: "center", 
+        alignItems: "center", 
+        minHeight: "100vh" 
+      }}>
+        <span>Loading...</span>
+      </div>
+    );
+  }
+  
+  if (isAuthenticated) {
     // User is logged in - redirect to appropriate dashboard
-    if (role === "admin") {
+    if (isAdmin) {
       return <Navigate to="/admin-dashboard" replace />;
     }
     return <Navigate to="/dashboard" replace />;
@@ -122,40 +139,52 @@ function EditProductRouteWrapper() {
 /* ============================================================
    MAIN APP (SCOPED ROOT)
 ============================================================ */
-function App() {
+function AppRoutes() {
   return (
-    <div className={styles.app}>
-      <Router>
-        <Routes>
-          {/* ================= PUBLIC ROUTES ================= */}
-          <Route path="/" element={<RootRedirect />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/forget-password" element={<ForgetPasswordPage />} />
+    <Routes>
+      {/* ================= PUBLIC ROUTES ================= */}
+      <Route path="/" element={<RootRedirect />} />
+      <Route 
+        path="/login" 
+        element={
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        } 
+      />
+      <Route 
+        path="/signup" 
+        element={
+          <PublicRoute>
+            <SignupPage />
+          </PublicRoute>
+        } 
+      />
+      <Route path="/forget-password" element={<ForgetPasswordPage />} />
 
-          {/* ================= USER HOME ================= */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
-            }
-          />
+      {/* ================= USER HOME ================= */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        }
+      />
 
-          {/* ================= ABOUT PAGE ================= */}
-          <Route
-            path="/about"
-            element={
-              <ProtectedRoute>
-                <AboutPage />
-              </ProtectedRoute>
-            }
-          />
+      {/* ================= ABOUT PAGE ================= */}
+      <Route
+        path="/about"
+        element={
+          <ProtectedRoute>
+            <AboutPage />
+          </ProtectedRoute>
+        }
+      />
 
-          {/* ================= SEARCH RESULTS ================= */}
-          <Route
-            path="/search"
+      {/* ================= SEARCH RESULTS ================= */}
+      <Route
+        path="/search"
             element={
               <ProtectedRoute>
                 <SearchResultsPage />
@@ -371,6 +400,19 @@ function App() {
           {/* ================= 404 CATCH-ALL ================= */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
+  );
+}
+
+/* ============================================================
+   APP WRAPPER WITH AUTH PROVIDER
+============================================================ */
+function App() {
+  return (
+    <div className={styles.app}>
+      <Router>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
       </Router>
     </div>
   );
