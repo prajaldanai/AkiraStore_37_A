@@ -36,14 +36,14 @@ function getHeaders() {
  * Handle API response with auth error detection
  */
 async function handleResponse(response) {
-  // Handle auth errors - redirect to login
+  // Handle auth errors - React Router ProtectedRoute will redirect
   if (response.status === 401 || response.status === 403) {
     clearAuth();
     const currentPath = window.location.pathname;
     if (currentPath !== "/login") {
       sessionStorage.setItem("authMessage", "Please login to continue");
       sessionStorage.setItem("authRedirect", currentPath);
-      window.location.href = "/login";
+      // React Router will handle redirect via ProtectedRoute
     }
     throw new Error("Authentication required");
   }

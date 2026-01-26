@@ -32,7 +32,7 @@ function handleAuthError(response) {
     if (currentPath !== "/login") {
       sessionStorage.setItem("authMessage", "Please login to continue");
       sessionStorage.setItem("authRedirect", currentPath);
-      window.location.href = "/login";
+      // React Router will handle redirect via ProtectedRoute
     }
     return true;
   }

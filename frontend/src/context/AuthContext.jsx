@@ -47,19 +47,11 @@ export function AuthProvider({ children }) {
         setUser(null);
         setIsAuthenticated(false);
         
-        // If there was a token but it's invalid, redirect to login
+        // If there was a token but it's invalid, set a message
         // (Don't redirect if no token was present - could be first visit)
         if (storedToken) {
           sessionStorage.setItem("authMessage", "Session invalid. Please log in again.");
-          // Only redirect if on a protected route (not login/signup/public pages)
-          const publicPaths = ["/login", "/signup", "/", "/about", "/contact"];
-          const currentPath = window.location.pathname;
-          const isPublicPage = publicPaths.some(p => currentPath === p || currentPath.startsWith("/product/") || currentPath.startsWith("/category/"));
-          
-          if (!isPublicPage) {
-            window.location.href = "/login";
-            return;
-          }
+          // React Router's ProtectedRoute will handle the redirect
         }
       }
 
@@ -82,9 +74,8 @@ export function AuthProvider({ children }) {
       if (!valid && isAuthenticated) {
         // Token became invalid - logout
         logout();
-        // Redirect to login
+        // Set message, React Router will handle redirect via ProtectedRoute
         sessionStorage.setItem("authMessage", "Session invalid. Please log in again.");
-        window.location.href = "/login";
       }
     };
 
@@ -107,7 +98,7 @@ export function AuthProvider({ children }) {
       if (!valid && isAuthenticated) {
         logout();
         sessionStorage.setItem("authMessage", "Session invalid. Please log in again.");
-        window.location.href = "/login";
+        // React Router will handle redirect via ProtectedRoute
       }
     };
 
@@ -136,7 +127,7 @@ export function AuthProvider({ children }) {
         if (!valid) {
           logout();
           sessionStorage.setItem("authMessage", "Session invalid. Please log in again.");
-          window.location.href = "/login";
+          // React Router will handle redirect via ProtectedRoute
         }
       }
     };
@@ -176,7 +167,7 @@ export function AuthProvider({ children }) {
         if (!valid && isAuthenticated) {
           logout();
           sessionStorage.setItem("authMessage", "Session invalid. Please log in again.");
-          window.location.href = "/login";
+          // React Router will handle redirect via ProtectedRoute
         }
       }
     };
@@ -202,7 +193,7 @@ export function AuthProvider({ children }) {
         if (!valid && isAuthenticated) {
           logout();
           sessionStorage.setItem("authMessage", "Session invalid. Please log in again.");
-          window.location.href = "/login";
+          // React Router will handle redirect via ProtectedRoute
         }
       }
     };

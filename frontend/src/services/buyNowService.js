@@ -24,7 +24,7 @@ function isAuthenticated() {
 }
 
 /**
- * Handle 401 response - clear auth and redirect
+ * Handle 401 response - clear auth and let React Router redirect
  */
 function handleAuthError(response) {
   if (response.status === 401 || response.status === 403) {
@@ -33,7 +33,7 @@ function handleAuthError(response) {
     if (currentPath !== "/login") {
       sessionStorage.setItem("authMessage", "Please login to continue");
       sessionStorage.setItem("authRedirect", currentPath);
-      window.location.href = "/login";
+      // React Router will handle redirect via ProtectedRoute
     }
     return true;
   }

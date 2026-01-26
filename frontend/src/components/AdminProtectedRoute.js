@@ -19,7 +19,7 @@ export default function AdminProtectedRoute({ children }) {
     if (!valid && isAuthReady) {
       clearAuth();
       sessionStorage.setItem("authMessage", "Please log in to continue.");
-      window.location.href = "/login";
+      // Navigate component will handle the redirect on next render
     }
   }, [location.pathname, isAuthReady]);
 

@@ -64,8 +64,8 @@ api.interceptors.response.use(
         const returnUrl = currentPath + window.location.search;
         sessionStorage.setItem("authRedirect", returnUrl);
         
-        // Redirect to login
-        window.location.href = "/login";
+        // React Router's ProtectedRoute will handle the redirect
+        // No hard page refresh needed
       }
     }
     
@@ -97,6 +97,7 @@ export function getAuthToken() {
 
 /**
  * Redirect to login with message
+ * Note: This only sets the message, actual redirect is handled by React Router
  * @param {string} message - Message to show
  */
 export function redirectToLogin(message = "Please login to continue") {
@@ -105,7 +106,8 @@ export function redirectToLogin(message = "Please login to continue") {
   if (currentPath !== "/login") {
     sessionStorage.setItem("authMessage", message);
     sessionStorage.setItem("authRedirect", currentPath + window.location.search);
-    window.location.href = "/login";
+    clearAuth();
+    // React Router's ProtectedRoute will handle the redirect
   }
 }
 
