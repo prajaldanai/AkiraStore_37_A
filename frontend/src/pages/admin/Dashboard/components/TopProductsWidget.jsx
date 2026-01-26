@@ -51,7 +51,7 @@ const TopProductsWidget = ({ products, loading }) => {
                   </td>
                   <td className={styles.tdRight}>
                     <span className={styles.revenue}>
-                      ${(product.totalRevenue || 0).toLocaleString()}
+                      Rs. {(product.totalRevenue || 0).toLocaleString()}
                     </span>
                   </td>
                 </tr>

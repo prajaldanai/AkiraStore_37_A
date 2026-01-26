@@ -289,6 +289,23 @@
   background: #f8fafc;
 }
 
+/* Highlighted row from notification click */
+.highlightedRow {
+  animation: highlightPulse 2s ease-in-out infinite;
+  background: #fef3c7 !important;
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    background: #fef3c7;
+    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4);
+  }
+  50% {
+    background: #fde68a;
+    box-shadow: 0 0 15px 3px rgba(251, 191, 36, 0.3);
+  }
+}
+
 .ordersTable tbody tr:last-child td {
   border-bottom: none;
 }

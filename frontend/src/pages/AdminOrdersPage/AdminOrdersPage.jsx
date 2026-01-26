@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { getAdminOrders, updateOrderStatus } from "../../services/adminOrderService";
 import AdminOrderDetailsModal from "../../components/AdminOrderDetailsModal/AdminOrderDetailsModal";
 import styles from "./AdminOrdersPage.module.css";
@@ -67,6 +67,7 @@ const getNextStatuses = (currentStatus) => {
 
 export default function AdminOrdersPage() {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -76,6 +77,8 @@ export default function AdminOrdersPage() {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [toast, setToast] = useState(null);
   const [updatingOrderId, setUpdatingOrderId] = useState(null);
+  const [highlightedOrderId, setHighlightedOrderId] = useState(null);
+  const orderRowRefs = useRef({});
 
   /**
    * Fetch orders from API
@@ -109,6 +112,32 @@ export default function AdminOrdersPage() {
   useEffect(() => {
     fetchOrders(1);
   }, [fetchOrders]);
+
+  // Handle highlight parameter from notification
+  useEffect(() => {
+    const highlightId = searchParams.get("highlight");
+    if (highlightId && orders.length > 0) {
+      const orderId = parseInt(highlightId, 10) || highlightId;
+      setHighlightedOrderId(orderId);
+      
+      // Scroll to the highlighted order
+      setTimeout(() => {
+        const orderRow = orderRowRefs.current[orderId];
+        if (orderRow) {
+          orderRow.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        // Also open the order details modal
+        setSelectedOrderId(orderId);
+      }, 300);
+
+      // Clear the highlight after 5 seconds
+      setTimeout(() => {
+        setHighlightedOrderId(null);
+        // Remove highlight param from URL
+        setSearchParams({});
+      }, 5000);
+    }
+  }, [searchParams, orders, setSearchParams]);
 
   /**
    * Handle status change
@@ -321,7 +350,11 @@ export default function AdminOrdersPage() {
                 </thead>
                 <tbody>
                   {orders.map((order) => (
-                    <tr key={order.id}>
+                    <tr 
+                      key={order.id}
+                      ref={(el) => orderRowRefs.current[order.id] = el}
+                      className={highlightedOrderId === order.id ? styles.highlightedRow : ""}
+                    >
                       <td>
                         <span className={styles.orderId}>{shortenId(order.id)}</span>
                       </td>
