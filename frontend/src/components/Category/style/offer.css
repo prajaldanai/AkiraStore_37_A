@@ -9,14 +9,13 @@
   background: #c9f4c4;
 
   /* MORE BREATHING SPACE */
-  padding: 15px 350px;
+  padding: 15px 80px;
   min-height: 340px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;    /* gap between image and the section  */
-
+  justify-content: center;
+  gap: 60px;
 
   box-sizing: border-box;
 }
@@ -137,12 +136,31 @@
 }
 
 /* ===============================
+   RESPONSIVE (LARGE TABLET)
+================================ */
+@media (max-width: 1200px) {
+  .offer-wrapper {
+    padding: 48px 60px;
+    gap: 50px;
+    min-height: 320px;
+  }
+
+  .offer-left img {
+    width: 320px;
+  }
+
+  .offer-right h2 {
+    font-size: 34px;
+  }
+}
+
+/* ===============================
    RESPONSIVE (TABLET)
 ================================ */
 @media (max-width: 1100px) {
   .offer-wrapper {
     padding: 48px 48px;
-    gap: 56px;
+    gap: 45px;
     min-height: 300px;
   }
 
@@ -152,6 +170,29 @@
 
   .offer-right h2 {
     font-size: 32px;
+  }
+}
+
+/* ===============================
+   RESPONSIVE (SMALL TABLET)
+================================ */
+@media (max-width: 900px) {
+  .offer-wrapper {
+    padding: 44px 36px;
+    gap: 40px;
+    min-height: 280px;
+  }
+
+  .offer-left img {
+    width: 260px;
+  }
+
+  .offer-right h2 {
+    font-size: 30px;
+  }
+
+  .offer-right p {
+    font-size: 16px;
   }
 }
 
@@ -167,6 +208,14 @@
     min-height: auto;
   }
 
+  .offer-left {
+    order: 1;
+  }
+
+  .offer-right {
+    order: 2;
+  }
+
   .offer-left img {
     width: 240px;
   }
@@ -178,6 +227,47 @@
 
   .offer-right p {
     margin-bottom: 20px;
+  }
+}
+
+/* ===============================
+   RESPONSIVE (SMALL MOBILE)
+================================ */
+@media (max-width: 600px) {
+  .offer-wrapper {
+    padding: 36px 20px;
+    gap: 30px;
+  }
+
+  .offer-right h2 {
+    font-size: 28px;
+  }
+
+  .offer-right p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .offer-left img {
+    width: 220px;
+  }
+
+  .countdown {
+    gap: 16px;
+  }
+
+  .countdown .box {
+    width: 68px;
+    height: 68px;
+    border-radius: 12px;
+  }
+
+  .countdown .box span {
+    font-size: 22px;
+  }
+
+  .offer-count {
+    font-size: 15px;
   }
 }
 /*Change made by jeson*/

@@ -7,6 +7,7 @@
   text-align: center;
   margin-bottom: 36px;
   box-sizing: border-box;
+  padding: 0 16px;
 }
 
 .figma-section-title {
@@ -35,6 +36,33 @@
   background: #2f8f46;
   border-radius: 20px;
   letter-spacing: 0.3px;
+}
+
+/* ================================
+   PRODUCTS SECTION WRAPPER
+================================ */
+
+.products-section {
+  width: 100%;
+  padding: 40px 24px;
+  box-sizing: border-box;
+}
+
+.slider-section {
+  padding: 40px 0;
+}
+
+/* ================================
+   PRODUCTS GRID LAYOUT
+================================ */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 /* ================================
@@ -78,17 +106,90 @@
 }
 
 /* ================================
-   RESPONSIVE
+   RESPONSIVE BREAKPOINTS
 ================================ */
 
-@media (max-width: 768px) {
+/* Large Tablet - 1200px and below */
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .products-section {
+    padding: 36px 20px;
+  }
+}
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 0 20px;
+  }
+
+  .figma-section-title {
+    font-size: 30px;
+  }
+
+  .figma-section-description {
+    font-size: 18px;
+  }
+
+  .figma-section-header {
+    margin-bottom: 30px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .products-section {
+    padding: 32px 16px;
+  }
+
+  .slider-section {
+    padding: 32px 0;
+  }
+
   .figma-section-title {
     font-size: 28px;
   }
 
   .figma-section-description {
-    font-size: 14px;
-    padding: 0 16px;
+    font-size: 16px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 0 12px;
+  }
+
+  .products-section {
+    padding: 28px 12px;
+  }
+
+  .figma-section-title {
+    font-size: 26px;
+  }
+
+  .figma-section-description {
+    font-size: 15px;
+    padding: 0 12px;
+  }
+
+  .figma-section-header {
+    margin-bottom: 24px;
   }
 
   .category-page .product-new-price {
@@ -96,18 +197,53 @@
   }
 
   .category-page .product-old-price {
-    font-size: 20px;
+    font-size: 14px;
   }
 }
-/*Change made by jeson*/
-/* ===============================
-   EXTRA RESPONSIVENESS – SECTION & PRICES
-================================ */
 
-/* Mobile phones */
-@media (max-width: 480px) {
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 10px;
+  }
+
+  .products-section {
+    padding: 24px 10px;
+  }
+
+  .slider-section {
+    padding: 24px 0;
+  }
+
   .figma-section-title {
     font-size: 24px;
+  }
+
+  .figma-section-description {
+    font-size: 14px;
+  }
+
+  .figma-section-header {
+    margin-bottom: 20px;
+  }
+}
+
+/* Mobile phones - 480px and below */
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 8px;
+  }
+
+  .products-section {
+    padding: 20px 8px;
+  }
+
+  .figma-section-title {
+    font-size: 22px;
     line-height: 1.25;
   }
 
@@ -119,6 +255,10 @@
   .figma-section-tag {
     font-size: 11px;
     padding: 3px 10px;
+  }
+
+  .figma-section-header {
+    margin-bottom: 16px;
   }
 
   .category-page .product-price-row {
@@ -138,10 +278,19 @@
   }
 }
 
-/* Very small devices */
+/* Very small devices - 360px and below */
 @media (max-width: 360px) {
+  .products-grid {
+    padding: 0 6px;
+    gap: 14px;
+  }
+
+  .products-section {
+    padding: 16px 6px;
+  }
+
   .figma-section-title {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .figma-section-description {

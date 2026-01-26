@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import eye from "../../../assets/icons/eye.png";
 import star from "../../../assets/icons/star.png";
@@ -10,7 +11,7 @@ import cart from "../../../assets/icons/cart.png";
  * Actions:
  * - View: Navigate to product detail page
  * - Rate: Open rating modal
- * - Cart: Add to cart (future)
+ * - Cart: Add to cart with visual feedback
  * 
  * CRITICAL FIX FOR PAGE RELOAD:
  * All click handlers must call both:
@@ -21,6 +22,7 @@ import cart from "../../../assets/icons/cart.png";
  */
 export default function HoverActions({ productId, onRate, onCart }) {
   const navigate = useNavigate();
+  const [cartClicked, setCartClicked] = useState(false);
 
   /* ===============================
      VIEW PRODUCT
@@ -45,11 +47,18 @@ export default function HoverActions({ productId, onRate, onCart }) {
   };
 
   /* ===============================
-     ADD TO CART (placeholder)
+     ADD TO CART
+     - Adds item to cart with visual feedback
+     - Shows brief animation on click
   =============================== */
   const handleCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // Visual feedback - brief click animation
+    setCartClicked(true);
+    setTimeout(() => setCartClicked(false), 200);
+    
     if (typeof onCart === "function") {
       onCart();
     }
@@ -84,7 +93,7 @@ export default function HoverActions({ productId, onRate, onCart }) {
 
       {/* 🛒 Add to cart */}
       <div 
-        className="hover-icon-box"
+        className={`hover-icon-box ${cartClicked ? 'cart-clicked' : ''}`}
         onClick={handleCart}
         role="button"
         tabIndex={0}

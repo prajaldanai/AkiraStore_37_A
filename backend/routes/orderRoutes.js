@@ -15,10 +15,10 @@ const {
 const { optionalAuth, verifyToken, isAdmin } = require("../middlewares/authMiddleware");
 const { enforceUserStatus } = require("../middlewares/enforceUserStatus");
 
-// Create a new order (user or guest)
+// Create a new order (requires authentication)
 // POST /api/orders
 // Apply enforceUserStatus to prevent blocked/suspended users from ordering
-router.post("/", optionalAuth, enforceUserStatus, createOrder);
+router.post("/", verifyToken, enforceUserStatus, createOrder);
 
 // ===================== USER MY ORDERS ROUTES =====================
 // IMPORTANT: These must come BEFORE /:orderId to avoid route conflicts
@@ -37,10 +37,10 @@ router.get("/my/:orderId", verifyToken, getMyOrderById);
 // GET /api/orders/:orderId
 router.get("/:orderId", optionalAuth, getUserOrderById);
 
-// Confirm order (user finalizes the order)
+// Confirm order (user finalizes the order - requires authentication)
 // POST /api/orders/:orderId/confirm
 // Apply enforceUserStatus to prevent blocked/suspended users from confirming orders
-router.post("/:orderId/confirm", optionalAuth, enforceUserStatus, confirmOrder);
+router.post("/:orderId/confirm", verifyToken, enforceUserStatus, confirmOrder);
 
 // ===================== ADMIN ROUTES =====================
 

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./AdminFeedbackPage.module.css";
 
 const STORAGE_KEY = "akira_store_feedback";
@@ -17,6 +18,7 @@ function readFeedbackEntries() {
 }
 
 export default function AdminFeedbackPage() {
+  const navigate = useNavigate();
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
@@ -36,9 +38,21 @@ export default function AdminFeedbackPage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <div>
-          <p className={styles.subTitle}>Admin Insights</p>
-          <h1 className={styles.title}>User Feedback</h1>
+        <div className={styles.headerLeft}>
+          <button 
+            className={styles.backBtn}
+            onClick={() => navigate("/admin-dashboard")}
+            aria-label="Back to Dashboard"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span>Back</span>
+          </button>
+          <div>
+            <p className={styles.subTitle}>Admin Insights</p>
+            <h1 className={styles.title}>User Feedback</h1>
+          </div>
         </div>
         <div className={styles.stats}>
           <div>

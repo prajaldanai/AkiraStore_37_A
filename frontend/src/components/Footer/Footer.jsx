@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 import logo from "../../assets/icons/logo.png";
 
@@ -29,20 +30,22 @@ export default function Footer() {
         <div className={styles.col}>
           <h3 className={styles.title}>Shopping & Category</h3>
 
-          <p className={styles.link}>Men’s Clothing</p>
-          <p className={styles.link}>Women Clothing</p>
-          <p className={styles.link}>Kids Clothing</p>
-          <p className={styles.link}>Shoes</p>
-          <p className={styles.link}>Electronics</p>
+          <Link to="/category/men" className={styles.link}>Men's Clothing</Link>
+          <Link to="/category/women" className={styles.link}>Women's Clothing</Link>
+          <Link to="/category/kids" className={styles.link}>Kids Clothing</Link>
+          <Link to="/category/shoes" className={styles.link}>Shoes</Link>
+          <Link to="/category/electronics" className={styles.link}>Electronics</Link>
         </div>
 
         {/* USEFUL LINKS */}
         <div className={styles.col}>
           <h3 className={styles.title}>Useful Links</h3>
 
-          <p className={styles.link}>Home</p>
-          <p className={styles.link}>About Us</p>
-          <p className={styles.link}>My Cart</p>
+          <Link to="/dashboard" className={styles.link}>Home</Link>
+          <Link to="/about" className={styles.link}>About Us</Link>
+          <Link to="/cart" className={styles.link}>My Cart</Link>
+          <Link to="/orders" className={styles.link}>My Orders</Link>
+          <Link to="/feedback" className={styles.link}>Feedback</Link>
         </div>
       </div>
     </footer>

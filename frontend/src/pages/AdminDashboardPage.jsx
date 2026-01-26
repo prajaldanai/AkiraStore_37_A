@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";   // ✅ NEW
 import CategoryPanelPage from "./CategoryPanelPage";
+import { clearAuth } from "../utils/auth";
 
 import "./AdminDashboardPage.css";
 
@@ -25,10 +26,7 @@ const AdminDashboardPage = () => {
   
   const handleLogout = () => {
     // Clear all auth-related data
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("username");
-    localStorage.removeItem("role");
-    localStorage.removeItem("userRole");
+    clearAuth();
     navigate("/login", { replace: true });
   };
 
