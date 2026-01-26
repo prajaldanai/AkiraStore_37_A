@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAdminOrders } from "../../services/adminOrderService";
 import AdminOrderDetailsModal from "../../components/AdminOrderDetailsModal/AdminOrderDetailsModal";
 import styles from "./AdminOrderHistoryPage.module.css";
@@ -58,6 +59,7 @@ const getCompletedDate = (order) => {
 };
 
 export default function AdminOrderHistoryPage() {
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -133,7 +135,20 @@ export default function AdminOrderHistoryPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.pageTitle}>Order History</h1>
+      {/* Header with Back Button */}
+      <div className={styles.header}>
+        <button 
+          className={styles.backBtn}
+          onClick={() => navigate("/admin-dashboard")}
+          aria-label="Back to Dashboard"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Back</span>
+        </button>
+        <h1 className={styles.pageTitle}>Order History</h1>
+      </div>
 
       {/* Top Bar */}
       <div className={styles.topBar}>

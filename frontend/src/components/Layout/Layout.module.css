@@ -5,14 +5,38 @@
 .pageContent {
   padding-top: 86px; /* 🔥 MUST match header height */
   min-height: calc(100vh - 86px);
+  width: 100%;
+  overflow-x: hidden;
 }
-/*Change made by jeson*/
+
 /* =====================================================
-   PAGE CONTENT OFFSET (SCOPED – NO LEAKS)
+   RESPONSIVE LAYOUT OFFSET
    ===================================================== */
 
-.pageContent {
-  padding-top: 86px; /* 🔥 MUST match header height */
-  min-height: calc(100vh - 86px);
+@media (max-width: 1024px) {
+  .pageContent {
+    padding-top: 76px;
+    min-height: calc(100vh - 76px);
+  }
 }
-/*Change made by jeson*/
+
+@media (max-width: 900px) {
+  .pageContent {
+    padding-top: 70px;
+    min-height: calc(100vh - 70px);
+  }
+}
+
+@media (max-width: 600px) {
+  .pageContent {
+    padding-top: 60px;
+    min-height: calc(100vh - 60px);
+  }
+}
+
+@media (max-width: 400px) {
+  .pageContent {
+    padding-top: 56px;
+    min-height: calc(100vh - 56px);
+  }
+}

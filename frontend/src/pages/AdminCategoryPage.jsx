@@ -203,7 +203,7 @@ export default function AdminCategoryPage() {
       {/* ============== HEADER ============== */}
       <div className="category-header">
         <div className="header-left">
-          <button className="back-btn" onClick={() => navigate(-1)}>
+          <button className="back-btn" onClick={() => navigate("/admin-dashboard")}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M12 15L7 10L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

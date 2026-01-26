@@ -12,6 +12,9 @@ body.women-page-body {
 .category-page.women-page.women-category-page {
   background-color: #ffffff !important;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  padding-bottom: 40px;
 }
 
 /* ==========================
@@ -21,37 +24,66 @@ body.women-page-body {
   text-align: center;
   padding: 40px;
   font-size: 18px;
+  width: 100%;
 }
-/*Change made by jeson*/
+
 /* ===============================
-   RESPONSIVE – WOMEN PAGE
+   RESPONSIVE – CATEGORY PAGE
 ================================ */
+
+/* Large Tablet */
+@media (max-width: 1024px) {
+  .category-page.women-page.women-category-page {
+    padding-bottom: 36px;
+  }
+}
 
 /* Tablets */
 @media (max-width: 768px) {
   .category-page.women-page.women-category-page {
     min-height: 100vh;
+    padding-bottom: 32px;
   }
 
   .loading {
-    padding: 32px;
+    padding: 32px 16px;
     font-size: 16px;
   }
 }
 
 /* Mobile phones */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .category-page.women-page.women-category-page {
+    padding-bottom: 28px;
+  }
+
   .loading {
-    padding: 24px;
+    padding: 28px 14px;
     font-size: 15px;
+  }
+}
+
+/* Small Mobile phones */
+@media (max-width: 480px) {
+  .category-page.women-page.women-category-page {
+    padding-bottom: 24px;
+  }
+
+  .loading {
+    padding: 24px 12px;
+    font-size: 14px;
   }
 }
 
 /* Very small devices */
 @media (max-width: 360px) {
+  .category-page.women-page.women-category-page {
+    padding-bottom: 20px;
+  }
+
   .loading {
-    padding: 20px;
-    font-size: 14px;
+    padding: 20px 10px;
+    font-size: 13px;
   }
 }
 
