@@ -17,12 +17,12 @@ import styles from "./SalesOverviewChart.module.css";
 
 const formatCurrency = (value) => {
   if (value >= 100000) {
-    return `₹${(value / 100000).toFixed(1)}L`;
+    return `Rs. ${(value / 100000).toFixed(1)}L`;
   }
   if (value >= 1000) {
-    return `₹${(value / 1000).toFixed(0)}K`;
+    return `Rs. ${(value / 1000).toFixed(0)}K`;
   }
-  return `₹${value}`;
+  return `Rs. ${value}`;
 };
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -31,7 +31,7 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className={styles.tooltip}>
         <p className={styles.tooltipLabel}>{label}</p>
         <p className={styles.tooltipValue}>
-          Revenue: ₹{payload[0].value.toLocaleString("en-IN")}
+          Revenue: Rs. {payload[0].value.toLocaleString("en-IN")}
         </p>
         <p className={styles.tooltipOrders}>
           Orders: {payload[0].payload.orders}
@@ -78,7 +78,7 @@ const SalesOverviewChart = ({ salesData, salesDays, loading }) => {
         </div>
         <div className={styles.stats}>
           <div className={styles.stat}>
-            <span className={styles.statValue}>₹{totalRevenue.toLocaleString("en-IN")}</span>
+            <span className={styles.statValue}>Rs. {totalRevenue.toLocaleString("en-IN")}</span>
             <span className={styles.statLabel}>TOTAL REVENUE</span>
           </div>
           <div className={styles.stat}>
@@ -86,7 +86,7 @@ const SalesOverviewChart = ({ salesData, salesDays, loading }) => {
             <span className={styles.statLabel}>ORDERS</span>
           </div>
           <div className={styles.stat}>
-            <span className={styles.statValue}>₹{avgOrderValue.toFixed(2)}</span>
+            <span className={styles.statValue}>Rs. {avgOrderValue.toFixed(2)}</span>
             <span className={styles.statLabel}>AVG. ORDER</span>
           </div>
         </div>

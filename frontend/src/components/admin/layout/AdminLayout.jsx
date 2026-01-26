@@ -8,11 +8,14 @@ import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import styles from "./AdminLayout.module.css";
 
+// Global admin font lock - ensures consistent font sizing across all devices
+import "../../../styles/adminGlobal.css";
+
 const AdminLayout = ({ children, pageTitle = "Dashboard" }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className={styles.layout}>
+    <div className={styles.layout} data-admin="true">
       <Sidebar
         collapsed={sidebarCollapsed}
         onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}

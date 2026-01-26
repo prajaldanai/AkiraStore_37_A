@@ -10,6 +10,9 @@ import InventoryTable from "./components/InventoryTable";
 import { getInventory, getCategories, adjustStock } from "../../../services/inventoryService";
 import styles from "./InventoryPage.module.css";
 
+// Global admin font lock - ensures consistent font sizing across all devices
+import "../../../styles/adminGlobal.css";
+
 const InventoryPage = () => {
   const navigate = useNavigate();
 
@@ -134,7 +137,7 @@ const InventoryPage = () => {
   };
 
   return (
-    <div className={styles.pageWrapper}>
+    <div className={styles.pageWrapper} data-admin="true">
       {/* Header */}
       <header className={styles.header}>
         <button className={styles.backBtn} onClick={handleBack}>

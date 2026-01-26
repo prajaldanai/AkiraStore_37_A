@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Check, Send } from "lucide-react";
 import { RatingSelector } from "./RatingSelector";
+import { getUserFromToken } from "../../utils/auth";
 import styles from "./FeedbackPage.module.css";
 
 const STORAGE_KEY = "akira_store_feedback";
@@ -17,8 +18,15 @@ export default function FeedbackForm() {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const stored = window?.localStorage.getItem("username") ?? "";
-    setUsername(stored);
+    // Get username from JWT token
+    const user = getUserFromToken();
+    if (user && user.username) {
+      setUsername(user.username);
+    } else {
+      // Fallback to localStorage if available
+      const stored = window?.localStorage.getItem("username") ?? "";
+      setUsername(stored);
+    }
   }, []);
 
   const handleSubmit = async (event) => {

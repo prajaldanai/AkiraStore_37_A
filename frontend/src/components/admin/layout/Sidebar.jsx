@@ -98,6 +98,19 @@ const MENU_ITEMS = [
       </svg>
     ),
   },
+  {
+    id: "feedback",
+    label: "Feedback",
+    path: "/admin/feedback",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M3 4H17V13H6L3 16V4Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+        <circle cx="7" cy="8.5" r="1" fill="currentColor"/>
+        <circle cx="10" cy="8.5" r="1" fill="currentColor"/>
+        <circle cx="13" cy="8.5" r="1" fill="currentColor"/>
+      </svg>
+    ),
+  },
 ];
 
 const Sidebar = ({ collapsed, onToggle }) => {

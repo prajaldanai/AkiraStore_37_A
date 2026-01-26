@@ -270,7 +270,6 @@
     font-size: 15px;
   }
 }
-/*Change made by jeson*/
 /* ===============================
    EXTRA RESPONSIVENESS – OFFER
 ================================ */
@@ -278,70 +277,104 @@
 /* Small mobile phones */
 @media (max-width: 480px) {
   .offer-wrapper {
-    padding: 32px 16px;
-    gap: 28px;
+    padding: 28px 14px;
+    gap: 24px;
   }
 
-  .offer-right h2 {
-    font-size: 26px;
-  }
-
-  .offer-right p {
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .offer-left img {
-    width: 200px;
-  }
-
-  .countdown {
-    gap: 14px;
-  }
-
-  .countdown .box {
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
-  }
-
-  .countdown .box span {
-    font-size: 20px;
-  }
-
-  .countdown .box {
-    font-size: 12px;
-  }
-
-  .offer-count {
-    font-size: 14px;
-  }
-
-  .no-offer-text {
-    font-size: 16px;
-  }
-}
-
-/* Very small devices */
-@media (max-width: 360px) {
   .offer-right h2 {
     font-size: 22px;
   }
 
   .offer-right p {
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
   }
 
   .offer-left img {
-    width: 180px;
+    width: 160px;
+  }
+
+  .countdown {
+    gap: 10px;
   }
 
   .countdown .box {
-    width: 58px;
-    height: 58px;
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
   }
 
   .countdown .box span {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .countdown .box {
+    font-size: 10px;
+  }
+
+  .ends-label {
+    font-size: 12px;
+  }
+
+  .offer-count {
+    font-size: 13px;
+  }
+
+  .no-offer-text {
+    font-size: 14px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .offer-wrapper {
+    padding: 24px 12px;
+    gap: 20px;
+  }
+
+  .offer-right h2 {
     font-size: 18px;
+  }
+
+  .offer-right p {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .offer-left img {
+    width: 140px;
+  }
+
+  .countdown {
+    gap: 8px;
+  }
+
+  .countdown .box {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+  }
+
+  .countdown .box span {
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+
+  .countdown .box {
+    font-size: 9px;
+  }
+
+  .ends-label {
+    font-size: 11px;
+  }
+
+  .offer-count {
+    font-size: 12px;
+  }
+
+  .no-offer-text {
+    font-size: 13px;
   }
 }
