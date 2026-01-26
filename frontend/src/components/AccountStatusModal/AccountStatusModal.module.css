@@ -133,3 +133,55 @@
 .closeBtn:hover {
   background: #374151;
 }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .modal {
+    max-width: 320px;
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .message {
+    font-size: 14px;
+  }
+
+  .dateInfo {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 12px;
+  }
+
+  .modal {
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .iconWrapper {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 16px;
+  }
+
+  .supportInfo {
+    font-size: 12px;
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .closeBtn {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+}
+
+
+
+
