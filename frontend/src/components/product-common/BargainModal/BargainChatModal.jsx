@@ -114,11 +114,15 @@ export default function BargainChatModal({
     setMessages(prev => [...prev, userMessage]);
     setInputValue("");
 
-    const newAttemptCount = attemptCount + 1;
-    setAttemptCount(newAttemptCount);
+    // Calculate response with current attempt count first to check if valid
+    const tempAttemptCount = attemptCount + 1;
+    const response = calculateBargainResponse(subtotal, offerPrice, tempAttemptCount);
 
-    // Calculate response
-    const response = calculateBargainResponse(subtotal, offerPrice, newAttemptCount);
+    // Only increment attempt count if the offer was valid (not isInvalid)
+    const newAttemptCount = response.isInvalid ? attemptCount : tempAttemptCount;
+    if (!response.isInvalid) {
+      setAttemptCount(newAttemptCount);
+    }
 
     // Add owner response after a short delay (simulate typing)
     setTimeout(() => {

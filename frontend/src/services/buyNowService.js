@@ -358,8 +358,9 @@ export function calculateBargainResponse(subtotal, offerPrice, attemptCount) {
   // Get the current counter offer for this attempt
   const currentCounter = getOwnerCounterByAttempt(subtotal, attemptCount);
   const maxDiscountPrice = subtotal * 0.90; // 10% max discount (hidden)
+  const minAcceptableOffer = subtotal * 0.50; // 50% of original price is minimum
 
-  // Validate offer
+  // Validate offer - basic validation
   if (typeof offerPrice !== "number" || isNaN(offerPrice) || offerPrice <= 0) {
     return {
       accepted: false,
@@ -370,14 +371,39 @@ export function calculateBargainResponse(subtotal, offerPrice, attemptCount) {
     };
   }
 
-  // Offer too high (more than original price) - accept immediately
-  if (offerPrice >= subtotal) {
+  // Offer higher than original price - reject it (user likely made a typo)
+  if (offerPrice > subtotal) {
+    return {
+      accepted: false,
+      discount: 0,
+      counterOffer: null,
+      message: `Whoa! 😅 Your offer of Rs. ${Math.round(offerPrice).toLocaleString()} is higher than the original price of Rs. ${Math.round(subtotal).toLocaleString()}. Please enter a lower amount to bargain!`,
+      isFinal: false,
+      isInvalid: true, // Flag to not count this as an attempt
+    };
+  }
+
+  // Offer equal to original price - accept with no discount
+  if (offerPrice === subtotal) {
     return {
       accepted: true,
       discount: 0,
       counterOffer: null,
-      message: "Deal! ✅ We accept your offer.",
+      message: "Deal! ✅ We accept your offer at the original price.",
       isFinal: true,
+    };
+  }
+
+  // Offer is too low (less than 50% of original) - reject immediately
+  if (offerPrice < minAcceptableOffer) {
+    return {
+      accepted: false,
+      discount: 0,
+      counterOffer: currentCounter,
+      message: `That's way too low 😔 The minimum I can consider is around Rs. ${Math.round(minAcceptableOffer).toLocaleString()}. How about Rs. ${Math.round(currentCounter).toLocaleString()}?`,
+      isFinal: false,
+      canAcceptCounter: true,
+      isInvalid: true, // Flag to not count this as an attempt
     };
   }
 

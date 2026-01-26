@@ -87,7 +87,7 @@ const RecentOrdersTable = ({ orders, loading }) => {
                     </td>
                     <td className={styles.date}>{formatDate(order.createdAt)}</td>
                     <td className={styles.amount}>
-                      ${parseFloat(order.totalAmount || 0).toFixed(2)}
+                      Rs. {parseFloat(order.totalAmount || 0).toFixed(2)}
                     </td>
                     <td>
                       <span className={`${styles.status} ${styles[statusConfig.className]}`}>
