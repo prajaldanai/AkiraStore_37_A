@@ -38,3 +38,118 @@
 .paragraph:last-child {
   margin-bottom: 0;
 }
+/*change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Large Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 21px;
+    margin-bottom: 22px;
+  }
+
+  .productName {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .paragraph {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .productName {
+    font-size: 21px;
+    margin-bottom: 16px;
+  }
+
+  .paragraph {
+    font-size: 16.5px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .title {
+    font-size: 19px;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .productName {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  .paragraph {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .productName {
+    font-size: 19px;
+    margin-bottom: 12px;
+  }
+
+  .paragraph {
+    font-size: 15.5px;
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .title {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .productName {
+    font-size: 18px;
+  }
+
+  .paragraph {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .productName {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  .paragraph {
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+}

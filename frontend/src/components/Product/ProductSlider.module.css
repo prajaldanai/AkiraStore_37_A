@@ -108,3 +108,147 @@
     right: 6px;
   }
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Large Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .sliderWrapper {
+    padding: 0 40px;
+    margin: 36px 0;
+  }
+
+  .navBtn {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    box-shadow: 0 5px 18px rgba(109, 40, 217, 0.3);
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .sliderWrapper {
+    padding: 0 36px;
+    margin: 32px 0;
+  }
+
+  .swiper :global(.swiper-slide) {
+    width: calc(100% / 2);
+  }
+
+  .navBtn {
+    width: 46px;
+    height: 46px;
+    font-size: 19px;
+    box-shadow: 0 4px 16px rgba(109, 40, 217, 0.25);
+  }
+
+  .prev {
+    left: 8px;
+  }
+
+  .next {
+    right: 8px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .sliderWrapper {
+    padding: 0 32px;
+    margin: 28px 0;
+  }
+
+  .navBtn {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .navBtn:hover {
+    transform: translateY(-50%) scale(1.08);
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .sliderWrapper {
+    padding: 0 16px;
+    margin: 24px 0;
+    background: #ffffff;
+  }
+
+  .swiper :global(.swiper-slide) {
+    width: 100%;
+  }
+
+  .navBtn {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    box-shadow: 0 3px 12px rgba(109, 40, 217, 0.2);
+  }
+
+  .prev {
+    left: 6px;
+  }
+
+  .next {
+    right: 6px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .sliderWrapper {
+    padding: 0 12px;
+    margin: 20px 0;
+  }
+
+  .navBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .prev {
+    left: 4px;
+  }
+
+  .next {
+    right: 4px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .sliderWrapper {
+    padding: 0 8px;
+    margin: 16px 0;
+  }
+
+  .navBtn {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .prev {
+    left: 2px;
+  }
+
+  .next {
+    right: 2px;
+  }
+}

@@ -310,3 +310,100 @@
     padding: 20px 12px;
   }
 }
+/*Change made by jeson*/
+/* ===============================
+   RESPONSIVE SIDEBAR FIXES
+================================ */
+
+/* Small laptops */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar.collapsed {
+    width: 72px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 72px;
+  }
+
+  .sidebar.collapsed {
+    width: 72px;
+  }
+
+  .navItem {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .navLabel {
+    display: none;
+  }
+
+  .logo {
+    justify-content: center;
+    padding: 20px 12px;
+  }
+
+  .logoText {
+    display: none;
+  }
+
+  .logoutBtn {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .logoutBtn .navLabel {
+    display: none;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 64px;
+  }
+
+  .sidebar.collapsed {
+    width: 64px;
+  }
+
+  .logoIcon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .navIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .collapseBtn {
+    margin: 8px;
+    padding: 6px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .sidebar {
+    width: 56px;
+  }
+
+  .sidebar.collapsed {
+    width: 56px;
+  }
+
+  .logoIcon {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+}

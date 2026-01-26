@@ -60,3 +60,131 @@
     font-weight: 600;
 
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .section {
+    gap: 12px;
+    margin-bottom: 50px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .viewBtn {
+    padding: 9px 24px;
+    font-size: 17px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .section {
+    margin-bottom: 45px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .viewBtn {
+    padding: 8px 22px;
+    font-size: 16.5px;
+  }
+
+  .subtitle {
+    font-size: 16.5px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .section {
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .viewBtn {
+    padding: 8px 20px;
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .section {
+    margin-bottom: 35px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .viewBtn {
+    padding: 7px 18px;
+    font-size: 15.5px;
+  }
+
+  .subtitle {
+    font-size: 15.5px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .section {
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .title {
+    font-size: 19px;
+  }
+
+  .viewBtn {
+    padding: 6px 16px;
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .section {
+    margin-bottom: 25px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .viewBtn {
+    padding: 6px 14px;
+    font-size: 14.5px;
+  }
+
+  .subtitle {
+    font-size: 14.5px;
+  }
+}

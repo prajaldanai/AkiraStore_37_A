@@ -413,3 +413,367 @@
 .save-btn:hover {
   background: #5f24c9;
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Large Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .add-product-modal {
+    max-width: 95%;
+    padding: 26px;
+    border-radius: 16px;
+    max-height: 85vh;
+  }
+
+  .add-prod-title {
+    font-size: 25px;
+    margin-bottom: 18px;
+  }
+
+  .add-prod-close-btn {
+    top: 16px;
+    right: 16px;
+    padding: 7px 11px;
+    font-size: 17px;
+  }
+
+  .add-prod-grid {
+    gap: 28px;
+  }
+
+  .image-thumb {
+    width: 110px;
+    height: 140px;
+  }
+
+  .add-more-images-box {
+    width: 110px;
+    height: 110px;
+  }
+
+  .add-prod-footer {
+    margin-top: 22px;
+  }
+
+  .save-product-btn,
+  .cancel-btn {
+    padding: 11px 22px;
+    font-size: 15.5px;
+  }
+
+  .popup-box {
+    width: 350px;
+    padding: 20px 22px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .add-product-modal {
+    padding: 24px;
+    max-height: 80vh;
+  }
+
+  .add-prod-title {
+    font-size: 23px;
+  }
+
+  .add-prod-close-btn {
+    top: 14px;
+    right: 14px;
+    font-size: 16px;
+  }
+
+  .add-prod-grid {
+    gap: 22px;
+  }
+
+  .add-prod-left input,
+  .add-prod-right input,
+  .add-prod-right select,
+  .add-prod-right textarea,
+  .add-prod-left textarea {
+    padding: 12px;
+    font-size: 14.5px;
+    margin-bottom: 13px;
+  }
+
+  .image-thumb {
+    width: 100px;
+    height: 130px;
+  }
+
+  .add-more-images-box {
+    width: 100px;
+    height: 100px;
+  }
+
+  .save-product-btn,
+  .cancel-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+
+  .popup-box {
+    width: 320px;
+    padding: 18px 20px;
+  }
+
+  .popup-box h3 {
+    font-size: 17px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .add-product-modal {
+    padding: 22px;
+    border-radius: 14px;
+    width: 98%;
+  }
+
+  .add-prod-title {
+    font-size: 21px;
+    margin-bottom: 16px;
+  }
+
+  .add-prod-close-btn {
+    padding: 6px 10px;
+    font-size: 15px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .add-prod-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .image-thumb {
+    width: 90px;
+    height: 120px;
+  }
+
+  .image-delete-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+  }
+
+  .add-more-images-box {
+    width: 90px;
+    height: 90px;
+    font-size: 14px;
+  }
+
+  .shipping-rule-tag {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .add-prod-footer {
+    margin-top: 20px;
+    gap: 12px;
+  }
+
+  .save-product-btn,
+  .cancel-btn {
+    padding: 9px 18px;
+    font-size: 14.5px;
+    border-radius: 10px;
+  }
+
+  .popup-box {
+    width: 300px;
+    padding: 16px 18px;
+  }
+
+  .popup-close {
+    width: 26px;
+    height: 26px;
+    font-size: 15px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .add-product-modal {
+    padding: 20px;
+    max-height: 75vh;
+  }
+
+  .add-prod-title {
+    font-size: 19px;
+  }
+
+  .add-prod-left input,
+  .add-prod-right input,
+  .add-prod-right select,
+  .add-prod-right textarea,
+  .add-prod-left textarea {
+    padding: 11px;
+    font-size: 14px;
+    border-width: 1.5px;
+    border-radius: 10px;
+  }
+
+  .image-upload-row {
+    gap: 10px;
+  }
+
+  .image-thumb {
+    width: 80px;
+    height: 110px;
+  }
+
+  .add-more-images-box {
+    width: 80px;
+    height: 80px;
+    font-size: 13px;
+  }
+
+  .ship-field select {
+    padding: 10px 12px;
+    font-size: 13.5px;
+  }
+
+  .add-prod-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .save-product-btn,
+  .cancel-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .popup-box {
+    width: 280px;
+    padding: 14px 16px;
+  }
+
+  .popup-box h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .popup-box input[type="text"],
+  .popup-box input[type="number"] {
+    padding: 9px 10px;
+    font-size: 13.5px;
+  }
+
+  .save-btn {
+    padding: 7px 16px;
+    font-size: 13.5px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .add-product-modal-overlay {
+    padding: 10px;
+  }
+
+  .add-product-modal {
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .add-prod-title {
+    font-size: 18px;
+  }
+
+  .add-prod-close-btn {
+    top: 10px;
+    right: 10px;
+    padding: 5px 8px;
+    font-size: 14px;
+  }
+
+  .image-thumb {
+    width: 70px;
+    height: 100px;
+  }
+
+  .add-more-images-box {
+    width: 70px;
+    height: 70px;
+    font-size: 12px;
+  }
+
+  .shipping-rules-tags {
+    gap: 6px;
+  }
+
+  .shipping-rule-tag {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  .popup-box {
+    width: 260px;
+    padding: 12px 14px;
+  }
+
+  .popup-close {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    top: 8px;
+    right: 12px;
+  }
+
+  .popup-box h3 {
+    font-size: 15px;
+  }
+
+  .apply-to-section {
+    font-size: 13px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .add-product-modal {
+    padding: 16px;
+  }
+
+  .add-prod-title {
+    font-size: 17px;
+  }
+
+  .add-prod-left input,
+  .add-prod-right input,
+  .add-prod-right select,
+  .add-prod-right textarea,
+  .add-prod-left textarea {
+    padding: 10px;
+    font-size: 13.5px;
+  }
+
+  .image-thumb {
+    width: 65px;
+    height: 90px;
+  }
+
+  .add-more-images-box {
+    width: 65px;
+    height: 65px;
+    font-size: 11px;
+  }
+
+  .popup-box {
+    width: 240px;
+    padding: 10px 12px;
+  }
+
+  .popup-box input[type="text"],
+  .popup-box input[type="number"] {
+    padding: 8px 9px;
+    font-size: 13px;
+  }
+}

@@ -66,3 +66,162 @@
   border-color: #6366f1;
   color: #ffffff;
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .container {
+    padding: 24px 18px;
+  }
+
+  .iconWrapper {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 14px;
+  }
+
+  .message {
+    margin-bottom: 18px;
+  }
+
+  .title {
+    font-size: 14.5px;
+    margin-bottom: 5px;
+  }
+
+  .subtitle {
+    font-size: 12.5px;
+  }
+
+  .chip {
+    padding: 5px 12px;
+    font-size: 12.5px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .container {
+    padding: 22px 16px;
+  }
+
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 12px;
+  }
+
+  .message {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .chip {
+    padding: 5px 11px;
+    font-size: 12px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 14px;
+  }
+
+  .iconWrapper {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 10px;
+  }
+
+  .message {
+    margin-bottom: 14px;
+  }
+
+  .title {
+    font-size: 13.5px;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 11.5px;
+  }
+
+  .categories {
+    gap: 6px;
+  }
+
+  .chip {
+    padding: 4px 10px;
+    font-size: 11.5px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .container {
+    padding: 18px 12px;
+  }
+
+  .iconWrapper {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: 13px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+  }
+
+  .categories {
+    gap: 5px;
+  }
+
+  .chip {
+    padding: 4px 9px;
+    font-size: 11px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .container {
+    padding: 16px 10px;
+  }
+
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+  }
+
+  .title {
+    font-size: 12.5px;
+  }
+
+  .subtitle {
+    font-size: 10.5px;
+  }
+
+  .categories {
+    gap: 4px;
+  }
+
+  .chip {
+    padding: 3px 8px;
+    font-size: 10.5px;
+  }
+}

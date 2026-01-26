@@ -357,3 +357,318 @@
     margin-left: 44px;
   }
 }
+/*change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS - ADDITIONAL
+   ===================================================== */
+
+/* Large Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .reviewsSection {
+    padding: 50px 0 60px;
+  }
+
+  .container {
+    max-width: 900px;
+    padding: 0 20px;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+  }
+
+  .reviewTextarea {
+    font-size: 18px;
+    padding: 16px 18px;
+    min-height: 110px;
+  }
+
+  .reviewText {
+    font-size: 18px;
+  }
+
+  .reviewCount {
+    font-size: 15px;
+  }
+
+  .postButton {
+    padding: 13px 32px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .reviewsSection {
+    padding: 45px 0 55px;
+  }
+
+  .sectionTitle {
+    font-size: 26px;
+  }
+
+  .reviewTextarea {
+    font-size: 17px;
+    border-width: 1.5px;
+  }
+
+  .reviewText {
+    font-size: 17px;
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .username {
+    font-size: 17px;
+  }
+
+  .timestamp {
+    font-size: 12.5px;
+  }
+
+  .postButton {
+    padding: 12px 28px;
+    font-size: 14.5px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .reviewsSection {
+    padding: 40px 0 50px;
+    margin-top: 30px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .sectionTitle {
+    font-size: 24px;
+  }
+
+  .reviewTextarea {
+    min-height: 100px;
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .reviewTextarea:focus {
+    box-shadow: 0 0 0 3px rgba(26, 143, 0, 0.1);
+  }
+
+  .postButton {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+
+  .formActions {
+    justify-content: stretch;
+  }
+
+  .reviewBody {
+    padding: 16px 18px;
+  }
+
+  .reviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .timestamp {
+    margin-left: 48px;
+    font-size: 12px;
+  }
+
+  .emptyState {
+    padding: 40px 20px;
+  }
+
+  .emptyTitle {
+    font-size: 18px;
+  }
+
+  .emptyDescription {
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .reviewsSection {
+    padding: 35px 0 45px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 30px;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+  }
+
+  .reviewCount {
+    font-size: 14px;
+  }
+
+  .reviewForm {
+    margin-bottom: 35px;
+  }
+
+  .reviewTextarea {
+    min-height: 90px;
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+
+  .reviewText {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .reviewBody {
+    padding: 14px 16px;
+  }
+
+  .userDetails {
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .username {
+    font-size: 16px;
+  }
+
+  .emptyState {
+    padding: 35px 15px;
+  }
+
+  .emptyTitle {
+    font-size: 17px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .reviewsSection {
+    padding: 30px 0 40px;
+  }
+
+  .sectionTitle {
+    font-size: 21px;
+  }
+
+  .reviewTextarea {
+    min-height: 85px;
+    padding: 12px 14px;
+    font-size: 14.5px;
+    border-radius: 10px;
+  }
+
+  .errorMessage {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .postButton {
+    padding: 12px 20px;
+    font-size: 14.5px;
+  }
+
+  .reviewCard {
+    border-radius: 10px;
+  }
+
+  .reviewBody {
+    padding: 12px 14px;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .username {
+    font-size: 15px;
+  }
+
+  .timestamp {
+    margin-left: 40px;
+    font-size: 11.5px;
+  }
+
+  .reviewText {
+    font-size: 14.5px;
+  }
+
+  .emptyIcon {
+    font-size: 40px;
+  }
+
+  .emptyTitle {
+    font-size: 16px;
+  }
+
+  .emptyDescription {
+    font-size: 13.5px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .reviewsSection {
+    padding: 25px 0 35px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .reviewTextarea {
+    min-height: 80px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .reviewText {
+    font-size: 14px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .username {
+    font-size: 14px;
+  }
+
+  .timestamp {
+    margin-left: 38px;
+    font-size: 11px;
+  }
+
+  .emptyState {
+    padding: 30px 10px;
+  }
+
+  .emptyTitle {
+    font-size: 15px;
+  }
+}

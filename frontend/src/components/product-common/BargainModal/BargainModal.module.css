@@ -80,7 +80,7 @@
   color: #fff;
 }
 
-@@
+
 .agentMessage {
   align-self: flex-start;
   background: #fef3c7;
@@ -142,4 +142,310 @@
   cursor: not-allowed;
 }
 
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
 
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .overlay {
+    padding: 20px;
+  }
+
+  .modal {
+    padding: 18px;
+    gap: 14px;
+    border-radius: 14px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .subtitle {
+    font-size: 12.5px;
+  }
+
+  .closeButton {
+    padding: 5px 10px;
+    font-size: 11.5px;
+  }
+
+  .messages {
+    max-height: 260px;
+    gap: 9px;
+  }
+
+  .userMessage,
+  .agentMessage {
+    padding: 9px 11px;
+    max-width: 87%;
+  }
+
+  .messageText {
+    font-size: 13.5px;
+  }
+
+  .time {
+    font-size: 10.5px;
+  }
+
+  .suggestions {
+    gap: 7px;
+  }
+
+  .suggestionButton {
+    padding: 7px 13px;
+    font-size: 11.5px;
+  }
+
+  .inputRow {
+    gap: 7px;
+  }
+
+  .input {
+    padding: 9px 11px;
+    font-size: 13.5px;
+    border-radius: 9px;
+  }
+
+  .sendButton {
+    padding: 9px 14px;
+    font-size: 13.5px;
+    border-radius: 9px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .overlay {
+    padding: 16px;
+  }
+
+  .modal {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 12px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .closeButton {
+    padding: 4px 9px;
+    font-size: 11px;
+  }
+
+  .messages {
+    max-height: 240px;
+  }
+
+  .userMessage,
+  .agentMessage {
+    padding: 8px 10px;
+    max-width: 89%;
+  }
+
+  .messageText {
+    font-size: 13px;
+  }
+
+  .time {
+    font-size: 10px;
+  }
+
+  .suggestionButton {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .input {
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  .sendButton {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .overlay {
+    padding: 12px;
+  }
+
+  .modal {
+    padding: 14px;
+    gap: 10px;
+    border-radius: 10px;
+  }
+
+  .header {
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 11.5px;
+  }
+
+  .messages {
+    max-height: 220px;
+    gap: 8px;
+  }
+
+  .userMessage,
+  .agentMessage {
+    padding: 7px 9px;
+    max-width: 92%;
+  }
+
+  .messageText {
+    font-size: 12.5px;
+  }
+
+  .time {
+    font-size: 9.5px;
+  }
+
+  .suggestions {
+    gap: 6px;
+  }
+
+  .suggestionButton {
+    padding: 5px 10px;
+    font-size: 10.5px;
+  }
+
+  .inputRow {
+    flex-direction: column;
+  }
+
+  .input {
+    padding: 8px 10px;
+    border-radius: 7px;
+  }
+
+  .sendButton {
+    padding: 8px 12px;
+    border-radius: 7px;
+    width: 100%;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .overlay {
+    padding: 10px;
+  }
+
+  .modal {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 14.5px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+  }
+
+  .closeButton {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .messages {
+    max-height: 200px;
+  }
+
+  .userMessage,
+  .agentMessage {
+    padding: 6px 8px;
+    max-width: 95%;
+  }
+
+  .messageText {
+    font-size: 12px;
+  }
+
+  .time {
+    font-size: 9px;
+  }
+
+  .suggestionButton {
+    padding: 4px 9px;
+    font-size: 10px;
+  }
+
+  .input {
+    padding: 7px 9px;
+    font-size: 12.5px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .overlay {
+    padding: 8px;
+  }
+
+  .modal {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .subtitle {
+    font-size: 10.5px;
+  }
+
+  .messages {
+    max-height: 180px;
+  }
+
+  .userMessage,
+  .agentMessage {
+    padding: 5px 7px;
+  }
+
+  .messageText {
+    font-size: 11.5px;
+  }
+
+  .time {
+    font-size: 8.5px;
+  }
+
+  .suggestionButton {
+    padding: 3px 8px;
+    font-size: 9.5px;
+  }
+
+  .input {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .sendButton {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+}

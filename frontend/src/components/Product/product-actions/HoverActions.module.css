@@ -58,3 +58,127 @@
   height: 26px;
   pointer-events: none;
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .overlay {
+    gap: 16px;
+  }
+
+  .iconBox {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .overlay {
+    gap: 14px;
+  }
+
+  .iconBox {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .iconBox:hover {
+    transform: translateY(-5px) scale(1.05);
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .overlay {
+    gap: 12px;
+  }
+
+  .iconBox {
+    width: 44px;
+    height: 44px;
+    border-radius: 9px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .overlay::before {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .overlay {
+    gap: 10px;
+  }
+
+  .iconBox {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .iconBox:hover {
+    transform: translateY(-4px) scale(1.04);
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .overlay {
+    gap: 8px;
+  }
+
+  .iconBox {
+    width: 36px;
+    height: 36px;
+    border-radius: 7px;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .overlay::before {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .iconBox {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+  }
+
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+}
