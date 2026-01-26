@@ -22,3 +22,36 @@ body.women-page-body {
   padding: 40px;
   font-size: 18px;
 }
+/*Change made by jeson*/
+/* ===============================
+   RESPONSIVE – WOMEN PAGE
+================================ */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .category-page.women-page.women-category-page {
+    min-height: 100vh;
+  }
+
+  .loading {
+    padding: 32px;
+    font-size: 16px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .loading {
+    padding: 24px;
+    font-size: 15px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .loading {
+    padding: 20px;
+    font-size: 14px;
+  }
+}
+

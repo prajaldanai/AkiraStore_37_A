@@ -94,3 +94,78 @@
     margin: 0 auto;
   }
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 22px;
+    padding: 0 20px;
+  }
+
+  .logo {
+    margin: 0 auto 12px;
+    width: 110px;
+  }
+
+  .left, .col {
+    width: 100%;
+    align-items: center;
+  }
+}
+
+/* Mobile - 600px and below */
+@media (max-width: 600px) {
+  .footer {
+    padding: 24px 0;
+  }
+
+  .container {
+    gap: 18px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .text, .link {
+    font-size: 13.5px;
+    margin-bottom: 5px;
+  }
+}
+
+/* Small Mobile - 400px and below */
+@media (max-width: 400px) {
+  .footer {
+    padding: 20px 0;
+  }
+
+  .container {
+    gap: 16px;
+    padding: 0 12px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .text, .link {
+    font-size: 13px;
+  }
+}

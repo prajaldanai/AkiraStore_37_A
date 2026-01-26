@@ -61,3 +61,172 @@
   border-top: 1px solid #ececec;
   padding-top: 12px;
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .card {
+    padding: 18px;
+    gap: 12px;
+    border-radius: 11px;
+  }
+
+  .header {
+    gap: 10px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .bargainButton {
+    padding: 5px 11px;
+    font-size: 11.5px;
+  }
+
+  .rows {
+    font-size: 13.5px;
+    gap: 7px;
+  }
+
+  .giftBoxToggle {
+    font-size: 12.5px;
+    gap: 7px;
+  }
+
+  .totalRow {
+    font-size: 15.5px;
+    padding-top: 11px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .card {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .bargainButton {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .rows {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .giftBoxToggle {
+    font-size: 12px;
+  }
+
+  .totalRow {
+    font-size: 15px;
+    padding-top: 10px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .card {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .bargainButton {
+    align-self: flex-start;
+    padding: 4px 9px;
+    font-size: 10.5px;
+  }
+
+  .rows {
+    font-size: 12.5px;
+  }
+
+  .giftBoxToggle {
+    font-size: 11.5px;
+  }
+
+  .totalRow {
+    font-size: 14.5px;
+    padding-top: 9px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .card {
+    padding: 12px;
+    border-radius: 9px;
+  }
+
+  .title {
+    font-size: 14.5px;
+  }
+
+  .bargainButton {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .rows {
+    font-size: 12px;
+  }
+
+  .giftBoxToggle {
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .totalRow {
+    font-size: 14px;
+    padding-top: 8px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .card {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .bargainButton {
+    padding: 2px 7px;
+    font-size: 9.5px;
+  }
+
+  .rows {
+    font-size: 11.5px;
+  }
+
+  .giftBoxToggle {
+    font-size: 10.5px;
+  }
+
+  .totalRow {
+    font-size: 13.5px;
+    padding-top: 7px;
+  }
+}

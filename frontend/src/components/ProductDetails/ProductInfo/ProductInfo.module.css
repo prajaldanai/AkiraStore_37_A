@@ -551,3 +551,532 @@
     grid-template-columns: 1fr;
   }
 }
+/*change made by jeson*/
+
+/* =====================================================
+   RESPONSIVE BREAKPOINTS - ADDITIONAL
+   ===================================================== */
+
+/* Large Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .container {
+    gap: 12px;
+  }
+
+  .ratingRow {
+    gap: 24px;
+  }
+
+  .stars {
+    font-size: 28px;
+  }
+
+  .ratingText {
+    font-size: 14.5px;
+  }
+
+  .rateButton {
+    padding: 9px 20px;
+    font-size: 14.5px;
+  }
+
+  .yourRating {
+    font-size: 14.5px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .price {
+    font-size: 24px;
+  }
+
+  .oldPrice {
+    font-size: 15px;
+  }
+
+  .sizeLabel {
+    font-size: 22px;
+  }
+
+  .sizeButton {
+    font-size: 17px;
+  }
+
+  .quantityLabel {
+    font-size: 22px;
+  }
+
+  .availabilityLabel {
+    font-size: 20px;
+  }
+
+  .whyList {
+    font-size: 22px;
+    gap: 8px 16px;
+  }
+
+  .whyList span {
+    font-size: 22px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .ratingRow {
+    gap: 20px;
+  }
+
+  .ratingLeft {
+    gap: 10px;
+  }
+
+  .stars {
+    font-size: 26px;
+  }
+
+  .ratingActions {
+    gap: 18px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .price {
+    font-size: 23px;
+  }
+
+  .taxNote {
+    font-size: 15px;
+  }
+
+  .sizeLabel {
+    font-size: 21px;
+  }
+
+  .sizeButton {
+    font-size: 16.5px;
+    min-width: 42px;
+    height: 38px;
+  }
+
+  .quantityLabel {
+    font-size: 21px;
+  }
+
+  .qtyButton {
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
+  }
+
+  .qtyValue {
+    min-width: 44px;
+    height: 34px;
+  }
+
+  .availabilityLabel {
+    font-size: 19px;
+  }
+
+  .addToCart,
+  .buyNow {
+    padding: 13px 22px;
+    font-size: 15.5px;
+  }
+
+  .whyChoose {
+    font-size: 28px;
+    margin-top: 22px;
+  }
+
+  .whyTitle {
+    font-size: 22px;
+  }
+
+  .whyList {
+    font-size: 20px;
+  }
+
+  .whyList span {
+    font-size: 20px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .ratingRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .ratingActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stars {
+    font-size: 24px;
+  }
+
+  .ratingText {
+    font-size: 14px;
+  }
+
+  .rateButton {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .priceSection {
+    gap: 3px;
+  }
+
+  .price {
+    font-size: 22px;
+  }
+
+  .oldPrice {
+    font-size: 14.5px;
+  }
+
+  .unitPrice {
+    font-size: 12.5px;
+  }
+
+  .taxNote {
+    font-size: 14.5px;
+  }
+
+  .sizeSection {
+    margin-top: 8px;
+  }
+
+  .sizeLabel {
+    font-size: 20px;
+  }
+
+  .sizeLimit {
+    font-size: 13px;
+  }
+
+  .sizeList {
+    gap: 8px;
+  }
+
+  .sizeButton {
+    min-width: 40px;
+    height: 36px;
+    padding: 0 12px;
+    font-size: 16px;
+  }
+
+  .quantitySection {
+    margin-top: 8px;
+  }
+
+  .quantityLabel {
+    font-size: 20px;
+  }
+
+  .availabilityLabel {
+    font-size: 18px;
+  }
+
+  .stockNumber,
+  .stockText,
+  .stockStatus,
+  .stockCount {
+    font-size: 15px;
+  }
+
+  .addToCart,
+  .buyNow {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  .whyChoose {
+    font-size: 26px;
+    margin-top: 20px;
+  }
+
+  .whyList {
+    font-size: 18px;
+    gap: 6px 14px;
+  }
+
+  .whyList span {
+    font-size: 18px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .container {
+    padding: 2px 0;
+  }
+
+  .ratingRow {
+    gap: 14px;
+  }
+
+  .ratingLeft {
+    gap: 8px;
+  }
+
+  .stars {
+    font-size: 22px;
+  }
+
+  .ratingText {
+    font-size: 13.5px;
+  }
+
+  .ratingActions {
+    gap: 16px;
+  }
+
+  .rateButton {
+    padding: 7px 16px;
+    font-size: 13.5px;
+  }
+
+  .yourRating {
+    font-size: 13.5px;
+  }
+
+  .title {
+    font-size: 19px;
+    -webkit-line-clamp: 3;
+  }
+
+  .price {
+    font-size: 21px;
+  }
+
+  .oldPrice {
+    font-size: 14px;
+  }
+
+  .unitPrice {
+    font-size: 12px;
+  }
+
+  .taxNote {
+    font-size: 14px;
+  }
+
+  .sizeLabel {
+    font-size: 19px;
+  }
+
+  .sizeHint {
+    font-size: 18px;
+  }
+
+  .sizeList {
+    gap: 6px;
+  }
+
+  .sizeButton {
+    min-width: 38px;
+    height: 34px;
+    padding: 0 10px;
+    font-size: 15.5px;
+  }
+
+  .quantityLabel {
+    font-size: 19px;
+  }
+
+  .qtyButton {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .qtyValue {
+    min-width: 42px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .availabilityLabel {
+    font-size: 17px;
+  }
+
+  .addToCart,
+  .buyNow {
+    padding: 11px 18px;
+    font-size: 14.5px;
+    border-radius: 7px;
+  }
+
+  .whyChoose {
+    font-size: 24px;
+    margin-top: 18px;
+  }
+
+  .whyTitle {
+    font-size: 20px;
+  }
+
+  .whyList {
+    grid-template-columns: 1fr;
+    font-size: 17px;
+    gap: 8px;
+  }
+
+  .whyList span {
+    font-size: 17px;
+  }
+
+  .cartMessage {
+    padding: 10px 14px;
+    font-size: 13.5px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .ratingRow {
+    gap: 12px;
+  }
+
+  .stars {
+    font-size: 20px;
+  }
+
+  .ratingText {
+    font-size: 13px;
+  }
+
+  .rateButton {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .price {
+    font-size: 20px;
+  }
+
+  .oldPrice {
+    font-size: 13.5px;
+  }
+
+  .taxNote {
+    font-size: 13.5px;
+  }
+
+  .sizeLabel {
+    font-size: 18px;
+  }
+
+  .sizeButton {
+    min-width: 36px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .quantityLabel {
+    font-size: 18px;
+  }
+
+  .availabilityLabel {
+    font-size: 16px;
+  }
+
+  .addToCart,
+  .buyNow {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .whyChoose {
+    font-size: 22px;
+  }
+
+  .whyTitle {
+    font-size: 19px;
+  }
+
+  .whyList {
+    font-size: 16px;
+  }
+
+  .whyList span {
+    font-size: 16px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .stars {
+    font-size: 18px;
+  }
+
+  .ratingText {
+    font-size: 12.5px;
+  }
+
+  .rateButton {
+    padding: 5px 12px;
+    font-size: 12.5px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .price {
+    font-size: 19px;
+  }
+
+  .sizeButton {
+    min-width: 34px;
+    height: 30px;
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  .quantityLabel {
+    font-size: 17px;
+  }
+
+  .qtyButton {
+    width: 30px;
+    height: 30px;
+  }
+
+  .availabilityLabel {
+    font-size: 15px;
+  }
+
+  .whyChoose {
+    font-size: 20px;
+  }
+
+  .whyTitle {
+    font-size: 18px;
+  }
+
+  .whyList {
+    font-size: 15px;
+  }
+
+  .whyList span {
+    font-size: 15px;
+  }
+}

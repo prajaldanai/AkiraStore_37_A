@@ -133,12 +133,22 @@
 .closeBtn:hover {
   background: #374151;
 }
+/*Change made by jeson*/
+/* ===============================
+   RESPONSIVE STYLES
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
+/* Small devices (phones) */
+@media (max-width: 480px) {
+
   .modal {
-    max-width: 320px;
-    padding: 24px;
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+
+  .iconWrapper {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
   }
 
   .title {
@@ -152,36 +162,52 @@
   .dateInfo {
     padding: 14px;
   }
-}
 
-@media (max-width: 480px) {
-  .overlay {
-    padding: 12px;
+  .dateLabel {
+    font-size: 12px;
   }
 
+  .dateValue {
+    font-size: 14px;
+  }
+
+  .supportInfo {
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+
+  .closeBtn {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+}
+
+/* Very small devices (old phones / small screens) */
+@media (max-width: 360px) {
+
   .modal {
-    padding: 18px;
-    border-radius: 12px;
+    padding: 20px 16px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .message {
+    font-size: 13px;
   }
 
   .iconWrapper {
     width: 52px;
     height: 52px;
-    margin-bottom: 16px;
-  }
-
-  .supportInfo {
-    font-size: 12px;
-    padding: 10px 12px;
-    gap: 6px;
-  }
-
-  .closeBtn {
-    padding: 12px 18px;
-    font-size: 14px;
   }
 }
 
+/* Tablets */
+@media (max-width: 768px) {
 
-
+  .modal {
+    max-width: 90%;
+  }
+}
 

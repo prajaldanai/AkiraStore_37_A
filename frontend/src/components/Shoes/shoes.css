@@ -1,3 +1,49 @@
 .page-content {
   padding-top: 100px;
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .page-content {
+    padding-top: 90px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .page-content {
+    padding-top: 85px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .page-content {
+    padding-top: 80px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .page-content {
+    padding-top: 75px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .page-content {
+    padding-top: 70px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .page-content {
+    padding-top: 65px;
+  }
+}

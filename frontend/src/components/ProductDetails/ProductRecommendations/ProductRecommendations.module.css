@@ -83,3 +83,147 @@
     font-size: 16px;
   }
 }
+/*change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS - ADDITIONAL
+   ===================================================== */
+
+/* Large Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .section {
+    margin-top: 36px;
+    margin-bottom: 36px;
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .viewBtn {
+    padding: 9px 24px;
+    font-size: 17px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .section {
+    padding: 0 20px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .viewBtn {
+    padding: 8px 22px;
+    font-size: 16.5px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .section {
+    gap: 10px;
+    margin-top: 28px;
+    margin-bottom: 28px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .viewBtn {
+    padding: 8px 20px;
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 15.5px;
+    margin-bottom: 6px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .section {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .viewBtn {
+    padding: 7px 18px;
+    font-size: 15.5px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 8px;
+    padding: 0 12px;
+  }
+
+  .title {
+    font-size: 19px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .viewBtn {
+    padding: 6px 16px;
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 14.5px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .section {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 0 10px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .viewBtn {
+    padding: 6px 14px;
+    font-size: 14.5px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+}

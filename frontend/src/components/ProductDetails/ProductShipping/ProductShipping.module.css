@@ -88,3 +88,220 @@
   text-align: center;
   margin: 0;
 }
+/*change made by jeson*/
+
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Large Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 21px;
+    margin-bottom: 22px;
+  }
+
+  .shippingContent {
+    gap: 24px;
+  }
+
+  .shippingGroup {
+    gap: 12px;
+  }
+
+  .groupTitle {
+    font-size: 17px;
+  }
+
+  .chargeList {
+    padding-left: 32px;
+    gap: 9px;
+  }
+
+  .chargeItem {
+    font-size: 17px;
+  }
+
+  .noData {
+    font-size: 17px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .shippingContent {
+    gap: 22px;
+  }
+
+  .groupHeader {
+    gap: 10px;
+  }
+
+  .emoji {
+    font-size: 22px;
+  }
+
+  .groupTitle {
+    font-size: 16.5px;
+  }
+
+  .chargeList {
+    padding-left: 30px;
+    gap: 8px;
+  }
+
+  .chargeItem {
+    font-size: 16.5px;
+  }
+
+  .noData {
+    font-size: 16.5px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .title {
+    font-size: 19px;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .shippingContent {
+    gap: 20px;
+  }
+
+  .shippingGroup {
+    gap: 10px;
+  }
+
+  .groupTitle {
+    font-size: 16px;
+  }
+
+  .chargeList {
+    padding-left: 28px;
+    gap: 7px;
+  }
+
+  .chargeItem {
+    font-size: 16px;
+  }
+
+  .noData {
+    font-size: 16px;
+    text-align: left;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .shippingContent {
+    gap: 18px;
+  }
+
+  .groupHeader {
+    gap: 8px;
+  }
+
+  .emoji {
+    font-size: 20px;
+  }
+
+  .groupTitle {
+    font-size: 15.5px;
+  }
+
+  .chargeList {
+    padding-left: 26px;
+    gap: 6px;
+  }
+
+  .chargeItem {
+    font-size: 15.5px;
+    gap: 3px;
+  }
+
+  .noData {
+    font-size: 15.5px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .title {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .shippingContent {
+    gap: 16px;
+  }
+
+  .shippingGroup {
+    gap: 8px;
+  }
+
+  .groupTitle {
+    font-size: 15px;
+  }
+
+  .chargeList {
+    padding-left: 24px;
+    gap: 5px;
+  }
+
+  .chargeItem {
+    font-size: 15px;
+  }
+
+  .chargeItem::before {
+    margin-right: 6px;
+  }
+
+  .noData {
+    font-size: 15px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .groupHeader {
+    gap: 6px;
+  }
+
+  .emoji {
+    font-size: 18px;
+  }
+
+  .groupTitle {
+    font-size: 14.5px;
+  }
+
+  .chargeList {
+    padding-left: 22px;
+  }
+
+  .chargeItem {
+    font-size: 14.5px;
+  }
+
+  .noData {
+    font-size: 14.5px;
+  }
+}
