@@ -388,3 +388,116 @@
   border-radius: 8px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
+/*Change made by jeson*/
+/* ===============================
+   RESPONSIVE MODAL & CONTENT
+================================ */
+
+/* Small laptops */
+@media (max-width: 1024px) {
+  .modalContent {
+    max-width: 90%;
+  }
+
+  .modalBody {
+    padding: 20px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .modalHeader {
+    padding: 16px 18px;
+  }
+
+  .modalTitle {
+    font-size: 1.1rem;
+  }
+
+  .modalBody {
+    padding: 18px;
+  }
+
+  .itemsTable th,
+  .itemsTable td {
+    padding: 10px;
+  }
+
+  .itemImage {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .modalOverlay {
+    padding: 12px;
+  }
+
+  .modalContent {
+    border-radius: 10px;
+  }
+
+  .modalHeader {
+    padding: 14px 16px;
+  }
+
+  .modalTitle {
+    font-size: 1rem;
+  }
+
+  .orderId {
+    font-size: 0.75rem;
+  }
+
+  .modalBody {
+    padding: 16px;
+  }
+
+  .section {
+    margin-bottom: 20px;
+  }
+
+  .timelineStep {
+    min-width: 80px;
+  }
+
+  .itemDetails {
+    gap: 8px;
+  }
+
+  .itemName {
+    font-size: 0.9rem;
+  }
+
+  .summaryRow {
+    font-size: 0.85rem;
+  }
+
+  .summaryTotal .summaryLabel,
+  .summaryTotal .summaryValue {
+    font-size: 1rem;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .modalTitle {
+    font-size: 0.95rem;
+  }
+
+  .timelineLabel {
+    font-size: 0.7rem;
+  }
+
+  .timelineDate {
+    font-size: 0.6rem;
+  }
+
+  .itemImage {
+    width: 46px;
+    height: 46px;
+  }
+}
+

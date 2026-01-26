@@ -49,3 +49,149 @@
   color: #666;
   text-align: center;
 }
+/*change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Large Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 21px;
+    margin-bottom: 22px;
+  }
+
+  .featureList {
+    gap: 16px;
+  }
+
+  .featureItem {
+    font-size: 15.5px;
+    gap: 13px;
+  }
+
+  .emoji {
+    font-size: 21px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .featureList {
+    gap: 14px;
+  }
+
+  .featureItem {
+    font-size: 15px;
+    gap: 12px;
+    line-height: 1.45;
+  }
+
+  .emoji {
+    font-size: 20px;
+  }
+
+  .noData {
+    font-size: 15.5px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .title {
+    font-size: 19px;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .featureItem {
+    font-size: 14.5px;
+    gap: 11px;
+  }
+
+  .emoji {
+    font-size: 19px;
+  }
+
+  .noData {
+    font-size: 15px;
+    text-align: left;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .featureList {
+    gap: 12px;
+  }
+
+  .featureItem {
+    font-size: 14px;
+    gap: 10px;
+    line-height: 1.4;
+  }
+
+  .emoji {
+    font-size: 18px;
+  }
+
+  .noData {
+    font-size: 14.5px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .title {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .featureList {
+    gap: 10px;
+  }
+
+  .featureItem {
+    font-size: 13.5px;
+    gap: 9px;
+  }
+
+  .emoji {
+    font-size: 17px;
+  }
+
+  .noData {
+    font-size: 14px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .featureItem {
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .emoji {
+    font-size: 16px;
+  }
+
+  .noData {
+    font-size: 13.5px;
+  }
+}

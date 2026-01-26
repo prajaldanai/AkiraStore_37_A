@@ -584,3 +584,72 @@
     width: auto;
   }
 }
+/*Change made by jeson*/
+/* ===============================
+   RESPONSIVE TOPBAR ENHANCEMENTS
+================================ */
+
+/* Small laptops */
+@media (max-width: 1024px) {
+  .searchInput {
+    width: 200px;
+  }
+
+  .pageTitle {
+    font-size: 16px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .topbar {
+    height: 56px;
+  }
+
+  .backBtn,
+  .iconBtn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .backBtn svg,
+  .iconBtn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 15px;
+  }
+
+  .right {
+    gap: 8px;
+  }
+
+  .userBtn {
+    padding: 4px;
+  }
+
+  .avatar {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .dropdown {
+    width: 100%;
+    right: 0;
+    left: 0;
+    border-radius: 0 0 12px 12px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .pageTitle {
+    display: none;
+  }
+}

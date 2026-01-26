@@ -77,3 +77,162 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .container {
+    padding: 18px;
+    gap: 14px;
+    border-radius: 11px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .subtitle {
+    font-size: 13.5px;
+  }
+
+  .details {
+    gap: 7px;
+  }
+
+  .row {
+    font-size: 13.5px;
+  }
+
+  .totalRow {
+    font-size: 15.5px;
+  }
+
+  .buyButton {
+    padding: 11px 15px;
+    font-size: 14.5px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .row {
+    font-size: 13px;
+  }
+
+  .totalRow {
+    font-size: 15px;
+  }
+
+  .buyButton {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .container {
+    padding: 14px;
+    gap: 10px;
+    border-radius: 9px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 12.5px;
+  }
+
+  .details {
+    gap: 6px;
+  }
+
+  .row {
+    font-size: 12.5px;
+  }
+
+  .totalRow {
+    font-size: 14.5px;
+  }
+
+  .buyButton {
+    padding: 9px 13px;
+    font-size: 13.5px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .title {
+    font-size: 14.5px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .row {
+    font-size: 12px;
+  }
+
+  .totalRow {
+    font-size: 14px;
+  }
+
+  .buyButton {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .container {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .subtitle {
+    font-size: 11.5px;
+  }
+
+  .row {
+    font-size: 11.5px;
+  }
+
+  .totalRow {
+    font-size: 13.5px;
+  }
+
+  .buyButton {
+    padding: 7px 10px;
+    font-size: 12.5px;
+  }
+}
