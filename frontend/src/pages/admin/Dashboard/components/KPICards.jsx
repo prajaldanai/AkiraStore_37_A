@@ -6,14 +6,13 @@
 import React from "react";
 import styles from "./KPICards.module.css";
 
+// Format currency with proper Indian locale (matching Sales Report format)
 const formatCurrency = (value) => {
-  if (value >= 1000000) {
-    return `$${(value / 1000000).toFixed(1)}M`;
+  const num = value || 0;
+  if (num >= 100000) {
+    return `Rs. ${(num / 100000).toFixed(2)}L`;
   }
-  if (value >= 1000) {
-    return `$${(value / 1000).toFixed(1)}K`;
-  }
-  return `$${value.toFixed(2)}`;
+  return `Rs. ${num.toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
 };
 
 const formatNumber = (value) => {

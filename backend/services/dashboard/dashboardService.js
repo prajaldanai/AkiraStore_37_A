@@ -356,7 +356,7 @@ async function getAdminNotifications() {
       message: `${customerName} placed an order for Rs. ${parseFloat(order.total).toFixed(2)}`,
       time: order.created_at,
       isNew: isRecent,
-      link: `/admin/orders/${order.id}`,
+      link: `/admin/orders?highlight=${order.id}`,
       icon: "order",
     });
   });
@@ -402,7 +402,7 @@ async function getAdminNotifications() {
       message: `Order #${order.id} by ${customerName} was cancelled`,
       time: order.created_at,
       isNew: false,
-      link: `/admin/orders/${order.id}`,
+      link: `/admin/orders?highlight=${order.id}`,
       icon: "cancel",
     });
   });

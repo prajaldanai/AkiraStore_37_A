@@ -24,13 +24,14 @@ const QuickActions = () => {
 
   const actions = [
     {
-      id: "add-product",
-      label: "Add Product",
-      description: "Create new product listing",
+      id: "inventory",
+      label: "Inventory",
+      description: "Manage product stock",
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5"/>
-          <path d="M10 6V14M6 10H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M3 5H17V15H3V5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+          <path d="M3 9H17" stroke="currentColor" strokeWidth="1.5"/>
+          <path d="M7 5V15" stroke="currentColor" strokeWidth="1.5"/>
         </svg>
       ),
       onClick: () => navigate("/admin/inventory"),
