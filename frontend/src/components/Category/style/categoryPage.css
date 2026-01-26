@@ -1,25 +1,26 @@
-/* ==========================
-   WOMEN PAGE – BACKGROUND ONLY
-   (DESIGN SAFE)
-========================== */
-
-/* Body fallback (optional but fine) */
-body.women-page-body {
+.category-page {
   background-color: #ffffff;
-}
-
-/* 🔥 EXACT WRAPPER ONLY (NO CHILD OVERRIDE) */
-.category-page.women-page.women-category-page {
-  background-color: #ffffff !important;
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
   padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-/* ==========================
-   LOADING STATE
-========================== */
+.category-page.women-page {
+  background-color: #ffffff;
+}
+
+.category-page.men-page {
+  background-color: #f7f7f7;
+}
+
+.category-page-default {
+  padding-bottom: 30px;
+}
+
 .loading {
   text-align: center;
   padding: 40px;
@@ -27,21 +28,14 @@ body.women-page-body {
   width: 100%;
 }
 
-/* ===============================
-   RESPONSIVE – CATEGORY PAGE
-================================ */
-
-/* Large Tablet */
 @media (max-width: 1024px) {
-  .category-page.women-page.women-category-page {
+  .category-page {
     padding-bottom: 36px;
   }
 }
 
-/* Tablets */
 @media (max-width: 768px) {
-  .category-page.women-page.women-category-page {
-    min-height: 100vh;
+  .category-page {
     padding-bottom: 32px;
   }
 
@@ -49,11 +43,14 @@ body.women-page-body {
     padding: 32px 16px;
     font-size: 16px;
   }
+
+  .category-page {
+    gap: 32px;
+  }
 }
 
-/* Mobile phones */
 @media (max-width: 600px) {
-  .category-page.women-page.women-category-page {
+  .category-page {
     padding-bottom: 28px;
   }
 
@@ -63,9 +60,8 @@ body.women-page-body {
   }
 }
 
-/* Small Mobile phones */
 @media (max-width: 480px) {
-  .category-page.women-page.women-category-page {
+  .category-page {
     padding-bottom: 24px;
   }
 
@@ -75,9 +71,8 @@ body.women-page-body {
   }
 }
 
-/* Very small devices */
 @media (max-width: 360px) {
-  .category-page.women-page.women-category-page {
+  .category-page {
     padding-bottom: 20px;
   }
 
@@ -86,4 +81,3 @@ body.women-page-body {
     font-size: 13px;
   }
 }
-
