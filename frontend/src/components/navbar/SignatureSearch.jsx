@@ -82,26 +82,47 @@ export default function SignatureSearch() {
     try {
       const response = await searchByImage(uploadedImage.file);
       
-      if (response.success && response.results.length > 0) {
-        // Store results in sessionStorage for the results page
+      if (response.success) {
+        if (response.results.length > 0) {
+          const bestMatch = response.results[0];
+          const matchedByImage = bestMatch?.matchScore >= 90;
+
+          if (matchedByImage) {
+            const message =
+              response.exactMatches > 0
+                ? `Found ${response.exactMatches} exact match${response.exactMatches > 1 ? "es" : ""}!`
+                : "Found a closely matching product!";
+
+            showToast(message, "success");
+            clearImagePreview();
+            closeDropdown();
+            setTimeout(() => {
+              navigate(`/product/${bestMatch.id}`);
+            }, 50);
+            return;
+          }
+        }
+
         sessionStorage.setItem("imageSearchResults", JSON.stringify(response));
-        
-        const matchMsg = response.exactMatches > 0 
-          ? `Found ${response.exactMatches} exact match${response.exactMatches > 1 ? "es" : ""}!`
-          : `Found ${response.results.length} similar products!`;
-        
-        showToast(matchMsg, "success");
-        
-        // Clear preview first
+        const toastMsg =
+          response.results.length > 0
+            ? response.message ||
+              `Found ${response.results.length} similar product${response.results.length !== 1 ? "s" : ""}!`
+            : response.message || "No matching products found. Try a product image from our store.";
+
+        showToast(toastMsg, response.results.length > 0 ? "success" : "error");
+
         clearImagePreview();
         closeDropdown();
-        
-        // Small delay to ensure sessionStorage is written before navigation
+
         setTimeout(() => {
           navigate("/search?type=image");
         }, 50);
       } else {
-        showToast(response.message || "No matching products found. Try a product image from our store.", "error");
+        showToast(
+          response.message || "Image search failed. Please try again.",
+          "error"
+        );
       }
     } catch (error) {
       showToast("Image search failed. Please try again.", "error");

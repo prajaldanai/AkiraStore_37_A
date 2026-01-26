@@ -7,14 +7,18 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 const { searchProductsHandler, getSuggestionsHandler, searchByImageHandler } = require("../controllers/searchController");
 const validateSearchQuery = require("../middlewares/validateSearchQuery");
 
 // Configure multer for image upload
+const searchUploadDir = path.join(__dirname, "../uploads/search");
+fs.mkdirSync(searchUploadDir, { recursive: true });
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../uploads/search"));
+    cb(null, searchUploadDir);
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);

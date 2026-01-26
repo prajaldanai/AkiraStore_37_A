@@ -6,7 +6,34 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const Jimp = require("jimp");
 const { searchProducts, getSuggestedProducts, searchByImage } = require("../services/search/productSearchService");
+
+const PHASH_DISTANCE_THRESHOLD = 6;
+
+function calculateHammingDistance(hashA, hashB) {
+  if (!hashA || !hashB || hashA.length !== hashB.length) return Number.MAX_SAFE_INTEGER;
+
+  let distance = 0;
+  for (let i = 0; i < hashA.length; i++) {
+    if (hashA[i] !== hashB[i]) distance += 1;
+  }
+  return distance;
+}
+
+async function getPerceptualHashFromBuffer(buffer) {
+  const image = await Jimp.read(buffer);
+  return image.hash();
+}
+
+async function safePerceptualHash(buffer) {
+  try {
+    return await getPerceptualHashFromBuffer(buffer);
+  } catch (err) {
+    console.warn("Could not compute perceptual hash:", err.message);
+    return null;
+  }
+}
 
 /**
  * Search products
@@ -81,6 +108,7 @@ async function searchByImageHandler(req, res) {
     // Calculate hash of uploaded image
     const uploadedImageBuffer = fs.readFileSync(uploadedFilePath);
     const uploadedHash = crypto.createHash("md5").update(uploadedImageBuffer).digest("hex");
+    const uploadedPhash = await safePerceptualHash(uploadedImageBuffer);
 
     // Get optional category hint from request
     const categoryHint = req.body?.categoryHint || null;
@@ -91,7 +119,6 @@ async function searchByImageHandler(req, res) {
     // Compare with product images
     const uploadsDir = path.join(__dirname, "..");  // Backend root
     const matchedProducts = [];
-    const similarProducts = [];
 
     // Get uploaded file info
     const uploadedFileSize = uploadedImageBuffer.length;
@@ -120,20 +147,31 @@ async function searchByImageHandler(req, res) {
             const productImageBuffer = fs.readFileSync(productImagePath);
             const productHash = crypto.createHash("md5").update(productImageBuffer).digest("hex");
             const productFileSize = productImageBuffer.length;
+            const productPhash = await safePerceptualHash(productImageBuffer);
 
             console.log(`\nProduct: "${product.name}"`);
             console.log(`  Path: ${productImagePath}`);
             console.log(`  Hash: ${productHash}`);
             console.log(`  Size: ${productFileSize}`);
             console.log(`  Hash match: ${uploadedHash === productHash}`);
-            console.log(`  Size match: ${productFileSize === uploadedFileSize}`);
+            console.log(`  Perceptual hash: ${productPhash}`);
+            console.log(
+              `  Hamming distance: ${calculateHammingDistance(uploadedPhash, productPhash)}`
+            );
 
-            // ONLY exact hash match counts
-            if (uploadedHash === productHash) {
+            const isExactMatch = uploadedHash === productHash;
+            const isPerceptualMatch =
+              !isExactMatch &&
+              calculateHammingDistance(uploadedPhash, productPhash) <= PHASH_DISTANCE_THRESHOLD;
+
+            if (isExactMatch) {
               console.log(`  ✅ EXACT HASH MATCH!`);
               matchedProducts.push({ ...product, matchScore: 100 });
+            } else if (isPerceptualMatch) {
+              console.log(`  ✱ PERCEPTUAL MATCH`);
+              matchedProducts.push({ ...product, matchScore: 90 });
             } else {
-              similarProducts.push({ ...product, matchScore: 50 });
+              console.log(`  ✗ No perceptual match`);
             }
           } catch (err) {
             console.warn(`Could not read product image: ${productImagePath}`, err.message);
@@ -146,7 +184,6 @@ async function searchByImageHandler(req, res) {
     
     console.log(`\n=== RESULTS ===`);
     console.log(`Exact matches: ${matchedProducts.length}`);
-    console.log(`Similar products: ${similarProducts.length}`);
 
     // Clean up uploaded file
     if (uploadedFilePath && fs.existsSync(uploadedFilePath)) {
@@ -160,23 +197,11 @@ async function searchByImageHandler(req, res) {
     
     if (matchedProducts.length > 0) {
       results = matchedProducts;
-      console.log(`Returning ${matchedProducts.length} exact match(es)`);
+      console.log(`Returning ${matchedProducts.length} matched product(s)`);
     } else {
-      // No exact match - return similar products but with a note
-      results = similarProducts.slice(0, 8);
-      message = "No exact match found. Showing products with images. For exact matching, upload the original product image file.";
-      console.log(`No exact matches. Returning ${results.length} similar products`);
-    }
-
-    if (results.length === 0) {
-      return res.json({
-        success: true,
-        query: "Image Search",
-        totalResults: 0,
-        results: [],
-        searchType: "image",
-        message: "No products found. Try uploading a different image.",
-      });
+      results = [];
+      message = "No matching product image found.";
+      console.log(`No matches at all. Returning empty result set`);
     }
 
     res.json({

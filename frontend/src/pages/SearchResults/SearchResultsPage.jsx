@@ -31,6 +31,7 @@ export default function SearchResultsPage() {
   const [error, setError] = useState(null);
   const [isImageSearch, setIsImageSearch] = useState(searchType === "image");
   const imageResultsLoaded = useRef(false);
+  const [imageSearchMessage, setImageSearchMessage] = useState("");
 
   // Handle image search results from sessionStorage
   useEffect(() => {
@@ -48,13 +49,14 @@ export default function SearchResultsPage() {
         console.log("Reading imageSearchResults:", storedResults ? "Found data" : "No data");
         
         if (storedResults) {
-          try {
-            const data = JSON.parse(storedResults);
-            console.log("Parsed results:", data.results?.length, "products");
-            setResults(data.results || []);
-            setTotalResults(data.totalResults || 0);
-            // Mark as loaded BEFORE clearing
-            imageResultsLoaded.current = true;
+            try {
+              const data = JSON.parse(storedResults);
+              console.log("Parsed results:", data.results?.length, "products");
+              setResults(data.results || []);
+              setTotalResults(data.totalResults || 0);
+              setImageSearchMessage(data.message || "");
+              // Mark as loaded BEFORE clearing
+              imageResultsLoaded.current = true;
             // Clear after successful read
             sessionStorage.removeItem("imageSearchResults");
             setIsLoading(false);
@@ -179,6 +181,9 @@ export default function SearchResultsPage() {
             </p>
           )}
         </div>
+        {isImageSearch && imageSearchMessage && (
+          <div className={styles.imageMessage}>{imageSearchMessage}</div>
+        )}
 
         {/* Loading State */}
         {isLoading && (
