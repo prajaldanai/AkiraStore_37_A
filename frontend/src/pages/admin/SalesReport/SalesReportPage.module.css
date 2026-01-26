@@ -5,16 +5,19 @@
   min-height: 100vh;
   background: #f8fafc;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  padding: 32px 40px 48px;
 }
 
 /* Main Content Area */
 .main {
-  padding: 24px;
+  padding: 24px 0 0;
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1600px;
+  width: min(1600px, 100%);
   margin: 0 auto;
+  padding: 0 16px;
 }
 
 /* Error Banner */

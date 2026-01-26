@@ -2,18 +2,18 @@
 
 .kpiGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
 }
 
 .kpiCard {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  padding: 16px;
+  gap: 16px;
+  padding: 20px 22px;
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid #e5e7eb;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
@@ -50,8 +50,8 @@
 }
 
 .value {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   color: #111827;
   letter-spacing: -0.02em;
   line-height: 1.2;
