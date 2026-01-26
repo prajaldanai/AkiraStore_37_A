@@ -63,6 +63,7 @@ import UsersPage from "./pages/admin/Users/UsersPage";
 
 // Components
 import AddProductModal from "./components/AddProductModal";
+import ScrollToTop from "./components/ScrollToTop";
 
 /* ============================================================
    ROOT REDIRECT - Smart redirect based on auth status
@@ -411,6 +412,7 @@ function App() {
     <div className={styles.app}>
       <Router>
         <AuthProvider>
+          <ScrollToTop />
           <AppRoutes />
         </AuthProvider>
       </Router>

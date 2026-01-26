@@ -38,6 +38,64 @@
 .paragraph:last-child {
   margin-bottom: 0;
 }
+
+/* Text container for expand/collapse */
+.textContainer {
+  position: relative;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.textContainer.collapsed {
+  /* Initial collapsed state */
+}
+
+.textContainer.expanded {
+  /* Fully expanded */
+}
+
+/* Read More / Show Less Button */
+.readMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  margin-top: 12px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.readMoreBtn:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.readMoreBtn:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.arrowIcon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.readMoreBtn:hover .arrowIcon {
+  transform: translateY(2px);
+}
+
+.textContainer.expanded + .readMoreBtn:hover .arrowIcon {
+  transform: translateY(-2px);
+}
+
 /*change made by jeson*/
 /* =====================================================
    RESPONSIVE BREAKPOINTS
@@ -97,6 +155,16 @@
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 12px;
+  }
+
+  .readMoreBtn {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .arrowIcon {
+    width: 16px;
+    height: 16px;
   }
 }
 
