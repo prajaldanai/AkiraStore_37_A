@@ -4,6 +4,9 @@ import { getAdminOrders, updateOrderStatus } from "../../services/adminOrderServ
 import AdminOrderDetailsModal from "../../components/AdminOrderDetailsModal/AdminOrderDetailsModal";
 import styles from "./AdminOrdersPage.module.css";
 
+// Global admin font lock - ensures consistent font sizing across all devices
+import "../../styles/adminGlobal.css";
+
 /**
  * Format date for display
  */
@@ -179,7 +182,7 @@ export default function AdminOrdersPage() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-admin="true">
       {/* Header with Back Button */}
       <div className={styles.header}>
         <button 

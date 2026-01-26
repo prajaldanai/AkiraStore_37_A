@@ -216,7 +216,7 @@ const Topbar = ({ pageTitle, showSearch = true, showBackButton = true }) => {
                         </div>
                         <div className={styles.searchResultInfo}>
                           <div className={styles.searchResultName}>{item.name}</div>
-                          <div className={styles.searchResultMeta}>₹{item.price} · {item.stock} in stock</div>
+                          <div className={styles.searchResultMeta}>Rs. {item.price} · {item.stock} in stock</div>
                         </div>
                       </button>
                     ))}
@@ -237,7 +237,7 @@ const Topbar = ({ pageTitle, showSearch = true, showBackButton = true }) => {
                         </div>
                         <div className={styles.searchResultInfo}>
                           <div className={styles.searchResultName}>Order #{item.id}</div>
-                          <div className={styles.searchResultMeta}>{item.customerName} · ₹{item.total}</div>
+                          <div className={styles.searchResultMeta}>{item.customerName} · Rs. {item.total}</div>
                         </div>
                         <span className={`${styles.statusBadge} ${styles[item.status?.toLowerCase()]}`}>
                           {item.status}

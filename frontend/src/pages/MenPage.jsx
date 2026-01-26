@@ -1,3 +1,3 @@
 export default function MenPage() {
-  return <CategoryPage category="men" />;
+  return <CategoryPage slug="men" />;
 }

@@ -353,7 +353,7 @@ async function getAdminNotifications() {
       id: `order-${order.id}`,
       type: "new_order",
       title: "New Order",
-      message: `${customerName} placed an order for ₹${parseFloat(order.total).toFixed(2)}`,
+      message: `${customerName} placed an order for Rs. ${parseFloat(order.total).toFixed(2)}`,
       time: order.created_at,
       isNew: isRecent,
       link: `/admin/orders/${order.id}`,

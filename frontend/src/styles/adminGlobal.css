@@ -1,0 +1,147 @@
+/* ========================================
+   ADMIN GLOBAL FONT LOCK
+   
+   This CSS ensures admin panel fonts are
+   identical on ALL devices regardless of:
+   - Screen size (14", 15.6", 27" etc.)
+   - Display resolution (1080p, 1440p, 4K)
+   - DPI/scaling settings
+   - OS-level font scaling
+   
+   RULES:
+   - Fixed 16px base font size
+   - No vw, clamp(), or responsive font units
+   - Uses rem for consistent scaling
+   - Prevents browser auto-scaling
+======================================== */
+
+/* ========================================
+   ADMIN ROOT SCOPE
+   Only applies to elements with data-admin
+======================================== */
+
+[data-admin="true"] {
+  /* Lock base font size to 16px */
+  font-size: 16px !important;
+  
+  /* Prevent browser text size adjustment */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  
+  /* Consistent font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Prevent inherited vw/clamp effects */
+  line-height: 1.5;
+}
+
+/* ========================================
+   ADMIN TEXT ELEMENTS - FIXED SIZES
+======================================== */
+
+[data-admin="true"] h1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+[data-admin="true"] h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+[data-admin="true"] h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+[data-admin="true"] h4 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+[data-admin="true"] h5 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+[data-admin="true"] h6 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+[data-admin="true"] small {
+  font-size: 12px;
+}
+
+/* ========================================
+   FORM ELEMENTS - FIXED SIZES
+======================================== */
+
+[data-admin="true"] input,
+[data-admin="true"] textarea,
+[data-admin="true"] select,
+[data-admin="true"] button {
+  font-size: inherit;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ========================================
+   TABLE ELEMENTS - FIXED SIZES
+======================================== */
+
+[data-admin="true"] table,
+[data-admin="true"] th,
+[data-admin="true"] td {
+  font-size: inherit;
+}
+
+/* ========================================
+   PREVENT ZOOM/SCALING ISSUES
+======================================== */
+
+[data-admin="true"] * {
+  /* Ensure all children respect the base font */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ========================================
+   OVERRIDE ANY RESPONSIVE FONT RULES
+   These selectors have high specificity
+   to override any clamp/vw values
+======================================== */
+
+/* Titles inherit from module CSS */
+
+/* ========================================
+   PRINT STYLES - CONSISTENT OUTPUT
+======================================== */
+
+@media print {
+  [data-admin="true"] {
+    font-size: 12pt !important;
+  }
+  
+  [data-admin="true"] h1 {
+    font-size: 24pt;
+  }
+  
+  [data-admin="true"] h2 {
+    font-size: 18pt;
+  }
+  
+  [data-admin="true"] h3 {
+    font-size: 14pt;
+  }
+}

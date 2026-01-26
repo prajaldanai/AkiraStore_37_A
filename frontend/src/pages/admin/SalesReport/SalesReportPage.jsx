@@ -23,6 +23,9 @@ import TopCustomersTable from "./components/TopCustomersTable";
 // Styles
 import styles from "./SalesReportPage.module.css";
 
+// Global admin font lock - ensures consistent font sizing across all devices
+import "../../../styles/adminGlobal.css";
+
 const SalesReportPage = () => {
   const {
     reportData,
@@ -37,7 +40,7 @@ const SalesReportPage = () => {
   } = useSalesReport();
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-admin="true">
       {/* Sticky Topbar */}
       <SalesReportTopbar
         lastUpdated={reportData?.generatedAt}

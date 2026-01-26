@@ -8,8 +8,9 @@ import ProductsSection from "./ProductsSection";
 import OfferSection from "./OfferSection";
 import { CATEGORY_CONFIG } from "./config";
 
-export default function CategoryPage() {
-  const { slug } = useParams();
+export default function CategoryPage({ slug: propSlug }) {
+  const params = useParams();
+  const slug = propSlug || params.slug;
 
   const [products, setProducts] = useState([]);
   const [exclusiveOffers, setExclusiveOffers] = useState([]);
@@ -79,9 +80,13 @@ export default function CategoryPage() {
   const newArrivals = products.filter((p) => p.tag === "new-arrival");
   const accessories = products.filter((p) => p.tag === "accessories");
 
+  const pageClass = `category-page ${
+    slug ? `${slug}-page ${slug}-category-page` : "category-page-default"
+  }`;
+
   return (
     <Layout>
-      <div className="category-page women-page women-category-page">
+      <div className={pageClass}>
         <HeroSection config={config} />
 
         {bestSelling.length > 0 && (
