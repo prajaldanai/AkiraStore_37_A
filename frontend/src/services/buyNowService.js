@@ -3,13 +3,41 @@
  * Handles all API calls for Buy Now checkout flow
  */
 
+import { getToken, validateToken, clearAuth } from "../utils/auth";
+
 const API_BASE = "http://localhost:5000/api";
 
 /**
- * Get auth token from localStorage
+ * Get auth token from localStorage (with validation)
  */
 function getAuthToken() {
-  return localStorage.getItem("authToken");
+  const token = getToken();
+  const { valid } = validateToken(token);
+  return valid ? token : null;
+}
+
+/**
+ * Check if user is authenticated
+ */
+function isAuthenticated() {
+  return getAuthToken() !== null;
+}
+
+/**
+ * Handle 401 response - clear auth and redirect
+ */
+function handleAuthError(response) {
+  if (response.status === 401 || response.status === 403) {
+    clearAuth();
+    const currentPath = window.location.pathname;
+    if (currentPath !== "/login") {
+      sessionStorage.setItem("authMessage", "Please login to continue");
+      sessionStorage.setItem("authRedirect", currentPath);
+      window.location.href = "/login";
+    }
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -40,12 +68,24 @@ function getHeaders(includeAuth = true) {
  * @returns {Promise<Object>} - { success, sessionId, session }
  */
 export async function createBuyNowSession(data) {
+  // Require authentication for buy actions
+  if (!isAuthenticated()) {
+    const error = new Error("Please login to continue");
+    error.requiresAuth = true;
+    throw error;
+  }
+
   try {
     const response = await fetch(`${API_BASE}/buy-now/session`, {
       method: "POST",
       headers: getHeaders(),
       body: JSON.stringify(data),
     });
+    
+    // Handle auth errors
+    if (handleAuthError(response)) {
+      throw new Error("Authentication required");
+    }
     
     const result = await response.json();
     
@@ -126,12 +166,24 @@ export async function updateBuyNowSession(sessionId, data) {
  * @returns {Promise<Object>}
  */
 export async function createOrder(orderData) {
+  // Require authentication for order creation
+  if (!isAuthenticated()) {
+    const error = new Error("Please login to continue");
+    error.requiresAuth = true;
+    throw error;
+  }
+
   try {
     const response = await fetch(`${API_BASE}/orders`, {
       method: "POST",
       headers: getHeaders(),
       body: JSON.stringify(orderData),
     });
+    
+    // Handle auth errors
+    if (handleAuthError(response)) {
+      throw new Error("Authentication required");
+    }
     
     const result = await response.json();
     
@@ -181,11 +233,23 @@ export async function getOrderById(orderId) {
  * @returns {Promise<Object>}
  */
 export async function confirmOrder(orderId) {
+  // Require authentication for order confirmation
+  if (!isAuthenticated()) {
+    const error = new Error("Please login to continue");
+    error.requiresAuth = true;
+    throw error;
+  }
+
   try {
     const response = await fetch(`${API_BASE}/orders/${orderId}/confirm`, {
       method: "POST",
       headers: getHeaders(),
     });
+    
+    // Handle auth errors
+    if (handleAuthError(response)) {
+      throw new Error("Authentication required");
+    }
     
     const result = await response.json();
     

@@ -3,13 +3,17 @@
  * Handles all API calls for sales analytics
  */
 
+import { getToken, validateToken, clearAuth } from "../utils/auth";
+
 const API_BASE = "http://localhost:5000/api";
 
 /**
- * Get auth token from localStorage
+ * Get auth token from localStorage (with validation)
  */
 function getAuthToken() {
-  return localStorage.getItem("authToken");
+  const token = getToken();
+  const { valid } = validateToken(token);
+  return valid ? token : null;
 }
 
 /**
@@ -29,9 +33,21 @@ function getHeaders() {
 }
 
 /**
- * Handle API response
+ * Handle API response with auth error detection
  */
 async function handleResponse(response) {
+  // Handle auth errors - redirect to login
+  if (response.status === 401 || response.status === 403) {
+    clearAuth();
+    const currentPath = window.location.pathname;
+    if (currentPath !== "/login") {
+      sessionStorage.setItem("authMessage", "Please login to continue");
+      sessionStorage.setItem("authRedirect", currentPath);
+      window.location.href = "/login";
+    }
+    throw new Error("Authentication required");
+  }
+
   const data = await response.json();
   
   if (!response.ok) {

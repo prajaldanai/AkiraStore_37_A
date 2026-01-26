@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getMyOrders } from "../../services/buyNowService";
+import { clearAuth } from "../../utils/auth";
 import Layout from "../../components/Layout/Layout";
 import styles from "./MyOrdersPage.module.css";
 
@@ -116,7 +117,7 @@ const MyOrdersPage = () => {
       // Check if it's an auth error - redirect to login
       if (err.message?.includes("Access denied") || err.message?.includes("token") || err.message?.includes("Authentication")) {
         // Token might be expired - clear it and redirect to login
-        localStorage.removeItem("authToken");
+        clearAuth();
         navigate("/login", { state: { from: "/orders" }, replace: true });
       } else {
         setError(err.message || "Failed to load orders");

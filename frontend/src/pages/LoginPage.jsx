@@ -3,35 +3,48 @@ import "./LoginPage.css";
 import loginIllustration from "../assets/images/login-illustration.png";
 import { loginUser } from "../services/authService";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login, isAuthenticated, isAuthReady, isAdmin } = useAuth();
 
   // Get the intended destination from location state (if redirected from ProtectedRoute)
-  const from = location.state?.from || null;
+  const from = location.state?.from || sessionStorage.getItem("authRedirect") || null;
+  
+  // Get auth message (e.g., "Please login to continue")
+  const authMessage = sessionStorage.getItem("authMessage");
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState(authMessage || "");
   const [successMsg, setSuccessMsg] = useState("");
+
+  // Clear auth messages after showing
+  useEffect(() => {
+    if (authMessage) {
+      sessionStorage.removeItem("authMessage");
+    }
+  }, [authMessage]);
 
   // ⭐ REDIRECT AWAY FROM LOGIN IF ALREADY AUTHENTICATED
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
+    if (isAuthReady && isAuthenticated) {
+      // Clear stored redirect
+      sessionStorage.removeItem("authRedirect");
+      
       // User is already logged in - redirect them away from login page
-      const role = localStorage.getItem("role");
-      if (role === "admin") {
+      if (isAdmin) {
         navigate("/admin-dashboard", { replace: true });
-      } else if (from) {
+      } else if (from && from !== "/login" && from !== "/signup") {
         navigate(from, { replace: true });
       } else {
         navigate("/dashboard", { replace: true });
       }
     }
-  }, [navigate, from]);
+  }, [isAuthenticated, isAuthReady, isAdmin, navigate, from]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,19 +56,32 @@ const LoginPage = () => {
       // ⭐ CALL BACKEND LOGIN API
       const data = await loginUser(username, password);
 
-      // ⭐ SAVE TOKEN + USERNAME + ROLE (authService already saves, but ensure consistency)
-      localStorage.setItem("authToken", data.token);
-      localStorage.setItem("username", data.username);
+      // ⭐ USE AUTH CONTEXT TO LOGIN
+      const loginSuccess = login(data.token, {
+        id: data.userId,
+        username: data.username,
+        role: data.role,
+      });
+
+      if (!loginSuccess) {
+        setErrorMsg("Login failed: Invalid token received");
+        return;
+      }
+
+      // Also save role for backward compatibility
       localStorage.setItem("role", data.role);
 
       setSuccessMsg("Login successful!");
+      
+      // Clear stored redirect
+      sessionStorage.removeItem("authRedirect");
 
       // ⭐ ROLE-BASED REDIRECTION (with support for intended destination)
       // Use shorter timeout for better UX
       setTimeout(() => {
         if (data.role === "admin") {
           navigate("/admin-dashboard", { replace: true });
-        } else if (from) {
+        } else if (from && from !== "/login" && from !== "/signup") {
           navigate(from, { replace: true });
         } else {
           navigate("/dashboard", { replace: true });

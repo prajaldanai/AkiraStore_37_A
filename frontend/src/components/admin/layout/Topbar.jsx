@@ -6,6 +6,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getNotifications, globalSearch } from "../../../services/dashboardService";
+import { clearAuth } from "../../../utils/auth";
 import styles from "./Topbar.module.css";
 
 const Topbar = ({ pageTitle, showSearch = true, showBackButton = true }) => {
@@ -95,9 +96,7 @@ const Topbar = ({ pageTitle, showSearch = true, showBackButton = true }) => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("user");
+    clearAuth();
     navigate("/login");
   };
 
@@ -168,7 +167,7 @@ const Topbar = ({ pageTitle, showSearch = true, showBackButton = true }) => {
       <div className={styles.left}>
         {/* Back Button */}
         {showBackButton && !isMainDashboard && (
-          <button className={styles.backBtn} onClick={() => navigate(-1)}>
+          <button className={styles.backBtn} onClick={() => navigate("/admin-dashboard")}>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M11 14L6 9L11 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -354,21 +353,6 @@ const Topbar = ({ pageTitle, showSearch = true, showBackButton = true }) => {
                   <div className={styles.dropdownRole}>Administrator</div>
                 </div>
               </div>
-              <div className={styles.dropdownDivider} />
-              <button className={styles.dropdownItem} onClick={() => navigate("/admin/settings")}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M13.6569 9.65685L13.1213 9.12132C12.7308 8.73079 12.7308 8.09763 13.1213 7.7071L13.6569 7.17157C14.0474 6.78104 14.0474 6.14788 13.6569 5.75735L13.6569 5.75735C13.2663 5.36683 12.6332 5.36683 12.2426 5.75735L11.7071 6.29289C11.3166 6.68342 10.6834 6.68342 10.2929 6.29289L10.2929 6.29289C9.90237 5.90237 9.90237 5.2692 10.2929 4.87868L10.8284 4.34314C11.219 3.95262 11.219 3.31945 10.8284 2.92893V2.92893C10.4379 2.5384 9.80474 2.5384 9.41421 2.92893L8.87868 3.46447C8.48816 3.85499 7.85499 3.85499 7.46447 3.46447L7.46447 3.46447C7.07394 3.07394 7.07394 2.44078 7.46447 2.05025L8 1.51472C8.39052 1.12419 8.39052 0.491028 8 0.100505V0.100505C7.60948 -0.290019 6.97631 -0.290019 6.58579 0.100505L6.05025 0.636039C5.65973 1.02656 5.02656 1.02656 4.63604 0.636039V0.636039C4.24551 0.245515 3.61235 0.245515 3.22183 0.636039L2.68629 1.17157C2.29576 1.5621 2.29576 2.19526 2.68629 2.58579V2.58579C3.07682 2.97631 3.07682 3.60948 2.68629 4L2.15076 4.53553C1.76024 4.92606 1.12707 4.92606 0.736548 4.53553V4.53553C0.346024 4.14501 0.346024 3.51184 0.736548 3.12132L1.27208 2.58579" stroke="currentColor" strokeWidth="1.5"/>
-                </svg>
-                Settings
-              </button>
-              <button className={styles.dropdownItem} onClick={() => navigate("/")}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M6 14H3C2.44772 14 2 13.5523 2 13V3C2 2.44772 2.44772 2 3 2H6" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M2 8H13M13 8L10 5M13 8L10 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                View Store
-              </button>
               <div className={styles.dropdownDivider} />
               <button className={`${styles.dropdownItem} ${styles.logout}`} onClick={handleLogout}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

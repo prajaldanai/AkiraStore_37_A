@@ -29,12 +29,12 @@
    ===================================================== */
 
 .inner {
-  height: 86px; /* 🔥 increased for better text breathing */
+  height: 86px;
   padding: 0 40px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 /* =====================================================
@@ -44,10 +44,12 @@
 .left {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  z-index: 1001;
 }
 
 .logo {
-  width: 118px; /* 🔥 slightly larger logo */
+  width: 118px;
   cursor: pointer;
 }
 
@@ -59,15 +61,15 @@
   flex: 1;
   display: flex;
   justify-content: center;
+  padding: 0 20px;
 }
 
 .searchBar {
-  width: 460px; /* 🔥 slightly wider */
-  height: 46px; /* 🔥 slightly taller */
+  width: 460px;
+  height: 46px;
   background: #ffffff;
   border-radius: 50px;
   border: 1.4px solid #bcbcbc;
-
   display: flex;
   align-items: center;
   padding: 0 16px;
@@ -86,8 +88,7 @@
   border: none;
   outline: none;
   background: transparent;
-
-  font-size: 16.5px; /* 🔥 improved readability */
+  font-size: 16.5px;
   line-height: 1.4;
 }
 
@@ -97,17 +98,56 @@
 }
 
 /* =====================================================
+   HAMBURGER MENU (Hidden by default on desktop)
+   ===================================================== */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.hamburgerLine {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburgerLine.open:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+
+.hamburgerLine.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerLine.open:nth-child(3) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* =====================================================
    RIGHT – NAV
    ===================================================== */
 
 .right {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .navLinks {
   display: flex;
-  gap: 34px; /* 🔥 more breathing space */
+  gap: 34px;
 }
 
 .navLink {
@@ -115,10 +155,10 @@
   border: none;
   cursor: pointer;
   position: relative;
-
-  font-size: 17.5px; /* 🔥 increased */
+  font-size: 17.5px;
   font-weight: 600;
   color: #000;
+  white-space: nowrap;
 }
 
 .cartLink {
@@ -178,35 +218,41 @@
   background: none;
   border: none;
   cursor: pointer;
-
   margin-left: 24px;
-  font-size: 17.5px; /* 🔥 increased */
+  font-size: 17.5px;
   font-weight: 700;
   color: #000;
+  white-space: nowrap;
 }
 
 .logoutBtn:hover {
   color: #7b3fa1;
 }
-/*Change made by jeson*/
+
+/* =====================================================
+   OVERLAY (for mobile menu)
+   ===================================================== */
+
+.overlay {
+  display: none;
+}
+
+/* =====================================================
+   MOBILE SEARCH (Hidden by default on desktop)
+   ===================================================== */
+
+.mobileSearch {
+  display: none;
+}
+
 /* =====================================================
    RESPONSIVE BREAKPOINTS
    ===================================================== */
 
-/* Tablet - 1024px and below */
-@media (max-width: 1024px) {
-  .inner {
-    height: 76px;
-    padding: 0 30px;
-  }
-
-  .searchBar {
-    width: 380px;
-    height: 42px;
-  }
-
+/* Large Tablet - 1200px and below */
+@media (max-width: 1200px) {
   .navLinks {
-    gap: 28px;
+    gap: 24px;
   }
 
   .navLink,
@@ -215,95 +261,19 @@
   }
 }
 
-/* Tablet - 900px and below */
-@media (max-width: 900px) {
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
   .inner {
-    height: 70px;
-    padding: 0 24px;
+    height: 76px;
+    padding: 0 30px;
   }
 
   .logo {
     width: 100px;
   }
 
-  .searchBar {
-    width: 320px;
-    height: 40px;
-  }
-
-  .searchBar input {
-    font-size: 15.5px;
-  }
-
-  .searchBar input::placeholder {
-    font-size: 15px;
-  }
-
   .navLinks {
-    gap: 22px;
-  }
-
-  .navLink,
-  .logoutBtn {
-    font-size: 15.5px;
-  }
-
-  .logoutBtn {
-    margin-left: 20px;
-  }
-}
-
-/* Mobile - 768px and below */
-@media (max-width: 768px) {
-  .inner {
-    height: 66px;
-    padding: 0 20px;
-  }
-
-  .logo {
-    width: 90px;
-  }
-
-  .searchBar {
-    width: 280px;
-    height: 38px;
-    padding: 0 14px;
-  }
-
-  .searchBar input {
-    font-size: 15px;
-  }
-
-  .navLinks {
-    gap: 18px;
-  }
-
-  .navMessage {
-    font-size: 12px;
-  }
-}
-
-/* Small Mobile - 600px and below */
-@media (max-width: 600px) {
-  .inner {
-    height: 62px;
-    padding: 0 16px;
-  }
-
-  .logo {
-    width: 80px;
-  }
-
-  .center {
-    display: none; /* Hide search bar on very small screens */
-  }
-
-  .right {
-    margin-left: auto;
-  }
-
-  .navLinks {
-    gap: 16px;
+    gap: 20px;
   }
 
   .navLink,
@@ -314,54 +284,205 @@
   .logoutBtn {
     margin-left: 16px;
   }
+}
+
+/* Mobile Breakpoint - 900px and below: Show hamburger menu */
+@media (max-width: 900px) {
+  .inner {
+    height: 70px;
+    padding: 0 20px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .center {
+    flex: 1;
+    padding: 0 15px;
+  }
+
+  /* Show hamburger */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hide desktop navigation and show as mobile menu */
+  .right {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #dcdcdc;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+
+  .right.mobileMenuOpen {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navLinks {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+
+  .navLink {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 16px 20px;
+    font-size: 17px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .navLink::after {
+    display: none;
+  }
+
+  .navLink:hover,
+  .navLink.active {
+    background: rgba(123, 63, 161, 0.08);
+  }
 
   .cartLink {
-    padding: 5px 12px;
+    border-radius: 0;
+    padding: 16px 20px;
+  }
+
+  .logoutBtn {
+    margin-left: 0;
+    margin-top: 10px;
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 17px;
+    width: 100%;
+    background: #7b3fa1;
+    color: #fff;
+    border-radius: 8px;
+  }
+
+  .logoutBtn:hover {
+    background: #6a3590;
+    color: #fff;
+  }
+
+  .navMessage {
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  /* Show overlay */
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
   }
 }
 
-/* Extra Small Mobile - 480px and below */
-@media (max-width: 480px) {
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
   .inner {
     height: 60px;
+    padding: 0 15px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .center {
+    display: none;
+  }
+
+  /* Show search bar inside mobile menu */
+  .mobileSearch {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+  }
+
+  .right {
+    top: 60px;
+    max-height: calc(100vh - 60px);
+  }
+
+  .overlay {
+    top: 60px;
+  }
+
+  .navLink {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+
+  .cartLink {
+    padding: 14px 16px;
+  }
+
+  .logoutBtn {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+}
+
+/* Extra Small Mobile - 400px and below */
+@media (max-width: 400px) {
+  .inner {
+    height: 56px;
     padding: 0 12px;
   }
 
   .logo {
-    width: 75px;
+    width: 70px;
   }
 
-  .navLinks {
-    gap: 14px;
+  .hamburger {
+    width: 24px;
+    height: 18px;
   }
 
-  .navLink,
-  .logoutBtn {
-    font-size: 14.5px;
+  .right {
+    top: 56px;
+    max-height: calc(100vh - 56px);
+    padding: 15px;
   }
 
-  .logoutBtn {
-    margin-left: 12px;
+  .overlay {
+    top: 56px;
+  }
+
+  .navLink {
+    padding: 12px 14px;
+    font-size: 15px;
   }
 
   .cartLink {
-    padding: 4px 10px;
-  }
-}
-
-/* Extra Small Mobile - 360px and below */
-@media (max-width: 360px) {
-  .navLinks {
-    gap: 10px;
-  }
-
-  .navLink,
-  .logoutBtn {
-    font-size: 14px;
+    padding: 12px 14px;
   }
 
   .logoutBtn {
-    margin-left: 8px;
+    padding: 12px 14px;
+    font-size: 15px;
   }
 }
 
