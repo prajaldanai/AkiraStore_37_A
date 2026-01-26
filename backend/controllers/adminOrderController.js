@@ -281,11 +281,19 @@ exports.getAdminOrders = async (req, res) => {
    GET ADMIN ORDER BY ID
    GET /api/admin/orders/:orderId
 ============================================================ */
-exports.getAdminOrderById = async (req, res) => {
-  try {
-    const { orderId } = req.params;
-    
-    const order = await Order.findByPk(orderId, {
+  const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  exports.getAdminOrderById = async (req, res) => {
+    try {
+      const { orderId } = req.params;
+      if (!UUID_PATTERN.test(orderId)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid order ID format",
+        });
+      }
+      
+      const order = await Order.findByPk(orderId, {
       include: [
         {
           model: OrderItem,

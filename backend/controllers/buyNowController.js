@@ -11,6 +11,9 @@ const {
 function normalizeImage(img) {
   if (!img) return null;
   const fixed = String(img).replace(/\\/g, "/");
+  if (fixed.startsWith("http://") || fixed.startsWith("https://")) {
+    return fixed;
+  }
   return fixed.startsWith("/uploads") ? fixed : `/uploads/${fixed}`;
 }
 
@@ -55,7 +58,7 @@ function formatShippingOptions(shipping) {
 ============================================================ */
 exports.createSession = async (req, res) => {
   try {
-    const { productId, selectedSize, quantity } = req.body;
+    const { productId, selectedSize, quantity, productImage } = req.body;
     const userId = req.user?.id || null; // From auth middleware if logged in
 
     if (!productId) {
@@ -96,7 +99,7 @@ exports.createSession = async (req, res) => {
       user_id: userId,
       product_id: productId,
       product_name: product.name,
-      product_image: normalizeImage(mainImage),
+      product_image: normalizeImage(productImage || mainImage),
       selected_size: Array.isArray(selectedSize) ? selectedSize.join(",") : selectedSize || null,
       quantity: requestedQty,
       unit_price: Number(product.price) || 0,

@@ -58,10 +58,7 @@ export default function ProductDetailsPage() {
     return () => { isMounted = false; };
   }, [id]);
 
-  if (loading) return <Layout><div className={styles.page}><p>Loading product...</p></div></Layout>;
-  if (error) return <Layout><div className={styles.page}><p>{error}</p></div></Layout>;
-  if (!product) return <Layout><div className={styles.page}><p>Product not available</p></div></Layout>;
-
+  const safeProduct = product || {};
   const { 
     images = [], 
     features = [], 
@@ -76,7 +73,17 @@ export default function ProductDetailsPage() {
     avg_rating, 
     rating_count, 
     stock 
-  } = product;
+  } = safeProduct;
+
+  const [selectedImage, setSelectedImage] = useState(images?.[0] ?? "");
+
+  useEffect(() => {
+    setSelectedImage(images?.[0] ?? "");
+  }, [images]);
+
+  if (loading) return <Layout><div className={styles.page}><p>Loading product...</p></div></Layout>;
+  if (error) return <Layout><div className={styles.page}><p>{error}</p></div></Layout>;
+  if (!product) return <Layout><div className={styles.page}><p>Product not available</p></div></Layout>;
 
   return (
     <Layout>
@@ -85,7 +92,10 @@ export default function ProductDetailsPage() {
         <div className={styles.pageContent}>
           {/* Main Product Box: 1440x871, white bg, 1px black border */}
           <div className={styles.topSection}>
-          <ProductImageGallery images={images} />
+          <ProductImageGallery
+            images={images}
+            onImageChange={(img) => setSelectedImage(img)}
+          />
           <ProductInfo
             productId={id}
             name={name}
@@ -95,7 +105,7 @@ export default function ProductDetailsPage() {
             rating_count={rating_count}
             sizes={sizes}
             stock={stock}
-            image={images?.[0] ?? ""}
+            image={selectedImage}
           />
           </div>
           

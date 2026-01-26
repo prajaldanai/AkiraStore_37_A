@@ -2,19 +2,20 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 28px 26px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   transition: box-shadow 0.15s ease;
+  min-height: 190px;
 }
 
 .card:hover {
@@ -22,24 +23,24 @@
 }
 
 .iconWrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .label {
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   color: #6b7280;
   margin-bottom: 4px;
 }
 
 .value {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   color: #111827;
   line-height: 1.2;
@@ -47,7 +48,7 @@
 }
 
 .subLabel {
-  font-size: 12px;
+  font-size: 13px;
   color: #9ca3af;
 }
 

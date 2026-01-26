@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import BargainChatModal from "../../components/product-common/BargainModal/BargainChatModal";
 import AccountStatusModal from "../../components/AccountStatusModal/AccountStatusModal";
@@ -19,6 +19,7 @@ const PLACEHOLDER_IMAGE = "https://via.placeholder.com/200x200?text=No+Image";
 export default function BuyNowPage() {
   const { sessionId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Session data
   const [session, setSession] = useState(null);
@@ -35,6 +36,9 @@ export default function BuyNowPage() {
     address: "",
     phone: "",
   });
+
+  const [selectedCheckoutImage, setSelectedCheckoutImage] = useState(null);
+  const [selectedCheckoutName, setSelectedCheckoutName] = useState(null);
 
   // Order options
   const [selectedShipping, setSelectedShipping] = useState(null);
@@ -94,20 +98,42 @@ export default function BuyNowPage() {
     return () => { isMounted = false; };
   }, [sessionId]);
 
+  // Check if this is a direct product Buy Now (has img param) vs cart checkout
+  // For direct Buy Now, clear any old preview items from localStorage
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    try {
-      const raw = window.localStorage.getItem(PREVIEW_STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          setPreviewItems(parsed);
-        }
+    const params = new URLSearchParams(location.search);
+    const img = params.get("img");
+    
+    // If URL has img param, this is a direct Buy Now from product page
+    // Clear any old localStorage preview data to avoid showing wrong product
+    if (img) {
+      try {
+        window.localStorage.removeItem(PREVIEW_STORAGE_KEY);
+      } catch (error) {
+        console.error("Unable to clear preview items", error);
       }
-    } catch (error) {
-      console.error("Unable to read preview items", error);
+      setPreviewItems([]); // Clear state as well
+      setSelectedCheckoutImage(img);
+    } else {
+      // Only load localStorage preview items for cart checkout (no img param)
+      try {
+        const raw = window.localStorage.getItem(PREVIEW_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            setPreviewItems(parsed);
+          }
+        }
+      } catch (error) {
+        console.error("Unable to read preview items", error);
+      }
     }
-  }, []);
+    
+    const overrideName = params.get("productName");
+    if (overrideName) {
+      setSelectedCheckoutName(overrideName);
+    }
+  }, [location.search]);
 
   // Handle form changes
   const handleFormChange = useCallback((field, value) => {
@@ -158,6 +184,23 @@ export default function BuyNowPage() {
   const taxAmount = 0; // For future use
   const total = subtotal - bargainDiscount + shippingCharge + giftBoxFee + taxAmount;
 
+  const sessionImagePath = session?.productImage || "";
+  const resolvedSessionImage = sessionImagePath
+    ? sessionImagePath.startsWith("http")
+      ? sessionImagePath
+      : `${API_BASE}${sessionImagePath}`
+    : null;
+  
+  // Resolve the checkout image from URL param (needs API_BASE prefix if it's a relative path)
+  const resolvedCheckoutImage = selectedCheckoutImage
+    ? selectedCheckoutImage.startsWith("http")
+      ? selectedCheckoutImage
+      : `${API_BASE}${selectedCheckoutImage}`
+    : null;
+  
+  const finalPreviewImage = resolvedCheckoutImage || resolvedSessionImage;
+  const finalProductName = selectedCheckoutName || session?.productName;
+
   // Validate form
   const validateForm = () => {
     const errors = {};
@@ -206,6 +249,8 @@ export default function BuyNowPage() {
         customerCity: customerForm.city,
         customerAddress: customerForm.address,
         customerPhone: customerForm.phone,
+        // Include additional cart items if present (for multi-item checkout)
+        additionalItems: previewItems.length > 0 ? previewItems : [],
       };
 
       const result = await createOrder(orderData);
@@ -409,45 +454,48 @@ export default function BuyNowPage() {
           {/* Right: Order Summary */}
           <aside className={styles.summarySection}>
             {/* Product Preview */}
-            {previewItems.length > 0 ? (
-              <div className={styles.previewItems}>
-                {previewItems.map((item) => (
-                  <article key={`checkout-${item.id}`} className={styles.previewItem}>
-                    {item.image && (
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className={styles.previewImage}
-                        onError={(event) => {
-                          event.target.src = PLACEHOLDER_IMAGE;
-                        }}
-                      />
-                    )}
-                    <div>
-                      <h3 className={styles.productName}>{item.name}</h3>
-                      <p className={styles.productQty}>Qty: {item.quantity}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <div className={styles.productPreview}>
-                {session.productImage && (
-                  <img
-                    src={`${API_BASE}${session.productImage}`}
-                    alt={session.productName}
-                    className={styles.productImage}
-                  />
-                )}
-                <div className={styles.productInfo}>
-                  <h3 className={styles.productName}>{session.productName}</h3>
-                  {session.selectedSize && (
-                    <p className={styles.productSize}>Size: {session.selectedSize}</p>
-                  )}
-                  <p className={styles.productQty}>Qty: {session.quantity}</p>
+              {previewItems.length > 0 ? (
+                <div className={styles.previewItems}>
+                  {previewItems.map((item) => (
+                    <article key={`checkout-${item.id}`} className={styles.previewItem}>
+                      {item.image && (
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className={styles.previewImage}
+                          onError={(event) => {
+                            event.target.src = PLACEHOLDER_IMAGE;
+                          }}
+                        />
+                      )}
+                      <div>
+                        <h3 className={styles.productName}>{item.name}</h3>
+                        <p className={styles.productQty}>Qty: {item.quantity}</p>
+                        <p className={styles.productPrice}>Rs. {(item.price || 0).toLocaleString()}</p>
+                      </div>
+                    </article>
+                  ))}
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className={styles.productPreview}>
+                  <img
+                    src={finalPreviewImage || PLACEHOLDER_IMAGE}
+                    alt={finalProductName}
+                    className={styles.productImage}
+                    onError={(event) => {
+                      event.target.src = PLACEHOLDER_IMAGE;
+                    }}
+                  />
+                  <div className={styles.productInfo}>
+                    <h3 className={styles.productName}>{finalProductName}</h3>
+                    {session.selectedSize && (
+                      <p className={styles.productSize}>Size: {session.selectedSize}</p>
+                    )}
+                    <p className={styles.productQty}>Qty: {session.quantity}</p>
+                    <p className={styles.productPrice}>Rs. {(session.unitPrice || 0).toLocaleString()}</p>
+                  </div>
+                </div>
+              )}
 
             {/* Order Summary Card */}
             <div className={styles.summaryCard}>

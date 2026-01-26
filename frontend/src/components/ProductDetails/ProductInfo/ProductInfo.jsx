@@ -168,17 +168,22 @@ export default function ProductInfo({
 
     try {
       setBuyNowLoading(true);
-      const result = await createBuyNowSession({
-        productId,
-        selectedSize: selectedSizes,
-        quantity: qty,
-      });
+        const result = await createBuyNowSession({
+          productId,
+          selectedSize: selectedSizes,
+          quantity: qty,
+          productImage: image,
+        });
 
-      if (result.success && result.sessionId) {
-        navigate(`/buy-now/${result.sessionId}`);
-      } else {
-        alert(result.message || "Failed to start checkout");
-      }
+        if (result.success && result.sessionId) {
+          const params = new URLSearchParams();
+          if (image) params.set("img", image);
+          if (name) params.set("productName", name);
+          const query = params.toString();
+          navigate(`/buy-now/${result.sessionId}${query ? `?${query}` : ""}`);
+        } else {
+          alert(result.message || "Failed to start checkout");
+        }
     } catch (error) {
       console.error("Buy Now error:", error);
       // Check for account status errors (blocked/suspended)

@@ -468,7 +468,7 @@ export function acceptCounterOffer(subtotal, counterOffer) {
   };
 }
 
-export default {
+const buyNowService = {
   createBuyNowSession,
   getBuyNowSession,
   updateBuyNowSession,
@@ -476,3 +476,5 @@ export default {
   calculateBargainResponse,
   acceptCounterOffer,
 };
+
+export default buyNowService;

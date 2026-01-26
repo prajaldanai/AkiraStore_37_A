@@ -5,6 +5,7 @@
 
 import React from "react";
 import styles from "./LowStockWidget.module.css";
+import { buildImageUrl } from "../../../../utils/media";
 
 const LowStockWidget = ({ products, loading }) => {
   if (loading) {
@@ -37,25 +38,57 @@ const LowStockWidget = ({ products, loading }) => {
             <p>All products are well stocked!</p>
           </div>
         ) : (
-          products.slice(0, 5).map((product) => (
-            <div key={product.id} className={styles.item}>
-              <div className={styles.productInfo}>
-                <span className={styles.productName}>{product.name}</span>
-                <span className={styles.productSku}>
-                  SKU: {product.sku || `#${product.id}`}
-                </span>
+          products.slice(0, 5).map((product) => {
+            const imageUrl = buildImageUrl(product.image);
+            return (
+              <div key={product.id} className={styles.item}>
+                <div className={styles.productThumb}>
+                  {imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt={product.name}
+                      className={styles.productImage}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className={styles.productImagePlaceholder}>
+                      <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M5 15l3-3 2 2 5-5 4 4" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+
+                <div className={styles.productInfo}>
+                  <span className={styles.productName}>{product.name}</span>
+                  <span className={styles.productCategory}>
+                    {product.category || "Uncategorized"}
+                  </span>
+                  <span className={styles.productSku}>
+                    SKU: {product.sku || `#${product.id}`}
+                  </span>
+                </div>
+
+                <div className={styles.stockInfo}>
+                  <span
+                    className={`${styles.stockBadge} ${
+                      product.stock === 0 ? styles.outOfStock : styles.lowStock
+                    }`}
+                  >
+                    {product.stock === 0 ? "Out of Stock" : `${product.stock} left`}
+                  </span>
+                </div>
               </div>
-              <div className={styles.stockInfo}>
-                <span
-                  className={`${styles.stockBadge} ${
-                    product.stock === 0 ? styles.outOfStock : styles.lowStock
-                  }`}
-                >
-                  {product.stock === 0 ? "Out of Stock" : `${product.stock} left`}
-                </span>
-              </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
 

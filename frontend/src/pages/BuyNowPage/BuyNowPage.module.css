@@ -305,6 +305,13 @@
   margin: 0;
 }
 
+.productPrice {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin: 4px 0 0;
+}
+
 /* Summary Card */
 .summaryCard {
   background: #fff;

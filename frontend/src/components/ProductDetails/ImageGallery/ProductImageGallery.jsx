@@ -3,7 +3,7 @@ import styles from "./ProductImageGallery.module.css";
 
 const PLACEHOLDER = "https://via.placeholder.com/400x400?text=No+Image";
 
-export default function ProductImageGallery({ images = [] }) {
+export default function ProductImageGallery({ images = [], onImageChange }) {
   const [mainIdx, setMainIdx] = useState(0);
   const [zoomLocked, setZoomLocked] = useState(false);
 
@@ -29,7 +29,17 @@ export default function ProductImageGallery({ images = [] }) {
   useEffect(() => {
     setMainIdx(0);
     setZoomLocked(false);
+    if (onImageChange) {
+      const newImage = images.length ? images[0] : "";
+      onImageChange(newImage);
+    }
   }, [images]);
+
+  useEffect(() => {
+    if (onImageChange && images[mainIdx]) {
+      onImageChange(images[mainIdx]);
+    }
+  }, [mainIdx, images, onImageChange]);
 
   /* ===============================
      MOVEABLE ZOOM (CURSOR FOLLOW)

@@ -173,54 +173,53 @@ export default function useCartAction() {
       }
 
       const quantityToAdd = Math.max(1, Number(options.quantity) || 1);
-      let updatedCart = [];
-      let messagePayload = null;
       const preparedItem = buildCartItem(
         { ...product, id: cartId },
         { ...options, id: cartId }
       );
 
-      setCartItems((prev) => {
-        const existing = prev.find((entry) => entry.id === cartId);
-        if (existing) {
-          const newQty = Math.max(1, Number(existing.quantity) || 0) + quantityToAdd;
-          updatedCart = prev.map((entry) =>
-            entry.id === cartId
-              ? {
-                  ...entry,
-                  quantity: newQty,
-                  selectedSizes: preparedItem.selectedSizes,
-                  updatedAt: new Date().toISOString(),
-                }
-              : entry
-          );
-          messagePayload = {
-            text: `${preparedItem.name} already in your cart. Quantity updated to ${newQty}.`,
-            type: "info",
-          };
-        } else {
-          updatedCart = [
-            ...prev,
-            {
-              ...preparedItem,
-              quantity: quantityToAdd,
-              addedAt: new Date().toISOString(),
-            },
-          ];
-          messagePayload = {
-            text: `${preparedItem.name} added to cart`,
-            type: "success",
-          };
-        }
-        return updatedCart;
-      });
+      // Read current cart directly from storage to avoid stale state
+      const currentCart = readCartFromStorage();
+      const existing = currentCart.find((entry) => entry.id === cartId);
+      
+      let updatedCart;
+      let messagePayload;
 
-      if (updatedCart.length >= 0) {
-        persistCart(updatedCart);
-        if (messagePayload) {
-          queueMessage(messagePayload);
-        }
+      if (existing) {
+        const newQty = Math.max(1, Number(existing.quantity) || 0) + quantityToAdd;
+        updatedCart = currentCart.map((entry) =>
+          entry.id === cartId
+            ? {
+                ...entry,
+                quantity: newQty,
+                selectedSizes: preparedItem.selectedSizes,
+                updatedAt: new Date().toISOString(),
+              }
+            : entry
+        );
+        messagePayload = {
+          text: `${preparedItem.name} already in your cart. Quantity updated to ${newQty}.`,
+          type: "info",
+        };
+      } else {
+        updatedCart = [
+          ...currentCart,
+          {
+            ...preparedItem,
+            quantity: quantityToAdd,
+            addedAt: new Date().toISOString(),
+          },
+        ];
+        messagePayload = {
+          text: `${preparedItem.name} added to cart`,
+          type: "success",
+        };
       }
+
+      // Persist to storage first, then update state
+      persistCart(updatedCart);
+      setCartItems(updatedCart);
+      queueMessage(messagePayload);
     },
     [queueMessage]
   );

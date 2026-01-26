@@ -60,14 +60,14 @@ const OrderStatusWidget = ({ statusBreakdown, loading }) => {
             </div>
           ) : (
             <>
-              <ResponsiveContainer width="100%" height={180}>
+              <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie
                     data={chartData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={50}
-                    outerRadius={75}
+                    innerRadius={60}
+                    outerRadius={95}
                     paddingAngle={2}
                     dataKey="count"
                     strokeWidth={0}
