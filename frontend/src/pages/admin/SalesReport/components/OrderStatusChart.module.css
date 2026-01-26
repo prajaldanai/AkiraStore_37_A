@@ -9,8 +9,8 @@
 /* Donut */
 .donutWrapper {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
   flex-shrink: 0;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .totalCount {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
   color: #111827;
   line-height: 1;
@@ -62,7 +62,7 @@
 .legendItem {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .legendDot {

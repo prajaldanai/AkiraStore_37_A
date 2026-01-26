@@ -4,12 +4,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
+  padding: 16px 36px;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
 .left {
@@ -50,19 +51,19 @@
 
 .title {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
   color: #111827;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
 }
 
 .subtitle {
-  font-size: 12px;
-  color: #9ca3af;
-  font-weight: 400;
-  padding: 2px 8px;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+  padding: 4px 12px;
   background: #f3f4f6;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .right {

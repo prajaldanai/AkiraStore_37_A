@@ -3,35 +3,37 @@
 .card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 30px;
+  min-height: 420px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
 .header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
 }
 
 .title {
   margin: 0;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: #111827;
 }
 
 .subtitle {
   margin: 4px 0 0 0;
-  font-size: 13px;
+  font-size: 15px;
   color: #6b7280;
 }
 
 .stats {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 .stat {
@@ -41,8 +43,8 @@
 }
 
 .statValue {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: #111827;
 }
 
@@ -54,7 +56,7 @@
 }
 
 .chartWrapper {
-  height: 280px;
+  height: 360px;
 }
 
 /* Empty State */
