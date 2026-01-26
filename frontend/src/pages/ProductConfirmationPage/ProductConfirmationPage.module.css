@@ -412,3 +412,122 @@
     width: 100%;
   }
 }
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .mainContent {
+    grid-template-columns: 1fr; /* Stack left and right panels */
+    gap: 32px;
+  }
+
+  .rightPanel {
+    position: static; /* Remove sticky if applicable */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Transforming the Products Table into a mobile-friendly list */
+  .tableHeader {
+    display: none; /* Hide headers */
+  }
+
+  .productsTable, 
+  .tableRow, 
+  .tableRow td {
+    display: block;
+    width: 100%;
+  }
+
+  .tableRow {
+    padding: 16px 0;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+  .tableRow td {
+    border: none;
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Add labels using CSS content for context */
+  .tableRow td:nth-child(2):before { content: "Qty:"; font-weight: 600; color: #666; }
+  .tableRow td:nth-child(3):before { content: "Size:"; font-weight: 600; color: #666; }
+  .tableRow td:nth-child(4):before { content: "Price:"; font-weight: 600; color: #666; }
+
+  .productCell {
+    flex-direction: row; /* Keep image and name together */
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .productImage {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 16px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .backButton {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .orderCard, .summaryCard {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+  }
+
+  .detailLabel {
+    width: 100%;
+    font-size: 12px;
+    color: #888;
+  }
+
+  .detailValue {
+    font-size: 15px;
+  }
+
+  .checkboxLabel {
+    font-size: 13px;
+  }
+
+  .totalValue {
+    font-size: 20px;
+  }
+
+  .nextButton {
+    padding: 16px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .productName {
+    font-size: 14px;
+  }
+
+  .summaryRow {
+    font-size: 13px;
+  }
+}

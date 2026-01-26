@@ -188,3 +188,184 @@
 .logoutBtn:hover {
   color: #7b3fa1;
 }
+/*Change made by jeson*/
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+   ===================================================== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+  .inner {
+    height: 76px;
+    padding: 0 30px;
+  }
+
+  .searchBar {
+    width: 380px;
+    height: 42px;
+  }
+
+  .navLinks {
+    gap: 28px;
+  }
+
+  .navLink,
+  .logoutBtn {
+    font-size: 16px;
+  }
+}
+
+/* Tablet - 900px and below */
+@media (max-width: 900px) {
+  .inner {
+    height: 70px;
+    padding: 0 24px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .searchBar {
+    width: 320px;
+    height: 40px;
+  }
+
+  .searchBar input {
+    font-size: 15.5px;
+  }
+
+  .searchBar input::placeholder {
+    font-size: 15px;
+  }
+
+  .navLinks {
+    gap: 22px;
+  }
+
+  .navLink,
+  .logoutBtn {
+    font-size: 15.5px;
+  }
+
+  .logoutBtn {
+    margin-left: 20px;
+  }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+  .inner {
+    height: 66px;
+    padding: 0 20px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .searchBar {
+    width: 280px;
+    height: 38px;
+    padding: 0 14px;
+  }
+
+  .searchBar input {
+    font-size: 15px;
+  }
+
+  .navLinks {
+    gap: 18px;
+  }
+
+  .navMessage {
+    font-size: 12px;
+  }
+}
+
+/* Small Mobile - 600px and below */
+@media (max-width: 600px) {
+  .inner {
+    height: 62px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .center {
+    display: none; /* Hide search bar on very small screens */
+  }
+
+  .right {
+    margin-left: auto;
+  }
+
+  .navLinks {
+    gap: 16px;
+  }
+
+  .navLink,
+  .logoutBtn {
+    font-size: 15px;
+  }
+
+  .logoutBtn {
+    margin-left: 16px;
+  }
+
+  .cartLink {
+    padding: 5px 12px;
+  }
+}
+
+/* Extra Small Mobile - 480px and below */
+@media (max-width: 480px) {
+  .inner {
+    height: 60px;
+    padding: 0 12px;
+  }
+
+  .logo {
+    width: 75px;
+  }
+
+  .navLinks {
+    gap: 14px;
+  }
+
+  .navLink,
+  .logoutBtn {
+    font-size: 14.5px;
+  }
+
+  .logoutBtn {
+    margin-left: 12px;
+  }
+
+  .cartLink {
+    padding: 4px 10px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .navLinks {
+    gap: 10px;
+  }
+
+  .navLink,
+  .logoutBtn {
+    font-size: 14px;
+  }
+
+  .logoutBtn {
+    margin-left: 8px;
+  }
+}
+
+
+
+
+

@@ -99,3 +99,64 @@
     font-size: 20px;
   }
 }
+/*Change made by jeson*/
+/* ===============================
+   EXTRA RESPONSIVENESS – SECTION & PRICES
+================================ */
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .figma-section-title {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+
+  .figma-section-description {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .figma-section-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .category-page .product-price-row {
+    gap: 8px;
+  }
+
+  .category-page .product-new-price {
+    font-size: 15px;
+  }
+
+  .category-page .product-old-price {
+    font-size: 14px;
+  }
+
+  .category-page .product-name {
+    font-size: 15px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .figma-section-title {
+    font-size: 22px;
+  }
+
+  .figma-section-description {
+    font-size: 12px;
+  }
+
+  .category-page .product-new-price {
+    font-size: 14px;
+  }
+
+  .category-page .product-old-price {
+    font-size: 13px;
+  }
+
+  .category-page .product-name {
+    font-size: 14px;
+  }
+}

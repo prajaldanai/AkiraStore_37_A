@@ -35,3 +35,46 @@
     padding: 16px;
   }
 }
+/*Change made by jeson*/
+/* ===============================
+   RESPONSIVE LAYOUT FIXES
+
+/* Tablets & small laptops */
+@media (max-width: 1024px) {
+  .content {
+    margin-left: 200px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .content.expanded {
+    margin-left: 0;
+  }
+
+  .pageContent {
+    padding: 16px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .pageContent {
+    padding: 12px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .pageContent {
+    padding: 10px;
+  }
+}

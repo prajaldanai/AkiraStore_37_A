@@ -126,3 +126,71 @@
     font-size: 54px;
   }
 }
+/*Change made by jeson*/
+/* ===============================
+   EXTRA RESPONSIVENESS – HERO
+================================ */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .heroInner {
+    padding: 0 24px;
+  }
+
+  .heroTitle {
+    font-size: 44px;
+    line-height: 1.1;
+  }
+
+  .heroSubtitle {
+    font-size: 18px;
+  }
+
+  .heroImg {
+    width: 280px;
+    height: 400px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .heroContainer {
+    padding: 24px 0;
+    margin-top: -20px;
+  }
+
+  .heroInner {
+    padding: 0 16px;
+    gap: 24px;
+  }
+
+  .heroTitle {
+    font-size: 36px;
+  }
+
+  .heroSubtitle {
+    font-size: 16px;
+    margin-top: 16px;
+  }
+
+  .heroImg {
+    width: 240px;
+    height: 340px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .heroTitle {
+    font-size: 32px;
+  }
+
+  .heroSubtitle {
+    font-size: 15px;
+  }
+
+  .heroImg {
+    width: 210px;
+    height: 300px;
+  }
+}

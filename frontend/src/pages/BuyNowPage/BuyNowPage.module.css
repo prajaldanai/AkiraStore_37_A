@@ -481,3 +481,98 @@
     font-size: 22px;
   }
 }
+
+
+
+
+/*simran*/
+/* --- RESPONSIVENESS ONLY --- */
+
+@media (max-width: 1024px) {
+  .content {
+    gap: 24px;
+    padding: 0 10px;
+  }
+  
+  .summarySection {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr; /* Stacks form and summary */
+    display: flex;
+    flex-direction: column-reverse; /* Shows summary/product first on mobile */
+  }
+
+  .summarySection {
+    position: static; /* Removes sticky behavior for vertical flow */
+    margin-bottom: 24px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr; /* Stacks First Name / Last Name fields */
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+
+  .backButtonTop {
+    padding: 10px 16px;
+    font-size: 13px;
+    width: 100%; /* Full width for easier tap target */
+    justify-content: center;
+  }
+
+  .formSection {
+    padding: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+  .shippingOption {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .shippingLabel {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .previewItem {
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .productImage, .previewImage {
+    width: 56px;
+    height: 56px;
+  }
+
+  .productName {
+    font-size: 14px;
+  }
+
+  .nextButton {
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+}
