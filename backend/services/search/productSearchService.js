@@ -205,7 +205,7 @@ async function searchByImage(categoryHint = null) {
         "stock",
       ],
       order: [["id", "DESC"]],
-      limit: 20,
+      // No limit - need to check all products for image matching
     });
 
     const results = products.map(product => ({
@@ -214,6 +214,8 @@ async function searchByImage(categoryHint = null) {
       price: parseFloat(product.price) || 0,
       oldPrice: product.old_price ? parseFloat(product.old_price) : null,
       image: product.ProductImages?.[0]?.image_url || null,
+      // Include ALL images for hash comparison
+      allImages: product.ProductImages?.map(img => img.image_url) || [],
       category: product.Category?.name || "Uncategorized",
       categorySlug: product.Category?.slug || null,
       stock: parseInt(product.stock) || 0,

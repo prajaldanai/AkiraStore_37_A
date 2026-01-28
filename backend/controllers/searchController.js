@@ -119,6 +119,7 @@ async function searchByImageHandler(req, res) {
     // Compare with product images
     const uploadsDir = path.join(__dirname, "..");  // Backend root
     const matchedProducts = [];
+    const matchedProductIds = new Set(); // Track already matched products
 
     // Get uploaded file info
     const uploadedFileSize = uploadedImageBuffer.length;
@@ -128,11 +129,28 @@ async function searchByImageHandler(req, res) {
     console.log("Uploaded image hash:", uploadedHash);
     console.log("Uploaded file size:", uploadedFileSize);
     console.log("Uploaded file name:", uploadedFileName);
+    console.log("Total products to check:", allProducts.results.length);
 
     for (const product of allProducts.results) {
-      if (product.image) {
-        // The image path is stored as /uploads/filename.ext
-        let imagePath = product.image;
+      // Get ALL images for this product (not just the first one)
+      const productImages = product.allImages || (product.image ? [product.image] : []);
+      
+      if (productImages.length === 0) {
+        console.log(`\nProduct: "${product.name}" - No images, skipping`);
+        continue;
+      }
+
+      console.log(`\nProduct: "${product.name}" (ID: ${product.id}) - ${productImages.length} image(s)`);
+
+      // Check each image of the product
+      for (let imgIndex = 0; imgIndex < productImages.length; imgIndex++) {
+        // Skip if product already matched
+        if (matchedProductIds.has(product.id)) {
+          console.log(`  Image ${imgIndex + 1}: Skipped (product already matched)`);
+          continue;
+        }
+
+        let imagePath = productImages[imgIndex];
         
         // Remove leading slash to join properly with backend root
         if (imagePath.startsWith("/")) {
@@ -140,7 +158,6 @@ async function searchByImageHandler(req, res) {
         }
         
         const productImagePath = path.join(uploadsDir, imagePath);
-        const productFileName = path.basename(imagePath).toLowerCase();
         
         if (fs.existsSync(productImagePath)) {
           try {
@@ -149,14 +166,13 @@ async function searchByImageHandler(req, res) {
             const productFileSize = productImageBuffer.length;
             const productPhash = await safePerceptualHash(productImageBuffer);
 
-            console.log(`\nProduct: "${product.name}"`);
-            console.log(`  Path: ${productImagePath}`);
-            console.log(`  Hash: ${productHash}`);
-            console.log(`  Size: ${productFileSize}`);
-            console.log(`  Hash match: ${uploadedHash === productHash}`);
-            console.log(`  Perceptual hash: ${productPhash}`);
+            console.log(`  Image ${imgIndex + 1}: ${path.basename(imagePath)}`);
+            console.log(`    Hash: ${productHash}`);
+            console.log(`    Size: ${productFileSize}`);
+            console.log(`    Hash match: ${uploadedHash === productHash}`);
+            console.log(`    Perceptual hash: ${productPhash}`);
             console.log(
-              `  Hamming distance: ${calculateHammingDistance(uploadedPhash, productPhash)}`
+              `    Hamming distance: ${calculateHammingDistance(uploadedPhash, productPhash)}`
             );
 
             const isExactMatch = uploadedHash === productHash;
@@ -165,19 +181,23 @@ async function searchByImageHandler(req, res) {
               calculateHammingDistance(uploadedPhash, productPhash) <= PHASH_DISTANCE_THRESHOLD;
 
             if (isExactMatch) {
-              console.log(`  ✅ EXACT HASH MATCH!`);
+              console.log(`    ✅ EXACT HASH MATCH!`);
               matchedProducts.push({ ...product, matchScore: 100 });
+              matchedProductIds.add(product.id);
+              break; // Found match for this product, move to next product
             } else if (isPerceptualMatch) {
-              console.log(`  ✱ PERCEPTUAL MATCH`);
+              console.log(`    ✱ PERCEPTUAL MATCH`);
               matchedProducts.push({ ...product, matchScore: 90 });
+              matchedProductIds.add(product.id);
+              break; // Found match for this product, move to next product
             } else {
-              console.log(`  ✗ No perceptual match`);
+              console.log(`    ✗ No match`);
             }
           } catch (err) {
-            console.warn(`Could not read product image: ${productImagePath}`, err.message);
+            console.warn(`    Could not read product image: ${productImagePath}`, err.message);
           }
         } else {
-          console.log(`File not found: ${productImagePath}`);
+          console.log(`  Image ${imgIndex + 1}: File not found - ${productImagePath}`);
         }
       }
     }

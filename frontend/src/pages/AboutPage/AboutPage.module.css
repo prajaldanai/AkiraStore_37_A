@@ -291,7 +291,7 @@
   }
 
   .card {
-    /* Changed from auto to 0 to fix Firefox compatibility */
+    /* Changed from auto to 0 tirefox compatibility */
     min-height: 0; 
   }
 
