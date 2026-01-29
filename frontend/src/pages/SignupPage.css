@@ -6,9 +6,8 @@
   align-items: center;
   position: relative;
   padding: 20px;
-    font-size: 18px !important;
-
-  
+  font-size: 18px !important;
+  box-sizing: border-box;
 }
 
 .fade-in {
@@ -26,6 +25,7 @@
   width: 40px;
   cursor: pointer;
   transition: 0.3s ease;
+  z-index: 10;
 }
 
 .icon-bounce:hover {
@@ -36,12 +36,15 @@
   background: #ffffff;
   border-radius: 10px;
   padding: 8px;
-  width: 900px;
-  height: 520px;
+  width: 850px;
+  max-width: 95%;
+  height: 480px;
+  max-height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
   animation: popUp 0.6s ease forwards;
+  overflow: hidden;
 }
 
 @keyframes popUp {
@@ -64,6 +67,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .signup-image {
@@ -74,11 +78,14 @@
 
 .signup-right {
   width: 55%;
-  padding: 22px 34px;
+  padding: 16px 28px;
   background: #f5cdfc;
   animation: slideInRight 0.7s ease forwards;
-    font-size: 18px;
-
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
 }
 
 @keyframes slideInRight {
@@ -89,56 +96,116 @@
 .signup-title {
   text-align: center;
   color: #6a0dad;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
-  
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  flex-shrink: 0;
 }
 
+/* Global message box with fixed height to prevent layout shift */
 .message-box {
-  min-height: 20px;
-  margin-bottom: 5px;
+  height: 22px;
+  min-height: 22px;
+  max-height: 22px;
+  margin-bottom: 2px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.error {
-  color: red;
-  font-weight: 600;
+.message-text {
   font-size: 14px;
-}
-
-.success {
-  color: green;
   font-weight: 600;
-  font-size: 18px;
+  margin: 0;
+  text-align: center;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
-label {
-  font-size: 20px;
+.message-text.error {
+  color: #dc3545;
+}
+
+.message-text.success {
+  color: #28a745;
+}
+
+/* Form layout with flexbox for stable structure */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  margin-right: -8px;
+}
+
+/* Custom scrollbar for form fields */
+.form-fields::-webkit-scrollbar {
+  width: 5px;
+}
+
+.form-fields::-webkit-scrollbar-track {
+  background: #f0d4f7;
+  border-radius: 4px;
+}
+
+.form-fields::-webkit-scrollbar-thumb {
+  background: #c66af0;
+  border-radius: 4px;
+}
+
+.form-fields::-webkit-scrollbar-thumb:hover {
+  background: #a855d6;
+}
+
+/* Input group with reserved space for error messages */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2px;
+}
+
+.input-group label {
+  font-size: 14px;
   color: #6a0dad;
   font-weight: 600;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
   display: block;
 }
 
 .signup-input {
   width: 100%;
-  height: 40px;
-  margin-bottom: 10px;
+  height: 34px;
   border: 2px solid #f3b6ff;
   outline: none;
-  padding: 0 12px;
-  font-size: 18px;
-  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 14px;
+  border-radius: 6px;
   background: #ffffff;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease, background-color 0.25s ease;
+  box-sizing: border-box;
+}
+
+.signup-input::placeholder {
+  color: #b8a0c0;
+  font-size: 12px;
 }
 
 .signup-input:hover {
   border-color: #c66af0;
   box-shadow: 0 0 6px rgba(0,0,0,0.12);
-  transform: scale(1.015);
+  transform: scale(1.01);
 }
 
 .signup-input:focus {
@@ -147,64 +214,124 @@ label {
   background: #ffe9ff;
 }
 
+.signup-input.input-error {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+
+.signup-input.input-error:focus {
+  box-shadow: 0 0 8px rgba(220, 53, 69, 0.3);
+}
+
+/* Field-level error message with fixed height */
+.field-error {
+  display: block;
+  height: 14px;
+  min-height: 14px;
+  max-height: 14px;
+  font-size: 10px;
+  color: #dc3545;
+  font-weight: 500;
+  line-height: 14px;
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+}
+
+/* Password strength indicator */
+.password-strength {
+  margin-top: 1px;
+  margin-bottom: 2px;
+}
+
+.strength-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.strength-checks span {
+  font-size: 10px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.check-pass {
+  color: #28a745;
+}
+
+.check-fail {
+  color: #999;
+}
+
+/* Button container - always visible at bottom */
+.button-container {
+  flex-shrink: 0;
+  padding-top: 8px;
+  padding-bottom: 4px;
+  display: flex;
+  justify-content: center;
+  background: #f5cdfc;
+}
+
 .signup-btn {
-  width: 55%;
-  height: 42px;
-  border-radius: 22px;
-  background: #7721b2;
+  width: 60%;
+  height: 38px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #7721b2 0%, #9b4dca 100%);
   color: #fff;
   font-size: 18px;
   font-weight: 600;
   border: none;
   cursor: pointer;
-  margin: 16px auto 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(119, 33, 178, 0.3);
 }
 
-.signup-btn:hover {
+.signup-btn:hover:not(.btn-disabled) {
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(119, 33, 178, 0.4);
+  background: linear-gradient(135deg, #8b2cc9 0%, #a85dd6 100%);
 }
 
-@media (max-width: 950px) {
-  .signup-wrapper {
-    width: 95%;
-    height: auto;
-  }
-  .signup-card {
-    flex-direction: column;
-    height: auto;
-  }
-  .signup-left {
-    width: 100%;
-    height: 250px;
-  }
-  .signup-right {
-    width: 100%;
-    padding: 22px;
-  }
-  .signup-btn {
-    width: 100%;
-  }
+.signup-btn:active:not(.btn-disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(119, 33, 178, 0.3);
 }
 
+.signup-btn.btn-disabled {
+  background: linear-gradient(135deg, #b8a0c0 0%, #c9b5d4 100%);
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
 
-
-/*simran*/
-/* --- RESPONSIVENESS ONLY --- */
+/* --- RESPONSIVE STYLES --- */
 
 @media (max-width: 1024px) {
   .signup-wrapper {
     width: 90%;
-    height: auto; /* Allow the card to grow with content */
-    min-height: 520px;
+    min-height: auto;
+    max-height: 95vh;
   }
   
   .signup-title {
     font-size: 20px;
+  }
+
+  .signup-right {
+    padding: 18px 28px;
+  }
+
+  .input-group label {
+    font-size: 15px;
+  }
+
+  .signup-input {
+    height: 36px;
+    font-size: 15px;
   }
 }
 
@@ -217,76 +344,124 @@ label {
 
   .signup-wrapper {
     width: 95%;
-    height: auto;
-    padding: 0; /* Tighten edge gap */
+    padding: 6px;
+    max-height: none;
   }
 
   .signup-card {
-    flex-direction: column; /* Stacks the purple/pink sections */
-    height: auto;
-    border-radius: 15px; /* Slightly softer corners for mobile */
+    flex-direction: column;
+    border-radius: 15px;
   }
 
   .signup-left {
     width: 100%;
-    height: 200px; /* Shortens the image section to prioritize the form */
+    height: 180px;
+    flex-shrink: 0;
   }
 
   .signup-image {
-    object-position: center; /* Ensures the focus of the image stays centered */
+    object-position: center;
   }
 
   .signup-right {
     width: 100%;
-    padding: 24px 20px;
-    transform: none; /* Disable horizontal slide-in to prevent layout shifting */
+    padding: 20px;
+    max-height: none;
+    transform: none;
     animation: fadeIn 0.7s ease forwards;
   }
 
   .signup-btn {
-    width: 100%; /* Full width for easier thumb-reach */
-    margin-top: 24px;
+    width: 100%;
+  }
+
+  .button-container {
+    padding-top: 12px;
   }
 }
 
 @media (max-width: 600px) {
   .signup-container {
     padding: 10px;
-    align-items: flex-start; /* Better for long forms on mobile to avoid top-clipping */
+    align-items: flex-start;
   }
 
   .signup-wrapper {
-    margin-top: 50px; /* Room for the home icon */
-  }
-
-  label {
-    font-size: 16px; /* Prevents labels from taking up too much vertical space */
-  }
-
-  .signup-input {
-    height: 44px; /* Slightly taller for easier touch input */
-    font-size: 16px;
+    margin-top: 50px;
   }
 
   .signup-title {
     font-size: 18px;
+    margin-bottom: 4px;
   }
 
-  .success {
+  .message-box {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+    margin-bottom: 2px;
+  }
+
+  .message-text {
+    font-size: 12px;
+  }
+
+  .input-group label {
+    font-size: 14px;
+  }
+
+  .signup-input {
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .signup-input::placeholder {
+    font-size: 13px;
+  }
+
+  .field-error {
+    height: 14px;
+    min-height: 14px;
+    max-height: 14px;
+    font-size: 10px;
+    line-height: 14px;
+  }
+
+  .signup-btn {
+    height: 44px;
     font-size: 16px;
   }
 }
 
 @media (max-width: 400px) {
   .signup-left {
-    display: none; /* Hide the image entirely on small phones for a faster UX */
+    height: 120px;
   }
 
   .signup-right {
-    padding: 20px 15px;
+    padding: 16px 12px;
+  }
+
+  .signup-title {
+    font-size: 16px;
   }
 
   .signup-input:hover {
-    transform: none; /* Disable scale on tiny screens to avoid edge flickering */
+    transform: none;
+  }
+
+  .input-group {
+    margin-bottom: 0;
+  }
+
+  .signup-btn {
+    height: 42px;
+  }
+}
+
+/* Very small screens - hide image for better UX */
+@media (max-width: 350px) {
+  .signup-left {
+    display: none;
   }
 }
