@@ -36,6 +36,7 @@ export default function HomePage() {
           title="Electronic Product"
           subtitle="Smart, powerful and reliable — electronics designed for your lifestyle."
           slug="electronics"
+          viewPath="/electronics"
         />
 
         <HomeSection

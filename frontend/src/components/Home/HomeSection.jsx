@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ProductSlider from "../Product/ProductSlider";
 import styles from "./HomeSection.module.css";
 
-export default function HomeSection({ title, subtitle, slug }) {
+export default function HomeSection({ title, subtitle, slug, viewPath }) {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
@@ -76,11 +76,11 @@ export default function HomeSection({ title, subtitle, slug }) {
         <h2 className={styles.title}>{title}</h2>
 
         {!hideViewButton && (
-          <button
-            type="button"
-            className={styles.viewBtn}
-            onClick={() => navigate(`/category/${slug}`)}
-          >
+        <button
+          type="button"
+          className={styles.viewBtn}
+          onClick={() => navigate(viewPath || `/category/${slug}`)}
+        >
             View
           </button>
         )}
